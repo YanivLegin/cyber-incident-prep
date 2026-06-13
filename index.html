@@ -130,6 +130,77 @@
             background: rgba(99,102,241,0.12);
             border-color: rgba(99,102,241,0.4);
         }
+
+        /* ===== Mobile Hamburger Menu ===== */
+        #mobile-hamburger-btn {
+            display: none;
+            transition: all 0.2s ease;
+        }
+        body.mobile-view #mobile-hamburger-btn {
+            display: flex;
+        }
+        #mobile-nav-menu {
+            display: none;
+            position: fixed;
+            top: 0; right: 0;
+            width: min(320px, 92vw);
+            height: 100vh;
+            background: rgba(8, 10, 20, 0.97);
+            backdrop-filter: blur(16px);
+            border-left: 1px solid rgba(99,102,241,0.2);
+            z-index: 200;
+            flex-direction: column;
+            padding: 1.5rem 1.25rem;
+            gap: 0.5rem;
+            box-shadow: -8px 0 40px rgba(0,0,0,0.5);
+            transform: translateX(100%);
+            transition: transform 0.28s cubic-bezier(0.4,0,0.2,1);
+        }
+        #mobile-nav-menu.open {
+            display: flex;
+            transform: translateX(0);
+        }
+        #mobile-nav-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.55);
+            z-index: 199;
+            backdrop-filter: blur(2px);
+        }
+        #mobile-nav-overlay.open {
+            display: block;
+        }
+        .mobile-nav-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            width: 100%;
+            text-align: right;
+            padding: 0.85rem 1rem;
+            border-radius: 0.875rem;
+            font-size: 1rem;
+            font-weight: 700;
+            color: #94a3b8;
+            background: transparent;
+            border: 1px solid transparent;
+            cursor: pointer;
+            transition: all 0.18s ease;
+        }
+        .mobile-nav-item:hover,
+        .mobile-nav-item.active {
+            background: rgba(99,102,241,0.12);
+            border-color: rgba(99,102,241,0.25);
+            color: #e2e8f0;
+        }
+        .mobile-nav-item.active {
+            color: #67e8f9;
+        }
+        .mobile-nav-divider {
+            height: 1px;
+            background: rgba(99,102,241,0.12);
+            margin: 0.35rem 0;
+        }
     </style>
 </head>
 <body class="min-h-screen flex flex-col" autocomplete="off">
@@ -177,8 +248,73 @@
                 </svg>
                 <span id="mobile-toggle-label">תצוגת נייד</span>
             </button>
+
+            <!-- Hamburger button (visible only in mobile-view) -->
+            <button id="mobile-hamburger-btn"
+                onclick="openMobileMenu()"
+                title="תפריט"
+                class="items-center gap-1.5 px-3 py-2 rounded-xl border border-indigo-500/40 text-indigo-300 bg-indigo-500/10 text-sm font-semibold">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/>
+                </svg>
+            </button>
         </div>
     </header>
+
+    <!-- Mobile Nav Overlay -->
+    <div id="mobile-nav-overlay" onclick="closeMobileMenu()"></div>
+
+    <!-- Mobile Nav Drawer -->
+    <nav id="mobile-nav-menu" role="dialog" aria-label="תפריט נייד">
+        <div class="flex items-center justify-between mb-4 pb-4 border-b border-slate-800">
+            <span class="text-base font-extrabold text-white tracking-tight">CyberPrep Studio</span>
+            <button onclick="closeMobileMenu()" class="p-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
+                </svg>
+            </button>
+        </div>
+
+        <p class="text-xs text-slate-500 uppercase tracking-widest font-semibold px-2 mb-1">תפריט למידה</p>
+
+        <button class="mobile-nav-item" id="mnav-guide" onclick="mobileNavGo('guide')">
+            <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
+            </svg>
+            מדריך לימודים מפורט
+        </button>
+
+        <button class="mobile-nav-item" id="mnav-mitre" onclick="mobileNavGo('mitre')">
+            <svg class="w-5 h-5 flex-shrink-0" viewBox="0 0 32 32" fill="currentColor">
+                <path d="M16 2C8.268 2 2 8.268 2 16s6.268 14 14 14 14-6.268 14-14S23.732 2 16 2zm0 2c6.627 0 12 5.373 12 12S22.627 28 16 28 4 22.627 4 16 9.373 4 16 4zm-1 4v8H9l7 8 7-8h-6V8h-1z"/>
+            </svg>
+            MITRE ATT&amp;CK
+        </button>
+
+        <button class="mobile-nav-item" id="mnav-flashcards" onclick="mobileNavGo('flashcards')">
+            <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/>
+            </svg>
+            <span id="mnav-flashcards-label">כרטיסיות שינון</span>
+        </button>
+
+        <button class="mobile-nav-item" id="mnav-simulator" onclick="mobileNavGo('simulator')">
+            <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/>
+            </svg>
+            <span id="mnav-simulator-label">סימולטור מבחן</span>
+        </button>
+
+        <button class="mobile-nav-item" id="mnav-dashboard" onclick="mobileNavGo('dashboard')">
+            <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10a2 2 0 01-2 2h-2a2 2 0 01-2-2zm9-10v12a2 2 0 002 2h2a2 2 0 002-2V9a2 2 0 00-2-2h-2a2 2 0 00-2 2z"/>
+            </svg>
+            מדדי שליטה מורחבים
+        </button>
+
+        <div class="mobile-nav-divider"></div>
+        <p class="text-xs text-slate-500 px-2 mt-1">לחץ על קטגוריה למעבר אליה</p>
+    </nav>
 
     <!-- Main Workspace Layout -->
     <div class="max-w-7xl mx-auto w-full px-4 mt-6 flex-1 grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
@@ -399,6 +535,38 @@
             btn.classList.toggle('active', isActive);
             label.textContent = isActive ? 'ביטול נייד' : 'תצוגת נייד';
             localStorage.setItem('mobileView', isActive ? '1' : '0');
+            if (!isActive) closeMobileMenu();
+        }
+
+        function openMobileMenu() {
+            document.getElementById('mobile-nav-menu').classList.add('open');
+            document.getElementById('mobile-nav-overlay').classList.add('open');
+            syncMobileNavActive();
+        }
+
+        function closeMobileMenu() {
+            document.getElementById('mobile-nav-menu').classList.remove('open');
+            document.getElementById('mobile-nav-overlay').classList.remove('open');
+        }
+
+        function mobileNavGo(tab) {
+            changeActiveTab(tab);
+            closeMobileMenu();
+        }
+
+        function syncMobileNavActive() {
+            const tabs = ['guide','mitre','flashcards','simulator','dashboard'];
+            tabs.forEach(t => {
+                const el = document.getElementById('mnav-' + t);
+                if (el) el.classList.toggle('active', t === currentTab);
+            });
+            // sync dynamic labels
+            const fl = document.getElementById('flashcard-nav-label');
+            const mfl = document.getElementById('mnav-flashcards-label');
+            if (fl && mfl) mfl.textContent = fl.textContent;
+            const sl = document.getElementById('simulator-nav-label');
+            const msl = document.getElementById('mnav-simulator-label');
+            if (sl && msl) msl.textContent = sl.textContent;
         }
 
         window.addEventListener('DOMContentLoaded', () => {
