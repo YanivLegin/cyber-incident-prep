@@ -282,6 +282,7 @@
         }
 
         function scrollToPresentations() {
+            dismissWelcomePop(false);
             if (currentTab !== 'guide') {
                 changeActiveTab('guide');
             }
@@ -302,6 +303,8 @@
                 pop.classList.remove('translate-y-0', 'opacity-100', 'pointer-events-auto');
                 if (permanent) {
                     localStorage.setItem('cyber_hasSeenWelcomePop', 'true');
+                } else {
+                    sessionStorage.setItem('cyber_dismissedWelcomeThisSession', 'true');
                 }
             }
         }
@@ -358,8 +361,8 @@
             updateHUD();
             renderCurrentView();
 
-            // Welcome Popup check (show on load unless muted)
-            if (!localStorage.getItem('cyber_hasSeenWelcomePop')) {
+            // Welcome Popup check (show on load unless muted permanently or dismissed in current session)
+            if (!localStorage.getItem('cyber_hasSeenWelcomePop') && !sessionStorage.getItem('cyber_dismissedWelcomeThisSession')) {
                 setTimeout(() => {
                     const pop = document.getElementById('welcome-popup');
                     if (pop) {
@@ -1384,6 +1387,7 @@
                 localStorage.removeItem('cyber_currentTab');
                 localStorage.removeItem('cyber_currentLesson');
                 localStorage.removeItem('cyber_hasSeenWelcomePop');
+                sessionStorage.removeItem('cyber_dismissedWelcomeThisSession');
                 
                 changeActiveTab('guide');
                 selectLesson(1);
