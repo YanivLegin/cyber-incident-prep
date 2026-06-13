@@ -213,7 +213,7 @@
             </div>
             <div class="space-y-2">
                 <h4 class="font-extrabold text-white text-base">💡 טיפ למידה ממוקדת</h4>
-                <p class="text-xs md:text-sm text-slate-400 leading-relaxed">מצגות השיעור המלאות (1-12) זמינות כעת לקריאה ישירה **בתחתית העמוד** של כל שיעור!</p>
+                <p class="text-xs md:text-sm text-slate-400 leading-relaxed">מצגות השיעור המלאות (1-12) זמינות כעת לקריאה ישירה <strong class="font-extrabold text-cyan-400">בתחתית העמוד</strong> של כל שיעור!</p>
                 <div class="pt-1 flex justify-end">
                     <button onclick="dismissWelcomePop()" class="px-3.5 py-1.5 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-slate-950 font-bold text-xs transition">
                         הבנתי, מעולה!
@@ -283,7 +283,6 @@
             if (pop) {
                 pop.classList.add('translate-y-10', 'opacity-0', 'pointer-events-none');
                 pop.classList.remove('translate-y-0', 'opacity-100', 'pointer-events-auto');
-                localStorage.setItem('cyber_hasSeenWelcomePop', 'true');
             }
         }
 
@@ -339,17 +338,15 @@
             updateHUD();
             renderCurrentView();
 
-            // Welcome Popup check
-            if (!localStorage.getItem('cyber_hasSeenWelcomePop')) {
-                setTimeout(() => {
-                    const pop = document.getElementById('welcome-popup');
-                    if (pop) {
-                        pop.classList.remove('translate-y-10', 'opacity-0', 'pointer-events-none');
-                        pop.classList.add('translate-y-0', 'opacity-100', 'pointer-events-auto');
-                        playChimeSound();
-                    }
-                }, 1500);
-            }
+            // Welcome Popup check (always show on load)
+            setTimeout(() => {
+                const pop = document.getElementById('welcome-popup');
+                if (pop) {
+                    pop.classList.remove('translate-y-10', 'opacity-0', 'pointer-events-none');
+                    pop.classList.add('translate-y-0', 'opacity-100', 'pointer-events-auto');
+                    playChimeSound();
+                }
+            }, 1500);
         });
 
         function changeActiveTab(tabId) {
@@ -1364,7 +1361,6 @@
                 localStorage.removeItem('cyber_tempCheckpointAnswers');
                 localStorage.removeItem('cyber_currentTab');
                 localStorage.removeItem('cyber_currentLesson');
-                localStorage.removeItem('cyber_hasSeenWelcomePop');
                 
                 changeActiveTab('guide');
                 selectLesson(1);
