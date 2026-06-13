@@ -116,6 +116,44 @@
         body.mobile-view table { font-size: 0.9rem !important; }
         body.mobile-view .grid-cols-1.sm\:grid-cols-3 { grid-template-columns: 1fr !important; }
 
+        /* Header in mobile-view: single compact row */
+        body.mobile-view #header-inner {
+            flex-direction: row !important;
+            align-items: center !important;
+            justify-content: space-between !important;
+            gap: 0.75rem !important;
+            flex-wrap: nowrap !important;
+            padding-top: 0.6rem !important;
+            padding-bottom: 0.6rem !important;
+        }
+        body.mobile-view #header-logo-block {
+            flex-shrink: 0;
+        }
+        body.mobile-view #header-logo-block p {
+            display: none;
+        }
+        body.mobile-view #header-logo-block h1 {
+            font-size: 1.15rem !important;
+        }
+        body.mobile-view #header-logo-block .w-12 {
+            width: 2.25rem !important;
+            height: 2.25rem !important;
+        }
+        body.mobile-view #header-mastery-hud {
+            display: none !important;
+        }
+        body.mobile-view #mobile-toggle-btn span {
+            display: none;
+        }
+        body.mobile-view #mobile-toggle-btn {
+            padding: 0.4rem 0.6rem !important;
+        }
+        body.mobile-view #header-right-controls {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
         /* Toggle button animation */
         #mobile-toggle-btn {
             transition: all 0.25s ease;
@@ -207,21 +245,43 @@
 
     <!-- Header -->
     <header class="border-b border-slate-800 bg-slate-950/80 backdrop-blur-md sticky top-0 z-40">
-        <div class="max-w-7xl mx-auto px-4 py-4 flex flex-col md:flex-row items-center justify-between gap-4">
-            <div class="flex items-center gap-3">
-                <div class="w-12 h-12 rounded-lg bg-gradient-to-tr from-cyan-500 to-indigo-600 flex items-center justify-center shadow-lg shadow-cyan-500/20">
+        <div id="header-inner" class="max-w-7xl mx-auto px-4 py-4 flex flex-col md:flex-row items-center justify-between gap-4">
+
+            <!-- Logo block -->
+            <div id="header-logo-block" class="flex items-center gap-3 w-full md:w-auto">
+                <div class="w-12 h-12 rounded-lg bg-gradient-to-tr from-cyan-500 to-indigo-600 flex items-center justify-center shadow-lg shadow-cyan-500/20 flex-shrink-0">
                     <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
                     </svg>
                 </div>
-                <div>
+                <div class="flex-1 min-w-0">
                     <h1 class="text-2xl md:text-3xl font-bold tracking-tight bg-gradient-to-r from-cyan-400 via-indigo-300 to-indigo-500 bg-clip-text text-transparent font-tech">CyberPrep Studio</h1>
                     <p class="text-sm text-slate-400 font-semibold">ממשק למידה ממוקד למבחן • ללא שמירת מצב ברענון • 12 שיעורים מלאים</p>
                 </div>
+                <!-- Hamburger: lives here so it appears right of logo on mobile -->
+                <div id="header-right-controls" class="hidden items-center gap-2 mr-auto">
+                    <button id="mobile-toggle-btn-inline"
+                        onclick="toggleMobileView()"
+                        title="ביטול תצוגת נייד"
+                        class="flex items-center gap-1.5 px-2.5 py-2 rounded-xl border border-slate-700 text-slate-400 bg-slate-900/40 text-sm font-semibold">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <rect x="7" y="2" width="10" height="20" rx="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <circle cx="12" cy="18" r="1" fill="currentColor" stroke="none"/>
+                        </svg>
+                    </button>
+                    <button id="mobile-hamburger-btn-inline"
+                        onclick="openMobileMenu()"
+                        title="תפריט"
+                        class="flex items-center justify-center w-10 h-10 rounded-xl border border-indigo-500/40 text-indigo-300 bg-indigo-500/10">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/>
+                        </svg>
+                    </button>
+                </div>
             </div>
-            
+
             <!-- Global Mastery HUD -->
-            <div class="flex items-center gap-4 w-full md:w-auto md:max-w-md bg-slate-900/40 p-3 rounded-xl border border-slate-800/60">
+            <div id="header-mastery-hud" class="flex items-center gap-4 w-full md:w-auto md:max-w-md bg-slate-900/40 p-3 rounded-xl border border-slate-800/60">
                 <div class="flex-1 min-w-[170px]">
                     <div class="flex justify-between text-xs font-semibold mb-1">
                         <span class="text-slate-400">מדד שליטה בחומר (Mastery)</span>
@@ -237,27 +297,31 @@
                 </div>
             </div>
 
-            <!-- Mobile View Toggle Button -->
-            <button id="mobile-toggle-btn"
-                onclick="toggleMobileView()"
-                title="מעבר לתצוגת נייד"
-                class="flex items-center gap-2 px-3 py-2 rounded-xl border border-slate-700 text-slate-400 bg-slate-900/40 text-sm font-semibold whitespace-nowrap">
-                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                    <rect x="7" y="2" width="10" height="20" rx="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    <circle cx="12" cy="18" r="1" fill="currentColor" stroke="none"/>
-                </svg>
-                <span id="mobile-toggle-label">תצוגת נייד</span>
-            </button>
+            <!-- Desktop-only controls (toggle + hamburger placeholder) -->
+            <div class="flex items-center gap-2">
+                <!-- Mobile View Toggle Button (desktop row) -->
+                <button id="mobile-toggle-btn"
+                    onclick="toggleMobileView()"
+                    title="מעבר לתצוגת נייד"
+                    class="flex items-center gap-2 px-3 py-2 rounded-xl border border-slate-700 text-slate-400 bg-slate-900/40 text-sm font-semibold whitespace-nowrap">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <rect x="7" y="2" width="10" height="20" rx="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <circle cx="12" cy="18" r="1" fill="currentColor" stroke="none"/>
+                    </svg>
+                    <span id="mobile-toggle-label">תצוגת נייד</span>
+                </button>
 
-            <!-- Hamburger button (visible only in mobile-view) -->
-            <button id="mobile-hamburger-btn"
-                onclick="openMobileMenu()"
-                title="תפריט"
-                class="items-center gap-1.5 px-3 py-2 rounded-xl border border-indigo-500/40 text-indigo-300 bg-indigo-500/10 text-sm font-semibold">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.2">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/>
-                </svg>
-            </button>
+                <!-- Hamburger (desktop fallback, hidden in mobile-view) -->
+                <button id="mobile-hamburger-btn"
+                    onclick="openMobileMenu()"
+                    title="תפריט"
+                    class="hidden items-center gap-1.5 px-3 py-2 rounded-xl border border-indigo-500/40 text-indigo-300 bg-indigo-500/10 text-sm font-semibold">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/>
+                    </svg>
+                </button>
+            </div>
+
         </div>
     </header>
 
@@ -531,10 +595,25 @@
             const body = document.body;
             const btn = document.getElementById('mobile-toggle-btn');
             const label = document.getElementById('mobile-toggle-label');
+            const inlineControls = document.getElementById('header-right-controls');
+            const desktopControls = btn.parentElement; // the flex div containing btn + hamburger
             const isActive = body.classList.toggle('mobile-view');
+
+            // Update main toggle button state
             btn.classList.toggle('active', isActive);
             label.textContent = isActive ? 'ביטול נייד' : 'תצוגת נייד';
             localStorage.setItem('mobileView', isActive ? '1' : '0');
+
+            // Show inline controls (next to logo) when mobile-view is ON
+            if (inlineControls) {
+                inlineControls.classList.toggle('hidden', !isActive);
+                inlineControls.classList.toggle('flex', isActive);
+            }
+
+            // Sync inline toggle button active state
+            const inlineToggle = document.getElementById('mobile-toggle-btn-inline');
+            if (inlineToggle) inlineToggle.classList.toggle('active', isActive);
+
             if (!isActive) closeMobileMenu();
         }
 
@@ -586,9 +665,14 @@
                 document.body.classList.add('mobile-view');
                 const btn = document.getElementById('mobile-toggle-btn');
                 const label = document.getElementById('mobile-toggle-label');
+                const inlineControls = document.getElementById('header-right-controls');
+                const inlineToggle = document.getElementById('mobile-toggle-btn-inline');
                 if (btn) btn.classList.add('active');
-                if (label) label.textContent = 'ביטול נייד';
+                if (label) label.textContent = '\u05d1\u05d9\u05d8\u05d5\u05dc \u05e0\u05d9\u05d9\u05d3';
+                if (inlineControls) { inlineControls.classList.remove('hidden'); inlineControls.classList.add('flex'); }
+                if (inlineToggle) inlineToggle.classList.add('active');
             }
+
 
             // Setup navigation counts
             document.getElementById('flashcard-nav-label').innerText = `כרטיסיות שינון (${flashcardsData.length})`;
