@@ -37,6 +37,7 @@
             background-color: #030712;
             color: #f3f4f6;
             font-family: 'Assistant', sans-serif;
+            font-size: 1.15rem; /* Enlarged text base size */
             background-image: 
                 radial-gradient(at 0% 0%, rgba(99, 102, 241, 0.12) 0px, transparent 50%),
                 radial-gradient(at 100% 100%, rgba(6, 182, 212, 0.12) 0px, transparent 50%);
@@ -57,15 +58,15 @@
         }
 
         ::-webkit-scrollbar {
-            width: 6px;
-            height: 6px;
+            width: 8px;
+            height: 8px;
         }
         ::-webkit-scrollbar-track {
             background: #030712;
         }
         ::-webkit-scrollbar-thumb {
             background: #1e293b;
-            border-radius: 3px;
+            border-radius: 4px;
         }
         ::-webkit-scrollbar-thumb:hover {
             background: #06b6d4;
@@ -95,33 +96,33 @@
 
     <!-- Header -->
     <header class="border-b border-slate-800 bg-slate-950/80 backdrop-blur-md sticky top-0 z-40">
-        <div class="max-w-7xl mx-auto px-4 py-3.5 flex flex-col md:flex-row items-center justify-between gap-4">
+        <div class="max-w-7xl mx-auto px-4 py-4 flex flex-col md:flex-row items-center justify-between gap-4">
             <div class="flex items-center gap-3">
-                <div class="w-10 h-10 rounded-lg bg-gradient-to-tr from-cyan-500 to-indigo-600 flex items-center justify-center shadow-lg shadow-cyan-500/20">
-                    <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <div class="w-12 h-12 rounded-lg bg-gradient-to-tr from-cyan-500 to-indigo-600 flex items-center justify-center shadow-lg shadow-cyan-500/20">
+                    <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
                     </svg>
                 </div>
                 <div>
-                    <h1 class="text-xl md:text-2xl font-bold tracking-tight bg-gradient-to-r from-cyan-400 via-indigo-300 to-indigo-500 bg-clip-text text-transparent font-tech">CyberPrep Studio</h1>
-                    <p class="text-xs text-slate-400">ממשק למידה אינטראקטיבי מקיף לניהול אירועי סייבר</p>
+                    <h1 class="text-2xl md:text-3xl font-bold tracking-tight bg-gradient-to-r from-cyan-400 via-indigo-300 to-indigo-500 bg-clip-text text-transparent font-tech">CyberPrep Studio</h1>
+                    <p class="text-sm text-slate-400">ממשק למידה אינטראקטיבי מקיף לניהול אירועי סייבר</p>
                 </div>
             </div>
             
             <!-- Global Mastery HUD -->
-            <div class="flex items-center gap-4 w-full md:w-auto md:max-w-md bg-slate-900/40 p-2 rounded-xl border border-slate-800/60">
-                <div class="flex-1 min-w-[150px]">
+            <div class="flex items-center gap-4 w-full md:w-auto md:max-w-md bg-slate-900/40 p-3 rounded-xl border border-slate-800/60">
+                <div class="flex-1 min-w-[170px]">
                     <div class="flex justify-between text-xs font-semibold mb-1">
                         <span class="text-slate-400">מדד שליטה בחומר (Mastery)</span>
-                        <span id="global-mastery-text" class="text-cyan-400 font-tech">0%</span>
+                        <span id="global-mastery-text" class="text-cyan-400 font-tech text-sm">0%</span>
                     </div>
-                    <div class="w-full bg-slate-800 rounded-full h-2 overflow-hidden">
+                    <div class="w-full bg-slate-800 rounded-full h-2.5 overflow-hidden">
                         <div id="global-mastery-bar" class="bg-gradient-to-r from-indigo-500 to-cyan-400 h-full w-0 transition-all duration-500 ease-out"></div>
                     </div>
                 </div>
                 <div class="text-center px-3 border-r border-slate-800">
-                    <span id="mastered-concepts-count" class="block text-lg font-bold text-emerald-400 font-tech">0/10</span>
-                    <span class="text-[9px] text-slate-400 block whitespace-nowrap">בחני הבנה פתורים</span>
+                    <span id="mastered-concepts-count" class="block text-2xl font-bold text-emerald-400 font-tech">0/13</span>
+                    <span class="text-[10px] text-slate-400 block whitespace-nowrap">בחני הבנה פתורים</span>
                 </div>
             </div>
         </div>
@@ -137,31 +138,34 @@
             <div class="glass-card rounded-2xl p-4 border border-slate-850 space-y-2">
                 <h3 class="text-xs font-bold text-slate-400 uppercase tracking-wider px-2 mb-2">תפריט למידה</h3>
                 
-                <button onclick="changeActiveTab('guide')" id="nav-btn-guide" class="w-full text-right py-2 px-3 rounded-xl bg-cyan-950/40 text-cyan-400 border border-cyan-500/20 text-sm font-bold transition flex items-center gap-2">
+                <button onclick="changeActiveTab('guide')" id="nav-btn-guide" class="w-full text-right py-2.5 px-3 rounded-xl bg-cyan-950/40 text-cyan-400 border border-cyan-500/20 text-base font-bold transition flex items-center gap-2">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
                     מדריך לימודים מפורט
                 </button>
                 
-                <!-- Sub-items: Lesson Selection (only active when guide tab is active) -->
-                <div id="lesson-subnavigation" class="pr-4 py-1 space-y-1">
-                    <button onclick="selectLesson(1)" id="lesson-nav-1" class="w-full text-right py-1.5 px-2 rounded-lg text-xs font-medium text-cyan-400 bg-cyan-500/10 border-r-2 border-cyan-500 transition">שיעור 1: מבוא וניהול סיכונים</button>
-                    <button onclick="selectLesson(2)" id="lesson-nav-2" class="w-full text-right py-1.5 px-2 rounded-lg text-xs font-medium text-slate-400 hover:text-slate-200 transition">שיעור 2: גבולות, OT ועדכונים</button>
-                    <button onclick="selectLesson(3)" id="lesson-nav-3" class="w-full text-right py-1.5 px-2 rounded-lg text-xs font-medium text-slate-400 hover:text-slate-200 transition">שיעור 3: הקשחה, SSDLC ומקרי בוחן</button>
-                    <button onclick="selectLesson(4)" id="lesson-nav-4" class="w-full text-right py-1.5 px-2 rounded-lg text-xs font-medium text-slate-400 hover:text-slate-200 transition">שיעור 4: APT, הגנות ו-Zero-Trust</button>
-                    <button onclick="selectLesson(5)" id="lesson-nav-5" class="w-full text-right py-1.5 px-2 rounded-lg text-xs font-medium text-slate-400 hover:text-slate-200 transition">שיעור 5: EDR, ניהול אירוע ומתקפות</button>
+                <!-- Sub-items: Lesson Selection -->
+                <div id="lesson-subnavigation" class="pr-3 py-1 space-y-1">
+                    <button onclick="selectLesson(1)" id="lesson-nav-1" class="w-full text-right py-2 px-2.5 rounded-lg text-sm font-medium text-cyan-400 bg-cyan-500/10 border-r-2 border-cyan-500 transition">שיעור 1: מבוא וניהול סיכונים</button>
+                    <button onclick="selectLesson(2)" id="lesson-nav-2" class="w-full text-right py-2 px-2.5 rounded-lg text-sm font-medium text-slate-400 hover:text-slate-200 transition">שיעור 2: גבולות, OT ועדכונים</button>
+                    <button onclick="selectLesson(3)" id="lesson-nav-3" class="w-full text-right py-2 px-2.5 rounded-lg text-sm font-medium text-slate-400 hover:text-slate-200 transition">שיעור 3: הקשחה, SSDLC ומקרי בוחן</button>
+                    <button onclick="selectLesson(4)" id="lesson-nav-4" class="w-full text-right py-2 px-2.5 rounded-lg text-sm font-medium text-slate-400 hover:text-slate-200 transition">שיעור 4: APT, הגנות ו-Zero-Trust</button>
+                    <button onclick="selectLesson(5)" id="lesson-nav-5" class="w-full text-right py-2 px-2.5 rounded-lg text-sm font-medium text-slate-400 hover:text-slate-200 transition">שיעור 5: EDR, ניהול אירוע ומתקפות</button>
+                    <button onclick="selectLesson(6)" id="lesson-nav-6" class="w-full text-right py-2 px-2.5 rounded-lg text-sm font-medium text-slate-400 hover:text-slate-200 transition">שיעור 6: ניהול משברים ורגולציה</button>
+                    <button onclick="selectLesson(7)" id="lesson-nav-7" class="w-full text-right py-2 px-2.5 rounded-lg text-sm font-medium text-slate-400 hover:text-slate-200 transition">שיעור 7: פורנזיקה וציד איומים</button>
+                    <button onclick="selectLesson(8)" id="lesson-nav-8" class="w-full text-right py-2 px-2.5 rounded-lg text-sm font-medium text-slate-400 hover:text-slate-200 transition">שיעור 8: שחזור והפקת לקחים</button>
                 </div>
 
-                <button onclick="changeActiveTab('flashcards')" id="nav-btn-flashcards" class="w-full text-right py-2 px-3 rounded-xl text-slate-400 hover:bg-slate-900/40 text-sm font-bold transition flex items-center gap-2">
+                <button onclick="changeActiveTab('flashcards')" id="nav-btn-flashcards" class="w-full text-right py-2.5 px-3 rounded-xl text-slate-400 hover:bg-slate-900/40 text-base font-bold transition flex items-center gap-2">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
                     כרטיסיות שינון (15)
                 </button>
                 
-                <button onclick="changeActiveTab('simulator')" id="nav-btn-simulator" class="w-full text-right py-2 px-3 rounded-xl text-slate-400 hover:bg-slate-900/40 text-sm font-bold transition flex items-center gap-2">
+                <button onclick="changeActiveTab('simulator')" id="nav-btn-simulator" class="w-full text-right py-2.5 px-3 rounded-xl text-slate-400 hover:bg-slate-900/40 text-base font-bold transition flex items-center gap-2">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"></path></svg>
                     סימולטור מבחן
                 </button>
 
-                <button onclick="changeActiveTab('dashboard')" id="nav-btn-dashboard" class="w-full text-right py-2 px-3 rounded-xl text-slate-400 hover:bg-slate-900/40 text-sm font-bold transition flex items-center gap-2">
+                <button onclick="changeActiveTab('dashboard')" id="nav-btn-dashboard" class="w-full text-right py-2.5 px-3 rounded-xl text-slate-400 hover:bg-slate-900/40 text-base font-bold transition flex items-center gap-2">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10a2 2 0 01-2 2h-2a2 2 0 01-2-2zm9-10v12a2 2 0 002 2h2a2 2 0 002-2V9a2 2 0 00-2-2h-2a2 2 0 00-2 2z"></path></svg>
                     מדדי שליטה מורחבים
                 </button>
@@ -170,7 +174,7 @@
             <!-- Pomodoro Timer Widget -->
             <div class="glass-card rounded-2xl p-5 border border-slate-850">
                 <div class="flex items-center justify-between mb-3">
-                    <h4 class="text-xs font-bold text-slate-300 flex items-center gap-1.5">
+                    <h4 class="text-sm font-bold text-slate-300 flex items-center gap-1.5">
                         <span class="w-2 h-2 rounded-full bg-rose-500 animate-ping"></span>
                         פומודורו למידה
                     </h4>
@@ -179,16 +183,16 @@
                         <svg id="sound-off-svg" class="w-4 h-4 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z M17 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2"></path></svg>
                     </button>
                 </div>
-                <div class="text-center py-2 bg-slate-950/60 rounded-xl border border-slate-800/80 mb-3">
-                    <span id="timer-text" class="text-3xl font-extrabold text-white font-tech">50:00</span>
-                    <span id="timer-mode-label" class="block text-[10px] text-slate-500 font-semibold tracking-wider">למידה ממוקדת</span>
+                <div class="text-center py-2.5 bg-slate-950/60 rounded-xl border border-slate-800/80 mb-3">
+                    <span id="timer-text" class="text-4xl font-extrabold text-white font-tech tracking-wider">50:00</span>
+                    <span id="timer-mode-label" class="block text-xs text-slate-500 font-semibold tracking-wider">למידה ממוקדת</span>
                 </div>
                 <div class="flex gap-2">
-                    <button id="timer-play-btn" onclick="toggleTimer()" class="flex-1 py-1.5 px-3 rounded-lg bg-gradient-to-r from-cyan-500 to-indigo-600 text-slate-950 font-bold text-xs hover:opacity-90 transition flex items-center justify-center gap-1">
-                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"></path></svg>
+                    <button id="timer-play-btn" onclick="toggleTimer()" class="flex-1 py-2 px-3 rounded-lg bg-gradient-to-r from-cyan-500 to-indigo-600 text-slate-950 font-bold text-sm hover:opacity-90 transition flex items-center justify-center gap-1">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"></path></svg>
                         <span>הפעל</span>
                     </button>
-                    <button onclick="resetTimer()" class="py-1.5 px-3 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 font-semibold text-xs transition">
+                    <button onclick="resetTimer()" class="py-2 px-3 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 font-semibold text-sm transition">
                         איפוס
                     </button>
                 </div>
@@ -208,9 +212,9 @@
     </div>
 
     <!-- Toast system -->
-    <div id="toast-bar" class="fixed bottom-5 left-5 px-4 py-2.5 rounded-xl bg-slate-900 border border-slate-800 text-cyan-400 text-sm font-semibold shadow-2xl transition-all duration-300 transform translate-y-10 opacity-0 z-50"></div>
+    <div id="toast-bar" class="fixed bottom-5 left-5 px-5 py-3 rounded-xl bg-slate-900 border border-slate-800 text-cyan-400 text-base font-semibold shadow-2xl transition-all duration-300 transform translate-y-10 opacity-0 z-50"></div>
 
-    <!-- Data Definition (Injected directly for single-file functionality) -->
+    <!-- Data Definition -->
     <script>
         const lessonsData = {
             1: {
@@ -236,6 +240,7 @@
                     {
                         title: "2. תשתיות קריטיות: IT לעומת OT",
                         text: "תשתיות המדינה נחלקות לשני דומיינים מרכזיים:\n1. **IT (Information Technology):** מערכות מידע רגילות, שרתים ומחשבים אישיים (למשל: בנק ישראל, הבורסה). המיקוד המרכזי באבטחה הוא **סודיות (Confidentiality)**.\n2. **OT (Operational Technology):** מערכות בקרה תעשייתיות (ICS/SCADA) האחראיות על תשתיות פיזיות (חשמל, מים, בתי זיקוק, רכבות). המיקוד המרכזי באבטחה הוא **זמינות (Availability)** ובטיחות פיזית של חיי אדם.\n\n*מתקפת ייחוס:* תקיפת **Stuxnet (2010)** על הצנטריפוגות באיראן מדגימה פגיעה במערכות OT שגרמה להרס פיזי ממשי.",
+                        image: "assets/it_vs_ot_diagram.png",
                         examinerTip: "המרצה אוהב לבקש השוואה בין השניים. זכור את משולש ה-CIA: ב-IT הסודיות ראשונה, ב-OT הזמינות והשלמות קריטיות (שיבוש קלט בבקר מים עלול להרעיל עיר שלמה, לכן שלמות וזמינות הבקר קודמות לכל).",
                         checkpoint: {
                             id: "l1_q2",
@@ -268,7 +273,7 @@
                 ]
             },
             2: {
-                title: "שיעור 2: גבולות הארגון, תשתיות קריטיות וניהול עדכונים",
+                title: "שיעור 2: גבולות הארגון, תשתיות קריטיות ועדכונים",
                 introduction: "שיעור זה מתמקד באבולוציה של גבולות הרשת הארגונית, האתגרים שנובעים מחיבור רכיבי ענן ו-IoT, והמורכבות הגבוהה של ניהול פגיעות ועדכוני תוכנה במערכות מורכבות.",
                 concepts: [
                     {
@@ -313,7 +318,7 @@
                             options: [
                                 "מכיוון שב-Zero-Day כל העולם כבר מכיר את דרכי הניצול של הפרצה.",
                                 "מכיוון שברגע שהפאץ' מפורסם (One-Day), הפגיעות הופכת לפומבית וכולם מודעים אליה, דבר שמפעיל סורקים אקטיביים של תוקפים מכל העולם על שרתים שטרם עודכנו.",
-                                "כי פגיעויות One-Day תמיד מוחקות את בסיס הנתונים באופן אוטומטי.",
+                                "כי פגיעויות One-Day תמיד מוחקות את בסיס הנתונים באופן אוטומטית.",
                                 "משום שלא ניתן להתקין פאצ'ים ללא אישור ישיר של המוסד לביטוח לאומי."
                             ],
                             correct: 1
@@ -344,6 +349,7 @@
                     {
                         title: "2. מחזור פיתוח מאובטח (SSDLC)",
                         text: "SSDLC משלב את אבטחת המידע בכל אחד משלבי פיתוח התוכנה (SDLC):\n- **שלב הדרישות:** ביצוע הערכת סיכונים (Risk Assessment), במיוחד בממשקים מול ספקים חיצוניים (כמו ספקי סליקה).\n- **שלב העיצוב:** ביצוע Threat Modeling (מידול איומים) ובחינת ממשקים פנימיים (חיבור ל-ERP).\n- **שלב הפיתוח:** שימוש בכלי בדיקה סטטיים (Static Analysis / SAST).\n- **שלב הבדיקות:** בדיקת תקינות קלט (Input Validation) למניעת SQL Injection (חסימת תווים מיוחדים) ואיסור חשיפת מידע טכני בתוך הודעות שגיאה המוצגות למשתמש.\n- **קוד פתוח:** סריקה קפדנית של ספריות קוד פתוח מחשש להחדרת קוד זדוני על ידי תוקפים.",
+                        image: "assets/ssdlc_phases.png",
                         examinerTip: "הבנת השלבים חשובה. בבחינה עשויים לשאול היכן מבוצע Threat Modeling (שלב העיצוב/Design) או מתי בודקים Input Validation (שלב הבדיקות/Testing).",
                         checkpoint: {
                             id: "l3_q2",
@@ -382,6 +388,7 @@
                     {
                         title: "1. חמשת שלבי ה-APT Kill Chain",
                         text: "מתקפת APT (Advanced Persistent Threat) היא תקיפה ממוקדת וממושכת המורכבת מחמישה שלבים קריטיים:\n1. **איסוף מידע (Reconnaissance):** איתור יעדים (סמנכ\"לי כספים, מנהלי מערכות) ואיסוף מידע עליהם מרשתות חברתיות.\n2. **אחיזה ראשונית (Initial Compromise):** החדירה הראשונית לארגון, לרוב שקטה ומינורית (למשל, פישינג ממוקד).\n3. **תקשורת שליטה ובקרה (C2 - Command & Control):** יצירת ערוץ תקשורת מוצפן בין הנוזקה לשרת של התוקף לקבלת פקודות.\n4. **תנועה לטרלית (Lateral Movement):** דילוג בין שרתים ותחנות קצה בתוך הארגון כדי להשיג סיסמאות של מנהלים ולהגיע לנכסים הרגישים.\n5. **ביצוע המשימה (Mission Complete):** השלב הסופי - גניבת המידע (CNE) או הרס תשתיות (CNA).\n\n**MITRE ATT&CK:** מסגרת עבודה מפורטת הממפה את כלל הטקטיקות והטכניקות של התוקפים בכל שלב ושלב.",
+                        image: "assets/kill_chain_steps.png",
                         examinerTip: "הבנת שלבי ה-APT קריטית למענה על תרחישי פריצה. אם תוקף נכנס דרך מחשב של מזכירה והגיע לשרת בסיס הנתונים של ההנהלה, ציין כי הוא ביצע 'תנועה לטרלית' (Lateral Movement) וציין את הבקרות שיכלו למנוע זאת (סגמנטציה).",
                         checkpoint: {
                             id: "l4_q1",
@@ -461,6 +468,120 @@
                                 "בדיקת תקינות קלט (Input Validation) ושימוש בשאילתות פרמטריות (Parameterized Queries).",
                                 "סנכרון שעונים באמצעות NTP.",
                                 "הגדרת רשומות SPF ו-DKIM בשרת הדואר."
+                            ],
+                            correct: 1
+                        }
+                    }
+                ]
+            },
+            6: {
+                title: "שיעור 6: ניהול משברים, דוברות והיבטים משפטיים ורגולטוריים",
+                introduction: "שיעור זה מרחיב אל המעטפת הניהולית והחוקית המקיפה אירועי סייבר. נלמד על מחזור ניהול אירוע לפי NIST, רגולציית הסייבר בישראל ואסטרטגיות ניהול משבר תקשורתי.",
+                concepts: [
+                    {
+                        title: "1. מחזור חיי הטיפול באירוע (Incident Response Lifecycle)",
+                        text: "על פי מודל ה-NIST (SP 800-61), ניהול אירוע אינו מתחיל רק ברגע הפריצה, אלא מורכב מארבעה שלבים קריטיים המזינים זה את זה:\n\n1. **הכנה (Preparation):** בניית פלייבוקים, הקשחה, הגדרת מערכי ניטור ותרגול ההנהלה.\n2. **זיהוי וניתוח (Detection & Analysis):** איסוף התראות מה-SIEM, זיהוי אנומליות וקביעת חומרת האירוע.\n3. **הכלה, ניקוי ושחזור (Containment, Eradication & Recovery):** בידוד שרתים נגועים, הסרת נוזקות, סגירת פרצות, והחזרת המערכות לפעילות תחת פיקוח.\n4. **פעילות שלאחר האירוע (Post-Incident Activity):** תחקיר הפקת לקחים, עדכון מדיניות הסיכונים וביצוע שינויי הקשחה למניעת הישנות המקרה.",
+                        examinerTip: "בבחינה, מומלץ להציג את ניהול האירוע כתהליך מחזורי. המעריך מחפש לראות שאתה מבין שחובה לסיים כל אירוע ב'הפקת לקחים' (Lessons Learned) כדי לעדכן את שלב ההכנה הבא.",
+                        checkpoint: {
+                            id: "l6_q1",
+                            question: "על פי מודל NIST לניהול אירוע, באיזה שלב מבוצע ניתוח הפקת לקחים ועדכון הפלייבוקים הארגוניים?",
+                            options: [
+                                "שלב ההכנה (Preparation)",
+                                "שלב הזיהוי והניתוח (Detection & Analysis)",
+                                "שלב הפעילות שלאחר האירוע (Post-Incident Activity)",
+                                "שלב ההכלה והניקוי (Containment & Eradication)"
+                            ],
+                            correct: 2
+                        }
+                    },
+                    {
+                        title: "2. רגולציה וחובות דיווח בישראל ובכלל",
+                        text: "אירוע סייבר מפעיל מערכות חוקיות כבדות משקל:\n- **הרשות להגנת הפרטיות (ישראל):** מחייבת ארגונים המחזיקים בסיסי נתונים עם מידע אישי לדווח על אירוע אבטחה חמור באופן מיידי (עד 72 שעות מהגילוי).\n- **חברות ציבוריות (בורסה):** חובה לדווח דיווח מיידי על אירוע סייבר מהותי העלול להשפיע על ערך המניה.\n- **מערך הסייבר הלאומי:** גוף מנחה המסייע לארגונים קריטיים וחולק אינדיקטורים של תקיפות (IOCs) לרוחב המדינה.",
+                        examinerTip: "הקפד להזכיר את חובת הדיווח לבורסה ולרשות להגנת הפרטיות כאשר מוצג תרחיש שבו נפרץ בסיס נתונים של לקוחות (סודיות נפגעה) בחברה ציבורית.",
+                        checkpoint: {
+                            id: "l6_q2",
+                            question: "תוך כמה זמן מחויב ארגון לדווח לרשות להגנת הפרטיות על אירוע סייבר חמור שבו נפגע מאגר מידע אישי?",
+                            options: [
+                                "תוך 24 שעות בלבד.",
+                                "ללא שיהוי, ועד 72 שעות מרגע גילוי האירוע.",
+                                "רק בסוף השנה הקלנדרית.",
+                                "אין חובת דיווח אלא אם הלקוחות תובעים את הארגון."
+                            ],
+                            correct: 1
+                        }
+                    }
+                ]
+            },
+            7: {
+                title: "שיעור 7: פורנזיקה דיגיטלית, ניתוח לוגים וציד איומים (Threat Hunting)",
+                introduction: "שיעור זה צולל להיבטים הטכנולוגיים של חקירת תקיפה סייבר פעילה. נלמד כיצד שומרים על ראיות דיגיטליות, איך מנתחים לוגים תחת לחץ, וכיצד מנהלים ציד איומים יזום.",
+                concepts: [
+                    {
+                        title: "1. עקרונות פורנזיקה דיגיטלית (Digital Forensics)",
+                        text: "בזמן חקירת אירוע, אסור לשנות את זירת הפשע הדיגיטלית. עקרונות הפורנזיקה כוללים:\n- **שרשרת שמירה על ראיות (Chain of Custody):** תיעוד קפדני של מי נגע בראיה ומתי, כדי שהיא תהיה קבילה משפטית.\n- **סדר נדיפות הנתונים (Order of Volatility):** איסוף תחילה של מידע שנעלם במהירות (כמו זיכרון RAM פעיל וחיבורי רשת פעילים), ורק לאחר מכן ביצוע העתק דיסק (Disk Imaging) באמצעות כלים המונעים כתיבה מחדש.\n\n*סנכרון זמנים:* כפי שנלמד בשיעור הקשחה, סנכרון שעונים (NTP) הוא קריטי כדי ליצור ציר זמן אחוד לחקירה רוחבית.",
+                        examinerTip: "בשאלה העוסקת בתחקור פריצה, הדגש שאין לבצע פעולות שינוי בשרת הנגוע (כמו התקנת תוכנות חדשות או ריבוט לא מבוקר) מחשש למחיקת ראיות יקרות ערך בזיכרון ה-RAM.",
+                        checkpoint: {
+                            id: "l7_q1",
+                            question: "בעת חקירת שרת נגוע, מדוע מומלץ לשאוב את נתוני זיכרון ה-RAM לפני ביצוע העתקת הדיסק הקשיח?",
+                            options: [
+                                "מכיוון שזיכרון ה-RAM מכיל מידע נדיף (כמו תהליכים פעילים וסיסמאות בטקסט פשוט) שיימחק לצמיתות ברגע שהמחשב יכבה.",
+                                "משום שדיסקים קשיחים אינם נפגעים מנוזקות.",
+                                "כדי לפנות מקום בשרת להתקנת תוכנת האנטי-וירוס.",
+                                "עקב דרישת חוק המחשבים הישראלי."
+                            ],
+                            correct: 0
+                        }
+                    },
+                    {
+                        title: "2. ציד איומים: IOC לעומת IOA",
+                        text: "אבטחה מודרנית אינה ממתינה להתראה, אלא יוזמת חיפוש:\n- **IOC (Indicator of Compromise):** אינדיקטורים לפריצה שכבר התרחשה (למשל: Hash מוכר של קובץ זדוני, כתובת IP של שרת C2 מוכר). זיהוי ריאקטיבי.\n- **IOA (Indicator of Attack):** אינדיקטורים לפעילות תקיפה בזמן אמת, המתמקדים בהתנהגות וכוונת התוקף (למשל: סדרה של הרצות פקודה חריגות, ניסיונות כתיבה לתיקיות מערכת). מאפשר עצירה פרואקטיבית.",
+                        examinerTip: "הבחן בין השניים במבחן. IOC הוא כמו טביעת אצבע של פושע מוכר, בעוד IOA הוא זיהוי התנהגות חשודה של אדם שמנסה לפרוץ מנעול בזמן אמת.",
+                        checkpoint: {
+                            id: "l7_q2",
+                            question: "מה מייצג IOC (Indicator of Compromise) בחקירת סייבר?",
+                            options: [
+                                "התנהגות חשודה בזמן אמת של משתמש ברשת.",
+                                "ראיה דיגיטלית (כגון Hash של קובץ או כתובת IP זדונית מוכרת) המעידה על כך שהרשת כבר נפרצה בעבר.",
+                                "פרוטוקול סנכרון זמנים בשרת.",
+                                "אסטרטגיה להעברת סיכונים לביטוח סייבר."
+                            ],
+                            correct: 1
+                        }
+                    }
+                ]
+            },
+            8: {
+                title: "שיעור 8: שחזור, גיבויים והפקת לקחים לאחר אירוע",
+                introduction: "היעד הסופי של ניהול אירוע הוא שיקום הארגון והפקת לקחים. נלמד על כללי גיבוי מתקדמים, הגדרת יעדי שחזור (RTO/RPO) ועדכון מערכי ההגנה.",
+                concepts: [
+                    {
+                        title: "1. חוק הגיבויים 3-2-1 ויעדי שחזור (RTO/RPO)",
+                        text: "כדי להתאושש ממתקפת כופרה (Ransomware) חמורה, הארגון חייב להישען על מערך גיבויים קשיח:\n- **חוק 3-2-1:**\n  - **3 העתקים** של המידע.\n  - **2 סוגי מדיה** שונים (דיסק קשיח, ענן, קלטת גיבוי).\n  - **1 העתק מחוץ לאתר (Offsite)** ורצוי שיהיה **Immutable (בלתי ניתן לשינוי/מחיקה)** או מנותק מהרשת (Offline/Air-gapped) כדי שהתוקף לא יוכל להצפין גם אותו.\n\n- **יעדי שחזור:**\n  - **RTO (Recovery Time Objective):** יעד זמן ההתאוששות - כמה זמן לוקח להחזיר את המערכת לפעילות (למשל: עד 4 שעות).\n  - **RPO (Recovery Point Objective):** יעד נקודת השחזור - כמה מידע מקסימלי הארגון מוכן לאבד (למשל: גיבוי של אתמול בלילה משמעו RPO של 24 שעות).",
+                        examinerTip: "מתקפות כופרה מודרניות מנסות למחוק או להצפין קודם כל את הגיבויים של הארגון. בבחינה, הדגש תמיד את הצורך בגיבויים מנותקי רשת (Offline) או גיבויים בלתי ניתנים לשינוי (Immutable) כדי להתמודד עם כופרות.",
+                        checkpoint: {
+                            id: "l8_q1",
+                            question: "מדוע גיבויים מבוססי ענן רגילים המסונכרנים תמיד לרשת עלולים שלא להספיק להתאוששות ממתקפת כופרה?",
+                            options: [
+                                "מכיוון שהם אינם תומכים בפרוטוקול SPF.",
+                                "נוזקת כופרה מודרנית סורקת את הרשת ומצפינה או מוחקת באופן אקטיבי גם את הגיבויים המקוונים המחוברים לרשת הארגונית.",
+                                "משום שגיבוי בענן מאט את מהירות הגלישה של העובדים.",
+                                "בגלל דרישת מודל 3 השכבות המונע העלאת קבצים לענן."
+                            ],
+                            correct: 1
+                        }
+                    },
+                    {
+                        title: "2. הפקת לקחים ועדכון אסטרטגיית אבטחה (Lessons Learned)",
+                        text: "השלב הסופי של אירוע סייבר הוא תחילת ההכנה לאירוע הבא. תחקיר 'הפקת לקחים' בודק:\n- כיצד התוקף חדר (ווקטור חדירה) ואיזו פרצה נוצלה.\n- מדוע בקרות המניעה והזיהוי כשלו.\n- מה עבד טוב ומה דרש שיפור בתפקוד צוות ה-SOC והנהלה.\n\nתוצאות התחקיר מתורגמות ישירות ל:\n- עדכון תוכניות סיכונים (Crown Jewels חדשים).\n- הגדרת כללי הקשחה חדשים.\n- שילוב בקרות אבטחה נוספות ב-SSDLC ובנקודות הקצה.",
+                        examinerTip: "הפקת לקחים היא המפתח לסגירת הלופ של ניהול האירוע. אל תסיים ניתוח תרחיש במבחן ללא אזכור שלב הפקת הלקחים ושיפור בקרות ההגנה לעתיד.",
+                        checkpoint: {
+                            id: "l8_q2",
+                            question: "מהי המטרה העיקרית של שלב הפקת הלקחים (Lessons Learned) לאחר סיום הטיפול באירוע סייבר?",
+                            options: [
+                                "הטלת אשמה אישית על העובד שפתח את מייל הפישינג.",
+                                "ניתוח הכשלים שנתגלו באירוע ועדכון מנגנוני המניעה, פלייבוקי התגובה וההקשחה של הארגון כדי למנוע הישנות המקרה.",
+                                "סגירת צוות ה-SOC והעברת הפעילות לחברת ביטוח.",
+                                "הסתרת פרטי האירוע מהבורסה לניירות ערך."
                             ],
                             correct: 1
                         }
@@ -606,7 +727,7 @@
                     "Proofpoint"
                 ],
                 answerIndex: 1,
-                explanation: "מנגנון ה-SPF (Sender Policy Framework) מבוסס על הגדרת רשומת DNS המכילה את כתובות ה-IP המורשות לשלוח מייל מטעם הדומיין. אם ה-IP השולח אינו ברשימה זו, בדיקת ה-SPF נכשלת."
+                explanation: "מנגנון ה-SPF (Sender Policy Framework) מבוסס על הגדרת רשומת DNS המכילה את כתובות ה-IP המורשות לשלוח מיילים בשם הדומיין. אם ה-IP השולח אינו ברשימה זו, בדיקת ה-SPF נכשלת."
             },
             {
                 category: "שיעור 5",
@@ -714,9 +835,9 @@
             ['guide', 'flashcards', 'simulator', 'dashboard'].forEach(t => {
                 const btn = document.getElementById(`nav-btn-${t}`);
                 if (t === tabId) {
-                    btn.className = "w-full text-right py-2 px-3 rounded-xl bg-cyan-950/40 text-cyan-400 border border-cyan-500/20 text-sm font-bold transition flex items-center gap-2";
+                    btn.className = "w-full text-right py-2.5 px-3 rounded-xl bg-cyan-950/40 text-cyan-400 border border-cyan-500/20 text-base font-bold transition flex items-center gap-2";
                 } else {
-                    btn.className = "w-full text-right py-2 px-3 rounded-xl text-slate-400 hover:bg-slate-900/40 text-sm font-bold transition flex items-center gap-2";
+                    btn.className = "w-full text-right py-2.5 px-3 rounded-xl text-slate-400 hover:bg-slate-900/40 text-base font-bold transition flex items-center gap-2";
                 }
             });
 
@@ -736,12 +857,12 @@
             currentLesson = lessonId;
             
             // Highlight subnav
-            for (let i = 1; i <= 5; i++) {
+            for (let i = 1; i <= 8; i++) {
                 const btn = document.getElementById(`lesson-nav-${i}`);
                 if (i === lessonId) {
-                    btn.className = "w-full text-right py-1.5 px-2 rounded-lg text-xs font-medium text-cyan-400 bg-cyan-500/10 border-r-2 border-cyan-500 transition";
+                    btn.className = "w-full text-right py-2 px-2.5 rounded-lg text-sm font-semibold text-cyan-400 bg-cyan-500/10 border-r-2 border-cyan-500 transition";
                 } else {
-                    btn.className = "w-full text-right py-1.5 px-2 rounded-lg text-xs font-medium text-slate-400 hover:text-slate-200 transition";
+                    btn.className = "w-full text-right py-2 px-2.5 rounded-lg text-sm font-medium text-slate-400 hover:text-slate-200 transition";
                 }
             }
 
@@ -750,12 +871,12 @@
         }
 
         function updateHUD() {
-            // Count completed inline checkpoints (total 10 checkpoints across 5 lessons)
+            // Count completed inline checkpoints (total 13 checkpoints across 8 lessons)
             const completedCount = Object.keys(masteredCheckpoints).filter(k => masteredCheckpoints[k] === true).length;
-            document.getElementById('mastered-concepts-count').innerText = `${completedCount}/10`;
+            document.getElementById('mastered-concepts-count').innerText = `${completedCount}/13`;
             
             // Mastery percent
-            const percent = Math.round((completedCount / 10) * 100);
+            const percent = Math.round((completedCount / 13) * 100);
             document.getElementById('global-mastery-text').innerText = `${percent}%`;
             document.getElementById('global-mastery-bar').style.width = `${percent}%`;
         }
@@ -785,9 +906,9 @@
                     <div class="glass-card rounded-2xl p-6 border border-slate-800 relative overflow-hidden">
                         <div class="absolute -right-16 -top-16 w-36 h-36 bg-cyan-500/5 rounded-full blur-2xl pointer-events-none"></div>
                         <div class="relative z-10">
-                            <span class="text-xs font-bold text-cyan-400 uppercase tracking-widest font-tech">שיעור ${currentLesson} מתוך 5</span>
-                            <h2 class="text-2xl font-extrabold text-white mt-1 mb-2">${lesson.title}</h2>
-                            <p class="text-slate-300 text-sm leading-relaxed">${lesson.introduction}</p>
+                            <span class="text-sm font-bold text-cyan-400 uppercase tracking-widest font-tech">שיעור ${currentLesson} מתוך 8</span>
+                            <h2 class="text-3xl font-extrabold text-white mt-1 mb-2">${lesson.title}</h2>
+                            <p class="text-slate-300 text-base leading-relaxed">${lesson.introduction}</p>
                         </div>
                     </div>
 
@@ -802,8 +923,8 @@
                     <div class="glass-card rounded-2xl border border-slate-800 overflow-hidden">
                         <!-- Concept Header -->
                         <div class="p-5 bg-slate-900/40 border-b border-slate-800 flex items-center justify-between">
-                            <h3 class="font-bold text-slate-200 text-base md:text-lg">${concept.title}</h3>
-                            <span id="badge-${concept.checkpoint.id}" class="text-xs font-bold px-2.5 py-1 rounded-full ${
+                            <h3 class="font-bold text-slate-200 text-lg md:text-xl">${concept.title}</h3>
+                            <span id="badge-${concept.checkpoint.id}" class="text-sm font-bold px-3 py-1 rounded-full ${
                                 isMastered 
                                     ? 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20' 
                                     : 'bg-slate-800 text-slate-400 border border-slate-700/60'
@@ -813,29 +934,36 @@
                         </div>
 
                         <!-- Concept Body -->
-                        <div class="p-5 md:p-6 space-y-4 text-slate-300 text-sm leading-relaxed">
+                        <div class="p-6 md:p-8 space-y-5 text-slate-250 text-base md:text-lg leading-relaxed">
                             <p class="whitespace-pre-line">${concept.text}</p>
                             
+                            <!-- Concept Illustration Image -->
+                            ${concept.image ? `
+                            <div class="my-5 p-2 bg-slate-950/40 rounded-2xl border border-slate-800/80">
+                                <img src="${concept.image}" class="w-full max-w-2xl mx-auto rounded-xl shadow-lg border border-slate-800" alt="${concept.title}">
+                                <p class="text-center text-xs text-slate-500 mt-2 font-medium">איור סימולציית הבנה: ${concept.title}</p>
+                            </div>` : ''}
+
                             <!-- Examiner Box -->
                             <div class="p-4 rounded-xl bg-cyan-950/20 border border-cyan-500/15 flex gap-3">
                                 <div class="w-8 h-8 rounded-full bg-cyan-500/10 text-cyan-400 flex items-center justify-center shrink-0">
                                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path></svg>
                                 </div>
-                                <div class="text-xs leading-relaxed text-slate-400">
-                                    <strong class="text-cyan-400 block text-xs mb-1">טיפ מפתח למעריך הבחינה (השאלות הפתוחות):</strong>
+                                <div class="text-xs md:text-sm leading-relaxed text-slate-400">
+                                    <strong class="text-cyan-400 block text-xs md:text-sm mb-1">טיפ מפתח למעריך הבחינה (השאלות הפתוחות):</strong>
                                     ${concept.examinerTip}
                                 </div>
                             </div>
 
-                            <!-- Inline Checkpoint (Question) -->
+                            <!-- Inline Checkpoint -->
                             <div class="border-t border-slate-800/80 pt-5 mt-5">
                                 <div class="flex items-center gap-2 mb-3">
-                                    <span class="w-1.5 h-3 bg-indigo-500 rounded"></span>
-                                    <h4 class="font-bold text-slate-200 text-xs tracking-wide uppercase">בוחן הבנה מהיר (Inline Checkpoint)</h4>
+                                    <span class="w-1.5 h-3.5 bg-indigo-500 rounded"></span>
+                                    <h4 class="font-bold text-slate-200 text-xs md:text-sm tracking-wide uppercase">בוחן הבנה מהיר (Inline Checkpoint)</h4>
                                 </div>
-                                <p class="text-sm font-semibold text-white mb-4">${concept.checkpoint.question}</p>
+                                <p class="text-base md:text-lg font-bold text-white mb-4">${concept.checkpoint.question}</p>
                                 
-                                <div class="grid grid-cols-1 gap-2.5">
+                                <div class="grid grid-cols-1 gap-3">
                 `;
 
                 concept.checkpoint.options.forEach((opt, oIdx) => {
@@ -846,15 +974,15 @@
                     const isCorrectOption = oIdx === concept.checkpoint.correct;
 
                     let btnStyle = "border-slate-800 bg-slate-950/20 hover:bg-slate-900/30 text-slate-300";
-                    let badgeIcon = `<span class="w-5 h-5 rounded-full border border-slate-700 flex items-center justify-center text-[10px] text-slate-500 shrink-0">${oIdx+1}</span>`;
+                    let badgeIcon = `<span class="w-6 h-6 rounded-full border border-slate-700 flex items-center justify-center text-xs text-slate-500 shrink-0 font-tech">${oIdx+1}</span>`;
 
                     if (checkpointAnswered) {
                         if (isCorrectOption) {
-                            btnStyle = "border-emerald-500/30 bg-emerald-500/5 text-emerald-300";
-                            badgeIcon = `<span class="w-5 h-5 rounded-full bg-emerald-500 text-slate-950 flex items-center justify-center text-xs font-bold shrink-0">✓</span>`;
+                            btnStyle = "border-emerald-500/30 bg-emerald-500/5 text-emerald-350";
+                            badgeIcon = `<span class="w-6 h-6 rounded-full bg-emerald-500 text-slate-950 flex items-center justify-center text-sm font-bold shrink-0">✓</span>`;
                         } else if (isSelected) {
-                            btnStyle = "border-rose-500/30 bg-rose-500/5 text-rose-300";
-                            badgeIcon = `<span class="w-5 h-5 rounded-full bg-rose-500 text-white flex items-center justify-center text-xs font-bold shrink-0">✗</span>`;
+                            btnStyle = "border-rose-500/30 bg-rose-500/5 text-rose-350";
+                            badgeIcon = `<span class="w-6 h-6 rounded-full bg-rose-500 text-white flex items-center justify-center text-sm font-bold shrink-0">✗</span>`;
                         } else {
                             btnStyle = "border-slate-850 bg-slate-950/10 opacity-50 text-slate-400";
                         }
@@ -862,7 +990,7 @@
 
                     html += `
                         <button onclick="answerCheckpoint('${checkId}', ${oIdx}, ${concept.checkpoint.correct})" ${checkpointAnswered ? 'disabled' : ''} 
-                                class="w-full text-right p-3.5 rounded-xl border text-xs leading-relaxed transition flex items-start gap-3 ${btnStyle}">
+                                class="w-full text-right p-4 rounded-xl border text-sm md:text-base leading-relaxed transition flex items-start gap-3 ${btnStyle}">
                             ${badgeIcon}
                             <span>${opt}</span>
                         </button>
@@ -872,11 +1000,11 @@
                 html += `
                                 </div>
                                 
-                                <!-- Explanation Box (Visible if answered) -->
-                                <div id="expl-${concept.checkpoint.id}" class="mt-4 p-4 rounded-xl bg-slate-950/60 border border-slate-800 text-xs leading-relaxed text-slate-400 ${
+                                <!-- Explanation Box -->
+                                <div id="expl-${concept.checkpoint.id}" class="mt-4 p-4 rounded-xl bg-slate-950/60 border border-slate-800 text-sm leading-relaxed text-slate-450 ${
                                     localStorage.getItem(`answered_${concept.checkpoint.id}`) !== null ? '' : 'hidden'
                                 }">
-                                    <strong class="text-indigo-400 block mb-1">הסבר המרצה:</strong>
+                                    <strong class="text-indigo-400 block mb-1 text-sm md:text-base">הסבר המרצה:</strong>
                                     כאשר עונים על שאלות כאלו במבחן, חשוב לזכור את הרקע והסיבה לבחירה. במקרה זה, הפתרון הנכון נובע מכך ש-${
                                         concept.checkpoint.options[concept.checkpoint.correct]
                                     }
@@ -893,12 +1021,12 @@
                     <!-- Bottom Nav -->
                     <div class="flex justify-between items-center border-t border-slate-800 pt-6">
                         <button onclick="selectLesson(${Math.max(1, currentLesson - 1)})" ${currentLesson === 1 ? 'disabled' : ''} 
-                                class="px-4 py-2 rounded-xl bg-slate-900 border border-slate-800 text-slate-300 text-xs font-semibold hover:bg-slate-800 transition disabled:opacity-50">
+                                class="px-5 py-2.5 rounded-xl bg-slate-900 border border-slate-800 text-slate-350 text-sm font-bold hover:bg-slate-800 transition disabled:opacity-50">
                             השיעור הקודם
                         </button>
-                        <span class="text-xs font-bold text-slate-400 font-tech">שיעור ${currentLesson} מתוך 5</span>
-                        <button onclick="selectLesson(${Math.min(5, currentLesson + 1)})" ${currentLesson === 5 ? 'disabled' : ''} 
-                                class="px-4 py-2 rounded-xl bg-slate-900 border border-slate-800 text-slate-300 text-xs font-semibold hover:bg-slate-800 transition disabled:opacity-50">
+                        <span class="text-sm font-bold text-slate-400 font-tech">שיעור ${currentLesson} מתוך 8</span>
+                        <button onclick="selectLesson(${Math.min(8, currentLesson + 1)})" ${currentLesson === 8 ? 'disabled' : ''} 
+                                class="px-5 py-2.5 rounded-xl bg-slate-900 border border-slate-800 text-slate-350 text-sm font-bold hover:bg-slate-800 transition disabled:opacity-50">
                             השיעור הבא
                         </button>
                     </div>
@@ -928,8 +1056,8 @@
             container.innerHTML = `
                 <div class="space-y-6">
                     <div class="glass-card rounded-2xl p-6 border border-slate-800 text-center max-w-xl mx-auto">
-                        <h2 class="text-xl font-extrabold text-white mb-1">מעבדת כרטיסיות Active Recall</h2>
-                        <p class="text-xs text-slate-400">נסה לענות על השאלה בקול רם, לחץ על הכרטיסייה כדי לראות את הפתרון, ודרג את רמת השליטה שלך.</p>
+                        <h2 class="text-2xl font-extrabold text-white mb-1">معבדת כרטיסיות Active Recall</h2>
+                        <p class="text-sm text-slate-400 font-medium">נסה לענות על השאלה בקול רם, לחץ על הכרטיסייה כדי לראות את הפתרון, ודרג את רמת השליטה שלך.</p>
                     </div>
 
                     <!-- 3D Card -->
@@ -940,28 +1068,28 @@
                                 <!-- Front -->
                                 <div class="absolute inset-0 backface-hidden p-8 flex flex-col justify-between rounded-2xl">
                                     <div class="flex justify-between items-center">
-                                        <span class="px-2.5 py-0.5 rounded-full text-[10px] font-bold tracking-wider uppercase bg-cyan-500/10 text-cyan-400 border border-cyan-500/20">${card.category}</span>
+                                        <span class="px-2.5 py-0.5 rounded-full text-xs font-bold tracking-wider uppercase bg-cyan-500/10 text-cyan-400 border border-cyan-500/20">${card.category}</span>
                                         <span class="text-xs font-tech text-slate-500">${currentCardIndex + 1} / ${flashcardsData.length}</span>
                                     </div>
-                                    <div class="text-center my-auto">
-                                        <p class="text-base md:text-lg font-bold leading-relaxed text-white">${card.question}</p>
+                                    <div class="text-center my-auto px-4">
+                                        <p class="text-lg md:text-xl font-bold leading-relaxed text-white">${card.question}</p>
                                     </div>
-                                    <div class="text-center text-xs text-slate-500 flex items-center justify-center gap-1.5">
+                                    <div class="text-center text-xs md:text-sm text-slate-500 flex items-center justify-center gap-1.5">
                                         <svg class="w-4 h-4 text-cyan-500 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122"></path></svg>
                                         לחץ על הכרטיסייה לחשיפת הפתרון
                                     </div>
                                 </div>
 
                                 <!-- Back -->
-                                <div class="absolute inset-0 backface-hidden rotate-y-180 p-6 md:p-8 flex flex-col justify-between bg-slate-950 rounded-2xl overflow-y-auto">
+                                <div class="absolute inset-0 backface-hidden rotate-y-180 p-8 flex flex-col justify-between bg-slate-950 rounded-2xl overflow-y-auto">
                                     <div class="flex justify-between items-center mb-2">
                                         <span class="text-[10px] font-bold uppercase text-indigo-400 bg-indigo-500/10 px-2 py-0.5 rounded border border-indigo-500/20">הסבר מחוון התשובה</span>
                                         <span class="text-xs text-slate-500">${currentCardIndex + 1} / ${flashcardsData.length}</span>
                                     </div>
-                                    <div class="my-auto text-sm leading-relaxed text-slate-300">
-                                        <p class="whitespace-pre-line">${card.answer}</p>
+                                    <div class="my-auto text-base leading-relaxed text-slate-300 whitespace-pre-line px-2">
+                                        ${card.answer}
                                     </div>
-                                    <div class="text-center text-[10px] text-cyan-500 mt-2">
+                                    <div class="text-center text-xs text-cyan-500 mt-2">
                                         לחץ שוב כדי להפוך חזרה
                                     </div>
                                 </div>
@@ -984,14 +1112,14 @@
                         </div>
                         
                         <div class="flex gap-3 w-full sm:w-auto">
-                            <button onclick="setCardMastery(true)" class="flex-1 sm:flex-initial px-4 py-2.5 rounded-xl text-sm font-bold transition flex items-center justify-center gap-2 ${
+                            <button onclick="setCardMastery(true)" class="flex-1 sm:flex-initial px-5 py-2.5 rounded-xl text-sm font-bold transition flex items-center justify-center gap-2 ${
                                 isMastered 
                                     ? 'bg-emerald-500 text-slate-950 shadow-lg shadow-emerald-500/20' 
                                     : 'bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-400 border border-emerald-500/30'
                             }">
                                 👍 ידעתי מצוין
                             </button>
-                            <button onclick="setCardMastery(false)" class="flex-1 sm:flex-initial px-4 py-2.5 rounded-xl text-sm font-bold transition flex items-center justify-center gap-2 ${
+                            <button onclick="setCardMastery(false)" class="flex-1 sm:flex-initial px-5 py-2.5 rounded-xl text-sm font-bold transition flex items-center justify-center gap-2 ${
                                 !isMastered && cardMasteredState[currentCardIndex] !== undefined
                                     ? 'bg-rose-500 text-white shadow-lg shadow-rose-500/20'
                                     : 'bg-rose-500/10 hover:bg-rose-500/20 text-rose-400 border border-rose-500/30'
@@ -1016,7 +1144,7 @@
         function setCardMastery(mastered) {
             cardMasteredState[currentCardIndex] = mastered;
             localStorage.setItem('cyber_card_states', JSON.stringify(cardMasteredState));
-            showToast(mastered ? 'סומן כנלמד בהצלחה!' : 'סומן כדורש חזרה בבלוק 6');
+            showToast(mastered ? 'סומן כנלמד בהצלחה!' : 'סומן כדורש חזרה');
             playChimeSound();
             renderCurrentView();
         }
@@ -1026,10 +1154,10 @@
                 <div class="space-y-8">
                     <!-- Mode Selector -->
                     <div class="flex justify-center gap-4 bg-slate-900/40 p-1.5 rounded-xl border border-slate-800/80 max-w-md mx-auto">
-                        <button onclick="switchSimMode('mc')" id="sim-mode-mc-btn" class="flex-1 py-2 text-xs font-bold rounded-lg bg-cyan-500 text-slate-950 transition">
+                        <button onclick="switchSimMode('mc')" id="sim-mode-mc-btn" class="flex-1 py-2 text-sm font-bold rounded-lg bg-cyan-500 text-slate-950 transition">
                             שאלות אמריקאיות (8)
                         </button>
-                        <button onclick="switchSimMode('open')" id="sim-mode-open-btn" class="flex-1 py-2 text-xs font-bold rounded-lg text-slate-400 hover:text-slate-200 transition">
+                        <button onclick="switchSimMode('open')" id="sim-mode-open-btn" class="flex-1 py-2 text-sm font-bold rounded-lg text-slate-400 hover:text-slate-200 transition">
                             תרחישי אירוע פתוחים (3)
                         </button>
                     </div>
@@ -1038,56 +1166,52 @@
                     <div id="sim-mc-content" class="max-w-3xl mx-auto space-y-6">
                         <div class="flex justify-between items-center border-b border-slate-850 pb-3">
                             <div>
-                                <h3 class="font-bold text-white text-lg">שאלות רב-ברירה</h3>
-                                <p class="text-xs text-slate-400">בחינה מהירה של כלל נושאי הקורס</p>
+                                <h3 class="font-bold text-white text-xl">שאלות רב-ברירה</h3>
+                                <p class="text-sm text-slate-400 font-medium">בחינה מהירה של כלל נושאי הקורס</p>
                             </div>
                             <span id="sim-score-badge" class="text-sm font-semibold bg-cyan-500/10 text-cyan-400 border border-cyan-500/20 px-3 py-1 rounded-full font-tech">ציון: 0</span>
                         </div>
 
                         <!-- Question Display -->
-                        <div id="sim-question-card">
-                            <!-- Injected by renderSimQuestion() -->
-                        </div>
+                        <div id="sim-question-card"></div>
                     </div>
 
                     <!-- SCENARIOS COMPONENT -->
                     <div id="sim-open-content" class="max-w-3xl mx-auto space-y-6 hidden">
                         <div class="border-b border-slate-850 pb-3">
-                            <h3 class="font-bold text-white text-lg">תרחישי אירוע פתוחים</h3>
-                            <p class="text-xs text-slate-400">תרגיל מבוסס סימולציות - כתוב טיוטה והשווה למחוון המרצה</p>
+                            <h3 class="font-bold text-white text-xl">תרחישי אירוע פתוחים</h3>
+                            <p class="text-sm text-slate-400 font-medium">תרגיל מבוסס סימולציות - כתוב טיוטה והשווה למחוון המרצה</p>
                         </div>
                         
                         <!-- Scenario buttons selection -->
                         <div class="flex gap-2">
-                            <button onclick="selectOpenScenarioSim(0)" id="scen-btn-0" class="px-3 py-1.5 rounded-lg text-xs font-bold bg-cyan-950/30 text-cyan-400 border border-cyan-500/20">תרחיש 1: בינת תוכנה</button>
-                            <button onclick="selectOpenScenarioSim(1)" id="scen-btn-1" class="px-3 py-1.5 rounded-lg text-xs font-bold bg-slate-900/50 text-slate-400 border border-slate-800">תרחיש 2: כופרה ב-OT</button>
-                            <button onclick="selectOpenScenarioSim(2)" id="scen-btn-2" class="px-3 py-1.5 rounded-lg text-xs font-bold bg-slate-900/50 text-slate-400 border border-slate-800">תרחיש 3: התקפת One-Day</button>
+                            <button onclick="selectOpenScenarioSim(0)" id="scen-btn-0" class="px-3.5 py-1.5 rounded-lg text-sm font-bold bg-cyan-950/30 text-cyan-400 border border-cyan-500/20">תרחיש 1: בינת תוכנה</button>
+                            <button onclick="selectOpenScenarioSim(1)" id="scen-btn-1" class="px-3.5 py-1.5 rounded-lg text-sm font-bold bg-slate-900/50 text-slate-400 border border-slate-800">תרחיש 2: כופרה ב-OT</button>
+                            <button onclick="selectOpenScenarioSim(2)" id="scen-btn-2" class="px-3.5 py-1.5 rounded-lg text-sm font-bold bg-slate-900/50 text-slate-400 border border-slate-800">תרחיש 3: התקפת One-Day</button>
                         </div>
 
-                        <div class="glass-card rounded-2xl p-6 border border-slate-800 space-y-6">
-                            <h4 id="scen-title-display" class="text-lg font-bold text-white"></h4>
-                            <p id="scen-desc-display" class="text-sm text-slate-350 leading-relaxed"></p>
+                        <div class="glass-card rounded-2xl p-6 md:p-8 border border-slate-800 space-y-6">
+                            <h4 id="scen-title-display" class="text-xl font-bold text-white"></h4>
+                            <p id="scen-desc-display" class="text-base md:text-lg text-slate-350 leading-relaxed"></p>
                             
                             <div>
-                                <label class="block text-xs font-bold text-slate-400 mb-2">טיוטת התשובה שלך (תרגול אקטיבי):</label>
-                                <textarea id="scen-user-input" rows="4" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 text-sm text-slate-200 focus:outline-none focus:border-cyan-500/50" placeholder="הקלד כאן את נקודות המפתח..."></textarea>
+                                <label class="block text-xs md:text-sm font-bold text-slate-400 mb-2">טיוטת התשובה שלך (תרגול אקטיבי):</label>
+                                <textarea id="scen-user-input" rows="5" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-4 text-base text-slate-200 focus:outline-none focus:border-cyan-500/50" placeholder="הקלד כאן את נקודות המפתח..."></textarea>
                             </div>
 
-                            <button onclick="toggleScenAnswerDisplay()" class="w-full py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-bold transition">
+                            <button onclick="toggleScenAnswerDisplay()" class="w-full py-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 text-sm font-bold transition">
                                 <span id="reveal-scen-btn-text">חשוף תשובת מודל ומחוון בדיקה</span>
                             </button>
 
                             <!-- Hidden Model Box -->
-                            <div id="scen-model-box" class="mt-4 p-5 rounded-xl bg-slate-950 border border-slate-850 text-sm space-y-4 hidden">
+                            <div id="scen-model-box" class="mt-4 p-6 rounded-xl bg-slate-950 border border-slate-850 text-base space-y-4 hidden">
                                 <div>
-                                    <h5 class="font-bold text-cyan-400 mb-1">תשובת מודל מלאה:</h5>
+                                    <h5 class="font-bold text-cyan-400 mb-1 text-lg">תשובת מודל מלאה:</h5>
                                     <p id="scen-model-ans-text" class="text-slate-300 leading-relaxed whitespace-pre-line"></p>
                                 </div>
                                 <div class="border-t border-slate-800/80 pt-3">
-                                    <h5 class="font-bold text-emerald-400 mb-1">מחוון ניקוד של הבודק (Rubric):</h5>
-                                    <ul id="scen-model-rubric" class="list-disc list-inside space-y-1 text-xs text-slate-400">
-                                        <!-- Rubrics list -->
-                                    </ul>
+                                    <h5 class="font-bold text-emerald-400 mb-1 text-lg">מחוון ניקוד של הבודק (Rubric):</h5>
+                                    <ul id="scen-model-rubric" class="list-disc list-inside space-y-1.5 text-sm text-slate-400"></ul>
                                 </div>
                             </div>
                         </div>
@@ -1112,14 +1236,14 @@
             if (mode === 'mc') {
                 mcContent.classList.remove('hidden');
                 openContent.classList.add('hidden');
-                mcBtn.className = "flex-1 py-2 text-xs font-bold rounded-lg bg-cyan-500 text-slate-950 transition";
-                openBtn.className = "flex-1 py-2 text-xs font-bold rounded-lg text-slate-400 hover:text-slate-200 transition";
+                mcBtn.className = "flex-1 py-2 text-sm font-bold rounded-lg bg-cyan-500 text-slate-950 transition";
+                openBtn.className = "flex-1 py-2 text-sm font-bold rounded-lg text-slate-400 hover:text-slate-200 transition";
                 renderSimQuestion();
             } else {
                 mcContent.classList.add('hidden');
                 openContent.classList.remove('hidden');
-                mcBtn.className = "flex-1 py-2 text-xs font-bold rounded-lg text-slate-400 hover:text-slate-200 transition";
-                openBtn.className = "flex-1 py-2 text-xs font-bold rounded-lg bg-cyan-500 text-slate-950 transition";
+                mcBtn.className = "flex-1 py-2 text-sm font-bold rounded-lg text-slate-400 hover:text-slate-200 transition";
+                openBtn.className = "flex-1 py-2 text-sm font-bold rounded-lg bg-cyan-500 text-slate-950 transition";
                 selectOpenScenarioSim(currentOpenIndex);
             }
         }
@@ -1135,15 +1259,15 @@
             let optionsHtml = '';
             q.options.forEach((opt, idx) => {
                 let btnStyle = "border-slate-800 bg-slate-950/40 hover:bg-slate-900/40 text-slate-350";
-                let badge = `<span class="w-5 h-5 rounded-full border border-slate-700 flex items-center justify-center text-xs text-slate-500 shrink-0">${idx+1}</span>`;
+                let badge = `<span class="w-6 h-6 rounded-full border border-slate-700 flex items-center justify-center text-xs text-slate-500 shrink-0 font-tech">${idx+1}</span>`;
 
                 if (hasSelected) {
                     if (idx === q.answerIndex) {
                         btnStyle = "border-emerald-500/40 bg-emerald-500/5 text-emerald-350";
-                        badge = `<span class="w-5 h-5 rounded-full bg-emerald-500 text-slate-950 flex items-center justify-center text-xs font-bold shrink-0">✓</span>`;
+                        badge = `<span class="w-6 h-6 rounded-full bg-emerald-500 text-slate-950 flex items-center justify-center text-sm font-bold shrink-0">✓</span>`;
                     } else if (idx === selectedOpt) {
                         btnStyle = "border-rose-500/40 bg-rose-500/5 text-rose-350";
-                        badge = `<span class="w-5 h-5 rounded-full bg-rose-500 text-white flex items-center justify-center text-xs font-bold shrink-0">✗</span>`;
+                        badge = `<span class="w-6 h-6 rounded-full bg-rose-500 text-white flex items-center justify-center text-sm font-bold shrink-0">✗</span>`;
                     } else {
                         btnStyle = "border-slate-850 bg-slate-950/20 opacity-60 text-slate-400";
                     }
@@ -1151,7 +1275,7 @@
 
                 optionsHtml += `
                     <button onclick="selectSimAnswer(${idx})" ${hasSelected ? 'disabled' : ''} 
-                            class="w-full text-right p-4 rounded-xl border transition text-xs md:text-sm flex items-start gap-3 ${btnStyle}">
+                            class="w-full text-right p-4 rounded-xl border transition text-sm md:text-base flex items-start gap-3 ${btnStyle}">
                         ${badge}
                         <span class="leading-relaxed">${opt}</span>
                     </button>
@@ -1159,27 +1283,27 @@
             });
 
             card.innerHTML = `
-                <div class="glass-card rounded-2xl p-6 border border-slate-800 space-y-4">
+                <div class="glass-card rounded-2xl p-6 md:p-8 border border-slate-800 space-y-4">
                     <div class="flex justify-between items-center">
-                        <span class="px-2 py-0.5 text-[9px] font-bold rounded bg-slate-800 text-slate-400 uppercase tracking-wide">${q.category}</span>
+                        <span class="px-2 py-0.5 text-xs font-bold rounded bg-slate-800 text-slate-400 uppercase tracking-wide">${q.category}</span>
                         <span class="text-xs font-tech text-slate-500">${currentQuizIndex + 1} / ${mcQuestions.length}</span>
                     </div>
-                    <h4 class="text-sm md:text-base font-bold text-white mb-4 leading-relaxed">${q.question}</h4>
+                    <h4 class="text-base md:text-lg font-bold text-white mb-4 leading-relaxed">${q.question}</h4>
                     
                     <div class="space-y-3">
                         ${optionsHtml}
                     </div>
 
                     <!-- Explanation -->
-                    <div class="mt-4 p-4 rounded-xl bg-slate-950/65 border border-slate-850 text-xs leading-relaxed text-slate-400 ${hasSelected ? '' : 'hidden'}">
-                        <strong class="text-indigo-400 block mb-1">הסבר המרצה לתשובה:</strong>
+                    <div class="mt-4 p-4 rounded-xl bg-slate-950/65 border border-slate-850 text-sm leading-relaxed text-slate-400 ${hasSelected ? '' : 'hidden'}">
+                        <strong class="text-indigo-400 block mb-1 text-sm md:text-base">הסבר המרצה לתשובה:</strong>
                         ${q.explanation}
                     </div>
 
-                    <!-- Navigation inside simulation -->
+                    <!-- Navigation -->
                     <div class="flex justify-between border-t border-slate-850 pt-5 mt-5">
-                        <button onclick="navigateSimQuestion(-1)" class="px-3.5 py-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-bold transition">שאלה קודמת</button>
-                        <button onclick="navigateSimQuestion(1)" class="px-3.5 py-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-bold transition">שאלה הבאה</button>
+                        <button onclick="navigateSimQuestion(-1)" class="px-4 py-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 text-sm font-bold transition">שאלה קודמת</button>
+                        <button onclick="navigateSimQuestion(1)" class="px-4 py-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 text-sm font-bold transition">שאלה הבאה</button>
                     </div>
                 </div>
             `;
@@ -1229,9 +1353,9 @@
             for (let i = 0; i < 3; i++) {
                 const btn = document.getElementById(`scen-btn-${i}`);
                 if (i === idx) {
-                    btn.className = "px-3 py-1.5 rounded-lg text-xs font-bold bg-cyan-950/30 text-cyan-400 border border-cyan-500/20";
+                    btn.className = "px-3.5 py-1.5 rounded-lg text-sm font-bold bg-cyan-950/30 text-cyan-400 border border-cyan-500/20";
                 } else {
-                    btn.className = "px-3 py-1.5 rounded-lg text-xs font-bold bg-slate-900/50 text-slate-400 border border-slate-800";
+                    btn.className = "px-3.5 py-1.5 rounded-lg text-sm font-bold bg-slate-900/50 text-slate-400 border border-slate-800";
                 }
             }
 
@@ -1283,50 +1407,50 @@
             container.innerHTML = `
                 <div class="space-y-6">
                     <div class="glass-card rounded-2xl p-6 border border-slate-800">
-                        <h2 class="text-xl font-extrabold text-white mb-2">מרכז שליטה וסטטיסטיקת למידה</h2>
-                        <p class="text-xs text-slate-400">נתח את קצב ההתקדמות שלך לקראת הבחינה</p>
+                        <h2 class="text-2xl font-extrabold text-white mb-2">מרכז שליטה וסטטיסטיקת למידה</h2>
+                        <p class="text-sm text-slate-400 font-medium">נתח את קצב ההתקדמות שלך לקראת הבחינה</p>
                     </div>
 
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                         <!-- Stat 1 -->
                         <div class="glass-card rounded-xl p-5 border border-slate-800 text-center space-y-2">
-                            <span class="text-xs font-bold text-slate-400 block">בחני הבנה (Inline)</span>
-                            <span class="text-3xl font-extrabold text-cyan-400 font-tech block">${inlineMastered} / 10</span>
-                            <span class="text-[10px] text-slate-500 block">הושלמו מתוך חומר הלימוד</span>
+                            <span class="text-xs md:text-sm font-bold text-slate-400 block">בחני הבנה (Inline)</span>
+                            <span class="text-4xl font-extrabold text-cyan-400 font-tech block">${inlineMastered} / 13</span>
+                            <span class="text-[10px] md:text-xs text-slate-500 block">הושלמו מתוך חומר הלימוד</span>
                         </div>
                         <!-- Stat 2 -->
                         <div class="glass-card rounded-xl p-5 border border-slate-800 text-center space-y-2">
-                            <span class="text-xs font-bold text-slate-400 block">כרטיסיות ששוננו (Flashcards)</span>
-                            <span class="text-3xl font-extrabold text-indigo-400 font-tech block">${flashcardMastered} / 15</span>
-                            <span class="text-[10px] text-slate-500 block">סומנו כ-'ידעתי מצוין'</span>
+                            <span class="text-xs md:text-sm font-bold text-slate-400 block">כרטיסיות ששוננו (Flashcards)</span>
+                            <span class="text-4xl font-extrabold text-indigo-400 font-tech block">${flashcardMastered} / 15</span>
+                            <span class="text-[10px] md:text-xs text-slate-500 block">סומנו כ-'ידעתי מצוין'</span>
                         </div>
                         <!-- Stat 3 -->
                         <div class="glass-card rounded-xl p-5 border border-slate-800 text-center space-y-2">
-                            <span class="text-xs font-bold text-slate-400 block">סימולציית בחירה מרובה</span>
-                            <span class="text-3xl font-extrabold text-emerald-400 font-tech block">${quizTotal > 0 ? Math.round((quizCorrect/quizTotal)*100) : 0}%</span>
-                            <span class="text-[10px] text-slate-500 block">ציון ממוצע מתוך ${quizTotal} מענים</span>
+                            <span class="text-xs md:text-sm font-bold text-slate-400 block">סימולציית בחירה מרובה</span>
+                            <span class="text-4xl font-extrabold text-emerald-400 font-tech block">${quizTotal > 0 ? Math.round((quizCorrect/quizTotal)*100) : 0}%</span>
+                            <span class="text-[10px] md:text-xs text-slate-500 block">ציון ממוצע מתוך ${quizTotal} מענים</span>
                         </div>
                     </div>
 
                     <div class="glass-card rounded-2xl p-6 border border-slate-800 space-y-4">
-                        <h3 class="font-bold text-white text-base">הערכות סופיות למעבר המבחן:</h3>
-                        <div class="space-y-3 text-xs md:text-sm text-slate-300">
+                        <h3 class="font-bold text-white text-lg">הערכות סופיות למעבר המבחן:</h3>
+                        <div class="space-y-3 text-sm md:text-base text-slate-300">
                             <p class="flex items-center gap-2">
-                                <span class="w-2 h-2 rounded-full ${inlineMastered >= 8 ? 'bg-emerald-500' : 'bg-rose-500'}"></span>
-                                <span>שליטה תיאורטית: <strong>${inlineMastered >= 8 ? 'מעולה' : 'נדרש פתרון של עוד בחנים מהירים בגוף החומר'}</strong></span>
+                                <span class="w-2.5 h-2.5 rounded-full ${inlineMastered >= 10 ? 'bg-emerald-500' : 'bg-rose-500'}"></span>
+                                <span>שליטה תיאורטית: <strong>${inlineMastered >= 10 ? 'מעולה' : 'נדרש פתרון של עוד בחנים מהירים בגוף החומר'}</strong></span>
                             </p>
                             <p class="flex items-center gap-2">
-                                <span class="w-2 h-2 rounded-full ${flashcardMastered >= 12 ? 'bg-emerald-500' : 'bg-rose-500'}"></span>
+                                <span class="w-2.5 h-2.5 rounded-full ${flashcardMastered >= 12 ? 'bg-emerald-500' : 'bg-rose-500'}"></span>
                                 <span>שינון מושגי יסוד: <strong>${flashcardMastered >= 12 ? 'מוכן למבחן' : 'עבור שוב על כרטיסיות השינון שסומנו לחזרה'}</strong></span>
                             </p>
                             <p class="flex items-center gap-2">
-                                <span class="w-2 h-2 rounded-full ${quizCorrect >= 6 ? 'bg-emerald-500' : 'bg-rose-500'}"></span>
+                                <span class="w-2.5 h-2.5 rounded-full ${quizCorrect >= 6 ? 'bg-emerald-500' : 'bg-rose-500'}"></span>
                                 <span>יכולת ניתוח קייסים: <strong>${quizCorrect >= 6 ? 'טובה מאוד' : 'פתור את סימולטור התרחישים וערוך השוואה קפדנית למחווני הניקוד'}</strong></span>
                             </p>
                         </div>
                         
                         <div class="border-t border-slate-800/80 pt-4 flex justify-between">
-                            <button onclick="resetAllStudyState()" class="px-3.5 py-2 rounded-lg bg-rose-500/10 hover:bg-rose-500/20 border border-rose-500/30 text-rose-400 text-xs font-bold transition">
+                            <button onclick="resetAllStudyState()" class="px-4 py-2.5 rounded-lg bg-rose-500/10 hover:bg-rose-500/20 border border-rose-500/30 text-rose-400 text-xs md:text-sm font-bold transition">
                                 אפס את כל נתוני הלמידה
                             </button>
                         </div>
@@ -1336,7 +1460,7 @@
         }
 
         function resetAllStudyState() {
-            if (confirm('האם אתה בטוח שברצונך לאפס לחלוטין את כל התקדמות הלמידה שלך (בחנים, כרטיסיות, סימולטור)?')) {
+            if (confirm('האם אתה בטוח שברצונך לאפס לחלוטין את כל התקדמות הלמידה שלך?')) {
                 localStorage.clear();
                 masteredCheckpoints = {};
                 cardMasteredState = {};
@@ -1365,15 +1489,14 @@
             if (isMuted) return;
             try {
                 const ctx = new (window.AudioContext || window.webkitAudioContext)();
-                
                 const osc = ctx.createOscillator();
                 const gain = ctx.createGain();
                 
                 osc.type = 'sine';
-                osc.frequency.setValueAtTime(587.33, ctx.currentTime); // D5
-                osc.frequency.setValueAtTime(880, ctx.currentTime + 0.15); // A5
+                osc.frequency.setValueAtTime(587.33, ctx.currentTime);
+                osc.frequency.setValueAtTime(880, ctx.currentTime + 0.15);
                 
-                gain.gain.setValueAtTime(0.25, ctx.currentTime);
+                gain.gain.setValueAtTime(0.2, ctx.currentTime);
                 gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.5);
                 
                 osc.connect(gain);
@@ -1382,7 +1505,7 @@
                 osc.start();
                 osc.stop(ctx.currentTime + 0.5);
             } catch (e) {
-                console.log("Audio blocking", e);
+                console.log("Audio Context blocked", e);
             }
         }
 
@@ -1401,7 +1524,6 @@
     <script>
         let timerSec = 3000;
         let timerMax = 3000;
-        let timerMode = 'study';
         let timerRunning = false;
         let timerInt = null;
 
