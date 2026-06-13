@@ -716,29 +716,6 @@
         function renderMitreLab(container) {
             container.innerHTML = `
                 <div class="space-y-6">
-                    <div class="glass-card rounded-2xl p-6 border border-slate-800 relative overflow-hidden">
-                        <div class="absolute -right-16 -top-16 w-36 h-36 bg-indigo-500/5 rounded-full blur-2xl pointer-events-none"></div>
-                        <div class="relative z-10 flex flex-col sm:flex-row sm:items-center gap-4">
-                            <div class="flex-1">
-                                <div class="flex items-center gap-3 mb-2">
-                                    <svg class="w-10 h-10 text-red-500 flex-shrink-0" viewBox="0 0 100 100" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                        <rect width="100" height="100" rx="12" fill="#e22b2b"/>
-                                        <text x="50" y="62" font-family="monospace" font-weight="900" font-size="38" text-anchor="middle" fill="white">ATT</text>
-                                        <text x="50" y="86" font-family="monospace" font-weight="700" font-size="20" text-anchor="middle" fill="#ffaaaa">&amp;CK</text>
-                                    </svg>
-                                    <div>
-                                        <span class="text-xs font-bold text-red-400 uppercase tracking-widest font-tech">MITRE Corporation</span>
-                                        <h2 class="text-2xl md:text-3xl font-extrabold text-white leading-tight">MITRE ATT&amp;CK</h2>
-                                    </div>
-                                </div>
-                                <p class="text-slate-300 text-sm md:text-base leading-relaxed">
-                                    מודל ה-MITRE ATT&amp;CK הוא בסיס ידע עולמי המתעד את שיטות, טקטיקות וטכניקות התקיפה של קבוצות תקיפה בעולם האמיתי.
-                                    הבנה של המודל היא הכרחית למעבר הבחינה, שבה תתבקש לזהות טקטיקות (כגון Initial Access, Persistence, Lateral Movement) ולנתח קבוצות תקיפה מובילות.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-
 
 
                     <!-- Flow Diagram -->
@@ -756,42 +733,6 @@
                         <p class="text-xs text-slate-500 mt-2 text-center">Initial Access ← Execution ← Persistence ← Privilege Escalation ← Defense Evasion ← Credential Access ← Discovery ← Lateral Movement ← Collection ← C&amp;C ← Exfiltration ← Impact</p>
                     </div>
 
-                    <!-- Groups Deep Dive (APT29 vs APT33) -->
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div class="glass-card rounded-2xl p-6 border border-slate-800 space-y-4">
-                            <div class="flex items-center gap-3">
-                                <div class="w-10 h-10 rounded-lg bg-rose-500/10 text-rose-450 flex items-center justify-center font-bold font-tech">APT29</div>
-                                <div>
-                                    <h4 class="font-bold text-white text-lg">קבוצת APT29 (Cozy Bear)</h4>
-                                    <span class="text-xs text-rose-400 font-semibold font-tech">משויכת לרוסיה • ריגול ומדינות</span>
-                                </div>
-                            </div>
-                            <p class="text-sm text-slate-300 leading-relaxed">
-                                קבוצת תקיפה מתוחכמת במיוחד הפועלת מטעם גופי ביון רוסיים. מתמקדת בשרתים ממשלתיים, שגרירויות וארגונים אסטרטגיים.
-                            </p>
-                            <ul class="list-disc list-inside text-xs text-slate-400 space-y-1.5 pr-2">
-                                <li><strong>טקטיקות מובילות:</strong> Initial Access (פישינג ממוקד), Defense Evasion (שימוש בכלים לגיטימיים של מערכת ההפעלה, מחיקת לוגים), Credential Access.</li>
-                                <li><strong>דפוסי פעולה:</strong> שימוש בנוזקות מותאמות אישית, הצפנת תקשורת, תקיפות שרשרת אספקה (Supply Chain) וחדירה שקטה ללא השארת עקבות (Fileless).</li>
-                            </ul>
-                        </div>
-                        
-                        <div class="glass-card rounded-2xl p-6 border border-slate-800 space-y-4">
-                            <div class="flex items-center gap-3">
-                                <div class="w-10 h-10 rounded-lg bg-cyan-500/10 text-cyan-400 flex items-center justify-center font-bold font-tech">APT33</div>
-                                <div>
-                                    <h4 class="font-bold text-white text-lg">קבוצת APT33 (Elfin)</h4>
-                                    <span class="text-xs text-cyan-400 font-semibold font-tech">משויכת לאיראן • תקיפת תשתיות ו-OT</span>
-                                </div>
-                            </div>
-                            <p class="text-sm text-slate-300 leading-relaxed">
-                                קבוצת תקיפה ממשלתית איראנית המתמקדת בעיקר בסקטורים של אנרגיה, תעופה, תעשייה ותשתיות פיזיות.
-                            </p>
-                            <ul class="list-disc list-inside text-xs text-slate-400 space-y-1.5 pr-2">
-                                <li><strong>טקטיקות מובילות:</strong> Initial Access (ספיר פישינג ממוקד סקטוריאלי), Execution (נוזקות הרסניות), Impact (הרס פיזי/מחיקת נתונים).</li>
-                                <li><strong>דפוסי פעולה:</strong> שימוש בויפרים (Wipers כגון Shamoon) למחיקת נתונים והרס מערכות בקרה, ניסיון לפגוע ברשתות OT דרך מעברי IT חלשים ללא MFA.</li>
-                            </ul>
-                        </div>
-                    </div>
 
                     <!-- APT Groups Common Techniques (sourced from MITRE ATT&CK Navigator) -->
                     <div class="glass-card rounded-2xl p-6 md:p-8 border border-slate-800 space-y-6">
