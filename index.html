@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CyberPrep - הכנה למבחן בניהול אירועי סייבר</title>
+    <title>CyberPrep - סטודיו למידה אינטראקטיבי לניהול אירועי סייבר</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Google Fonts: Inter & Outfit & Assistant for Hebrew -->
@@ -38,26 +38,24 @@
             color: #f3f4f6;
             font-family: 'Assistant', sans-serif;
             background-image: 
-                radial-gradient(at 0% 0%, rgba(99, 102, 241, 0.15) 0px, transparent 50%),
-                radial-gradient(at 100% 100%, rgba(6, 182, 212, 0.15) 0px, transparent 50%);
+                radial-gradient(at 0% 0%, rgba(99, 102, 241, 0.12) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, rgba(6, 182, 212, 0.12) 0px, transparent 50%);
             background-attachment: fixed;
         }
         
-        /* Glassmorphism custom classes */
         .glass-card {
-            background: rgba(15, 23, 42, 0.65);
+            background: rgba(15, 23, 42, 0.6);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
             border: 1px solid rgba(255, 255, 255, 0.05);
         }
 
         .glow-hover:hover {
-            box-shadow: 0 0 20px rgba(6, 182, 212, 0.25);
-            border-color: rgba(6, 182, 212, 0.5);
+            box-shadow: 0 0 20px rgba(6, 182, 212, 0.2);
+            border-color: rgba(6, 182, 212, 0.4);
             transition: all 0.3s ease;
         }
 
-        /* Custom scrollbar */
         ::-webkit-scrollbar {
             width: 6px;
             height: 6px;
@@ -93,1021 +91,384 @@
         }
     </style>
 </head>
-<body class="min-h-screen pb-12">
+<body class="min-h-screen flex flex-col">
 
-    <!-- Header & Navigation -->
+    <!-- Header -->
     <header class="border-b border-slate-800 bg-slate-950/80 backdrop-blur-md sticky top-0 z-40">
-        <div class="max-w-7xl mx-auto px-4 py-4 flex flex-col md:flex-row items-center justify-between gap-4">
+        <div class="max-w-7xl mx-auto px-4 py-3.5 flex flex-col md:flex-row items-center justify-between gap-4">
             <div class="flex items-center gap-3">
                 <div class="w-10 h-10 rounded-lg bg-gradient-to-tr from-cyan-500 to-indigo-600 flex items-center justify-center shadow-lg shadow-cyan-500/20">
                     <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
                     </svg>
                 </div>
                 <div>
-                    <h1 class="text-xl md:text-2xl font-bold tracking-tight bg-gradient-to-r from-cyan-400 via-indigo-300 to-indigo-500 bg-clip-text text-transparent font-tech">CyberPrep 1-Day</h1>
-                    <p class="text-xs text-slate-400">הנדסה לאחור וערכת הכנה ממוקדת לניהול אירועי סייבר</p>
+                    <h1 class="text-xl md:text-2xl font-bold tracking-tight bg-gradient-to-r from-cyan-400 via-indigo-300 to-indigo-500 bg-clip-text text-transparent font-tech">CyberPrep Studio</h1>
+                    <p class="text-xs text-slate-400">ממשק למידה אינטראקטיבי מקיף לניהול אירועי סייבר</p>
                 </div>
             </div>
             
-            <!-- Overall Progress Widget -->
-            <div class="flex items-center gap-4 w-full md:w-auto md:max-w-md bg-slate-900/40 p-2.5 rounded-xl border border-slate-800/60">
+            <!-- Global Mastery HUD -->
+            <div class="flex items-center gap-4 w-full md:w-auto md:max-w-md bg-slate-900/40 p-2 rounded-xl border border-slate-800/60">
                 <div class="flex-1 min-w-[150px]">
                     <div class="flex justify-between text-xs font-semibold mb-1">
-                        <span class="text-slate-400">התקדמות כללית בלו"ז</span>
-                        <span id="overall-progress-text" class="text-cyan-400 font-tech">0%</span>
+                        <span class="text-slate-400">מדד שליטה בחומר (Mastery)</span>
+                        <span id="global-mastery-text" class="text-cyan-400 font-tech">0%</span>
                     </div>
                     <div class="w-full bg-slate-800 rounded-full h-2 overflow-hidden">
-                        <div id="overall-progress-bar" class="bg-gradient-to-r from-indigo-500 to-cyan-400 h-full w-0 transition-all duration-500 ease-out"></div>
+                        <div id="global-mastery-bar" class="bg-gradient-to-r from-indigo-500 to-cyan-400 h-full w-0 transition-all duration-500 ease-out"></div>
                     </div>
                 </div>
                 <div class="text-center px-3 border-r border-slate-800">
-                    <span id="mastered-cards-count" class="block text-xl font-bold text-emerald-400 font-tech">0/15</span>
-                    <span class="text-[10px] text-slate-400 block whitespace-nowrap">מושגים ששוננו</span>
+                    <span id="mastered-concepts-count" class="block text-lg font-bold text-emerald-400 font-tech">0/10</span>
+                    <span class="text-[9px] text-slate-400 block whitespace-nowrap">בחני הבנה פתורים</span>
                 </div>
             </div>
         </div>
     </header>
 
-    <main class="max-w-7xl mx-auto px-4 mt-6">
+    <!-- Main Workspace Layout -->
+    <div class="max-w-7xl mx-auto w-full px-4 mt-6 flex-1 grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
         
-        <!-- Welcome banner -->
-        <div class="glass-card rounded-2xl p-6 mb-6 border border-slate-800/80 relative overflow-hidden">
-            <div class="absolute -right-16 -top-16 w-48 h-48 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none"></div>
-            <div class="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
-                <div>
-                    <span class="px-2.5 py-1 text-xs font-semibold rounded-full bg-cyan-500/10 text-cyan-400 border border-cyan-500/20">מרתון למידה של 10 שעות נטו</span>
-                    <h2 class="text-2xl font-extrabold mt-3 mb-2 text-white">ברוכים הבאים לתוכנית ה-Reverse Engineering למבחן!</h2>
-                    <p class="text-slate-300 text-sm leading-relaxed max-w-3xl">
-                        מבחן זה מורכב מ<strong>שאלות פתוחות (75% מהציון)</strong>. כדי להצליח, אינך צריך לשנן חומר תיאורטי יבש ללא הקשר, אלא להבין לעומק **מנגנונים, דילמות ניהוליות והשוואות**. האתר נבנה כשותף למידה אינטראקטיבי המשלב טיימר פומודורו מותאם, צ'קליסט מעקב, כרטיסיות שליפה אקטיבית (Active Recall) וסימולטור סימולציות.
-                    </p>
-                </div>
-                <div class="flex gap-3 shrink-0">
-                    <button onclick="scrollToElement('practice-section')" class="px-4 py-2.5 rounded-xl bg-gradient-to-r from-cyan-500 to-indigo-600 text-white font-semibold text-sm hover:opacity-90 transition shadow-lg shadow-cyan-500/10">תרגול מהיר</button>
-                    <button onclick="scrollToElement('cheatsheet-section')" class="px-4 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-750 text-slate-300 font-semibold text-sm transition border border-slate-700">סיכומי שיעורים</button>
-                </div>
-            </div>
-        </div>
-
-        <!-- Dashboard Layout -->
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+        <!-- SIDEBAR: Navigation, Timer, Mastery Dashboard (lg:col-span-3) -->
+        <aside class="lg:col-span-3 space-y-6 lg:sticky lg:top-24">
             
-            <!-- LEFT COLUMN: Timer & Stats (lg:col-span-4) -->
-            <div class="lg:col-span-4 grid grid-cols-1 gap-6 sticky top-24">
+            <!-- Tab & Lesson Selector -->
+            <div class="glass-card rounded-2xl p-4 border border-slate-850 space-y-2">
+                <h3 class="text-xs font-bold text-slate-400 uppercase tracking-wider px-2 mb-2">תפריט למידה</h3>
                 
-                <!-- Pomodoro Timer Card -->
-                <div class="glass-card rounded-2xl p-6 border border-slate-800/80 shadow-xl">
-                    <div class="flex items-center justify-between mb-4">
-                        <div class="flex items-center gap-2">
-                            <span class="w-2.5 h-2.5 rounded-full bg-rose-500 animate-ping"></span>
-                            <h3 class="font-bold text-slate-200">טיימר פומודורו ממוקד</h3>
-                        </div>
-                        <button id="sound-toggle" onclick="toggleSound()" class="p-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-400 transition" title="השתק/הפעל צליל">
-                            <svg id="sound-icon-on" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072M18.364 5.636a9 9 0 010 12.728M12 18.75V5.25L7.75 9.5H4.5v5h3.25L12 18.75z"></path></svg>
-                            <svg id="sound-icon-off" class="w-5 h-5 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z M17 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2"></path></svg>
-                        </button>
-                    </div>
-
-                    <!-- Visual Timer Ring -->
-                    <div class="relative flex items-center justify-center my-6">
-                        <svg class="w-48 h-48 transform -rotate-90">
-                            <!-- Track circle -->
-                            <circle cx="96" cy="96" r="80" stroke="#1e293b" stroke-width="8" fill="transparent" />
-                            <!-- Animated circle -->
-                            <circle id="timer-progress" cx="96" cy="96" r="80" stroke="url(#timer-gradient)" stroke-width="8" fill="transparent" 
-                                    stroke-dasharray="502.6" stroke-dashoffset="0" stroke-linecap="round" class="transition-all duration-1000 ease-linear"/>
-                            
-                            <defs>
-                                <linearGradient id="timer-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                                    <stop offset="0%" stop-color="#6366f1" />
-                                    <stop offset="100%" stop-color="#06b6d4" />
-                                </linearGradient>
-                            </defs>
-                        </svg>
-                        
-                        <!-- Text inside ring -->
-                        <div class="absolute text-center">
-                            <span id="timer-display" class="block text-4xl font-extrabold font-tech tracking-wider text-white">50:00</span>
-                            <span id="timer-label" class="text-xs text-slate-400 font-semibold tracking-wide uppercase mt-1 block">זמן למידה</span>
-                        </div>
-                    </div>
-
-                    <!-- Presets Selector -->
-                    <div class="grid grid-cols-3 gap-2 mb-6">
-                        <button onclick="setTimerPreset(50, 'study')" id="btn-preset-study" class="py-1.5 px-2 text-xs font-bold rounded-lg border border-cyan-500/30 bg-cyan-950/30 text-cyan-400 text-center transition hover:bg-cyan-900/30">למידה (50ד')</button>
-                        <button onclick="setTimerPreset(10, 'short')" id="btn-preset-short" class="py-1.5 px-2 text-xs font-bold rounded-lg border border-slate-800 bg-slate-900/50 text-slate-400 text-center transition hover:bg-slate-800">הפסקה (10ד')</button>
-                        <button onclick="setTimerPreset(20, 'long')" id="btn-preset-long" class="py-1.5 px-2 text-xs font-bold rounded-lg border border-slate-800 bg-slate-900/50 text-slate-400 text-center transition hover:bg-slate-800">מנוחה (20ד')</button>
-                    </div>
-
-                    <!-- Action Controls -->
-                    <div class="flex gap-3">
-                        <button id="btn-timer-toggle" onclick="toggleTimer()" class="flex-1 py-3 px-4 rounded-xl bg-gradient-to-r from-cyan-500 to-indigo-600 text-white font-bold hover:opacity-95 transition shadow-lg shadow-cyan-500/10 flex items-center justify-center gap-2">
-                            <svg id="play-icon" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"></path></svg>
-                            <svg id="pause-icon" class="w-5 h-5 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M10 9v6m4-6v6m7-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                            <span id="btn-timer-text">התחל למידה</span>
-                        </button>
-                        <button onclick="resetTimer()" class="p-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 transition" title="איפוס">
-                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 1121.21 7.89M9 11l3-3 3 3m-3-3v12"></path></svg>
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Study Methodology Guidelines -->
-                <div class="glass-card rounded-2xl p-5 border border-slate-800/80">
-                    <h3 class="font-bold text-slate-200 mb-3 flex items-center gap-2">
-                        <svg class="w-5 h-5 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path></svg>
-                        טכניקות להגברת האפקטיביות
-                    </h3>
-                    <ul class="space-y-3 text-xs text-slate-300">
-                        <li class="flex gap-2">
-                            <span class="text-cyan-400 font-bold">●</span>
-                            <span><strong>Active Recall (שליפה פעילה):</strong> נסה לענות על השאלה בכרטיסייה בקול רם לפני שתהפוך אותה.</span>
-                        </li>
-                        <li class="flex gap-2">
-                            <span class="text-cyan-400 font-bold">●</span>
-                            <span><strong>Spaced Repetition:</strong> סמן כרטיסיות חלשות ב-"לסקירה נוספת". המערכת תאפשר לך לחזור עליהן בבלוק האחרון של היום.</span>
-                        </li>
-                        <li class="flex gap-2">
-                            <span class="text-cyan-400 font-bold">●</span>
-                            <span><strong>למידה מבוססת תרחישים:</strong> במבחן תידרש לנתח תקלות. שים דגש מיוחד על תרחיש מקרה הבוחן של <em>"בינת תוכנה"</em> המדגים השלכות עסקיות.</span>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-
-            <!-- MIDDLE COLUMN: 1-Day Study Checklist (lg:col-span-8) -->
-            <div class="lg:col-span-8 space-y-6">
+                <button onclick="changeActiveTab('guide')" id="nav-btn-guide" class="w-full text-right py-2 px-3 rounded-xl bg-cyan-950/40 text-cyan-400 border border-cyan-500/20 text-sm font-bold transition flex items-center gap-2">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
+                    מדריך לימודים מפורט
+                </button>
                 
-                <!-- Main Schedule Header -->
-                <div class="flex items-center justify-between border-b border-slate-800 pb-3">
-                    <h3 class="text-xl font-bold text-slate-200">תוכנית לימודים היפר-ממוקדת (10 שעות נטו)</h3>
-                    <button onclick="resetAllCheckboxes()" class="text-xs text-slate-400 hover:text-rose-400 transition">אפס את כל המשימות</button>
+                <!-- Sub-items: Lesson Selection (only active when guide tab is active) -->
+                <div id="lesson-subnavigation" class="pr-4 py-1 space-y-1">
+                    <button onclick="selectLesson(1)" id="lesson-nav-1" class="w-full text-right py-1.5 px-2 rounded-lg text-xs font-medium text-cyan-400 bg-cyan-500/10 border-r-2 border-cyan-500 transition">שיעור 1: מבוא וניהול סיכונים</button>
+                    <button onclick="selectLesson(2)" id="lesson-nav-2" class="w-full text-right py-1.5 px-2 rounded-lg text-xs font-medium text-slate-400 hover:text-slate-200 transition">שיעור 2: גבולות, OT ועדכונים</button>
+                    <button onclick="selectLesson(3)" id="lesson-nav-3" class="w-full text-right py-1.5 px-2 rounded-lg text-xs font-medium text-slate-400 hover:text-slate-200 transition">שיעור 3: הקשחה, SSDLC ומקרי בוחן</button>
+                    <button onclick="selectLesson(4)" id="lesson-nav-4" class="w-full text-right py-1.5 px-2 rounded-lg text-xs font-medium text-slate-400 hover:text-slate-200 transition">שיעור 4: APT, הגנות ו-Zero-Trust</button>
+                    <button onclick="selectLesson(5)" id="lesson-nav-5" class="w-full text-right py-1.5 px-2 rounded-lg text-xs font-medium text-slate-400 hover:text-slate-200 transition">שיעור 5: EDR, ניהול אירוע ומתקפות</button>
                 </div>
 
-                <!-- Block 1 -->
-                <div class="glass-card rounded-2xl border border-slate-800/80 overflow-hidden glow-hover">
-                    <div onclick="toggleBlockAccordion(1)" class="p-5 flex items-center justify-between cursor-pointer bg-slate-900/40 hover:bg-slate-900/60 transition">
-                        <div>
-                            <span class="text-[10px] uppercase font-bold text-cyan-400 tracking-wider font-tech">בלוק 1 (08:00 - 10:00) • שעתיים</span>
-                            <h4 class="text-lg font-bold text-white mt-0.5">יסודות, ניהול סיכונים וניהול אירועים ברמת הארגון</h4>
-                        </div>
-                        <div class="flex items-center gap-3">
-                            <span id="block-1-progress" class="text-xs font-semibold px-2 py-0.5 rounded bg-slate-800 text-slate-300 font-tech">0/3</span>
-                            <svg id="accordion-icon-1" class="w-5 h-5 text-slate-400 transform transition-transform duration-300 rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
-                        </div>
-                    </div>
-                    <div id="block-content-1" class="p-5 border-t border-slate-800/60 space-y-4">
-                        <div class="text-sm text-slate-300 mb-2">
-                            <strong>המיקוד במבחן:</strong> הגדרת נכסים קריטיים (Crown Jewels), חישוב סיכונים, הבדלים יסודיים בין IT ל-OT (דוגמאות ובקרות פיזיות), דילמת הניהול (השבתה מול ייצור הכנסות), ודילמת הכרזת אירוע סייבר (VP approval והשלכות משפטיות/בורסה).
-                        </div>
-                        <div class="space-y-3">
-                            <label class="flex items-start gap-3 p-3 rounded-lg bg-slate-900/60 hover:bg-slate-900 border border-slate-800/40 cursor-pointer transition">
-                                <input type="checkbox" data-block="1" onchange="updateCheckboxes()" class="w-5 h-5 rounded text-cyan-500 bg-slate-800 border-slate-700 focus:ring-cyan-500 focus:ring-offset-slate-900 mt-0.5">
-                                <div class="text-sm">
-                                    <p class="font-bold text-slate-200">למידת תיאוריית היסוד (שיעורים 1 ו-5)</p>
-                                    <p class="text-xs text-slate-400 mt-1">קריאת ההגדרות של אירוע סייבר, משולש CIA, זיהוי Crown Jewels (eBay vs Coca-Cola) ואסטרטגיות סיכון (הפחתה, העברה, קבלה, דחייה).</p>
-                                </div>
-                            </label>
-                            <label class="flex items-start gap-3 p-3 rounded-lg bg-slate-900/60 hover:bg-slate-900 border border-slate-800/40 cursor-pointer transition">
-                                <input type="checkbox" data-block="1" onchange="updateCheckboxes()" class="w-5 h-5 rounded text-cyan-500 bg-slate-800 border-slate-700 focus:ring-cyan-500 focus:ring-offset-slate-900 mt-0.5">
-                                <div class="text-sm">
-                                    <p class="font-bold text-slate-200">Active Recall: השוואת IT מול OT ודילמת הניהול</p>
-                                    <p class="text-xs text-slate-400 mt-1">עבור על כרטיסיות 1 עד 4. ודא שאתה מסוגל להסביר מדוע IT מתמקד בסודיות ואילו OT בזמינות וביטחון פיזי.</p>
-                                </div>
-                            </label>
-                            <label class="flex items-start gap-3 p-3 rounded-lg bg-slate-900/60 hover:bg-slate-900 border border-slate-800/40 cursor-pointer transition">
-                                <input type="checkbox" data-block="1" onchange="updateCheckboxes()" class="w-5 h-5 rounded text-cyan-500 bg-slate-800 border-slate-700 focus:ring-cyan-500 focus:ring-offset-slate-900 mt-0.5">
-                                <div class="text-sm">
-                                    <p class="font-bold text-slate-200">דילמת ההכרזה וצוות ה-SOC (שיעור 5)</p>
-                                    <p class="text-xs text-slate-400 mt-1">הבנת ההבדל בין תקלה תפעולית גרידא לאירוע סייבר המפעיל "פלייבוק" תגובה, דורש מעורבות הנהלה, דיווח לבורסה וייעוץ משפטי.</p>
-                                </div>
-                            </label>
-                        </div>
-                    </div>
-                </div>
+                <button onclick="changeActiveTab('flashcards')" id="nav-btn-flashcards" class="w-full text-right py-2 px-3 rounded-xl text-slate-400 hover:bg-slate-900/40 text-sm font-bold transition flex items-center gap-2">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
+                    כרטיסיות שינון (15)
+                </button>
+                
+                <button onclick="changeActiveTab('simulator')" id="nav-btn-simulator" class="w-full text-right py-2 px-3 rounded-xl text-slate-400 hover:bg-slate-900/40 text-sm font-bold transition flex items-center gap-2">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"></path></svg>
+                    סימולטור מבחן
+                </button>
 
-                <!-- Block 2 -->
-                <div class="glass-card rounded-2xl border border-slate-800/80 overflow-hidden glow-hover">
-                    <div onclick="toggleBlockAccordion(2)" class="p-5 flex items-center justify-between cursor-pointer bg-slate-900/40 hover:bg-slate-900/60 transition">
-                        <div>
-                            <span class="text-[10px] uppercase font-bold text-cyan-400 tracking-wider font-tech">בלוק 2 (10:15 - 11:45) • שעה וחצי</span>
-                            <h4 class="text-lg font-bold text-white mt-0.5">גבולות הארגון, תשתיות קריטיות ועדכונים (שיעור 2)</h4>
-                        </div>
-                        <div class="flex items-center gap-3">
-                            <span id="block-2-progress" class="text-xs font-semibold px-2 py-0.5 rounded bg-slate-800 text-slate-300 font-tech">0/3</span>
-                            <svg id="accordion-icon-2" class="w-5 h-5 text-slate-400 transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
-                        </div>
-                    </div>
-                    <div id="block-content-2" class="p-5 border-t border-slate-800/60 space-y-4 hidden">
-                        <div class="text-sm text-slate-300 mb-2">
-                            <strong>המיקוד במבחן:</strong> פגיעות Zero-Day לעומת One-Day (מה קורה מיד כשמפורסם פאץ'), מודל 3 השכבות, אתגרי BYOD ו-AI, ניהול מצאי ונכסים (Asset Management), ואתגר העדכונים של מערכות SCADA וציוד רפואי ("אם זה עובד אל תיגע").
-                        </div>
-                        <div class="space-y-3">
-                            <label class="flex items-start gap-3 p-3 rounded-lg bg-slate-900/60 hover:bg-slate-900 border border-slate-800/40 cursor-pointer transition">
-                                <input type="checkbox" data-block="2" onchange="updateCheckboxes()" class="w-5 h-5 rounded text-cyan-500 bg-slate-800 border-slate-700 focus:ring-cyan-500 focus:ring-offset-slate-900 mt-0.5">
-                                <div class="text-sm">
-                                    <p class="font-bold text-slate-200">פגיעויות ועדכונים: Zero-Day מול One-Day</p>
-                                    <p class="text-xs text-slate-400 mt-1">שינון ההגדרות של Zero-day (ללא פאץ') ו-One-day (שלב מסוכן בו יש פאץ' פומבי אך הארגון טרם הטמיע). הבנת השימוש ב-CVE ודירוג חומרת הפגיעויות.</p>
-                                </div>
-                            </label>
-                            <label class="flex items-start gap-3 p-3 rounded-lg bg-slate-900/60 hover:bg-slate-900 border border-slate-800/40 cursor-pointer transition">
-                                <input type="checkbox" data-block="2" onchange="updateCheckboxes()" class="w-5 h-5 rounded text-cyan-500 bg-slate-800 border-slate-700 focus:ring-cyan-500 focus:ring-offset-slate-900 mt-0.5">
-                                <div class="text-sm">
-                                    <p class="font-bold text-slate-200">אבולוציית הרשת ומערכות בקרה (OT)</p>
-                                    <p class="text-xs text-slate-400 mt-1">למידת מודל 3 השכבות (תצוגה, לוגיקה, בסיס נתונים), סגמנטציה ורמות אבטחה. הבנת האתגר הייחודי בבתי חולים (ציוד רפואי מבוסס OS ישן כמו Windows 7 שאי אפשר לעדכן).</p>
-                                </div>
-                            </label>
-                            <label class="flex items-start gap-3 p-3 rounded-lg bg-slate-900/60 hover:bg-slate-900 border border-slate-800/40 cursor-pointer transition">
-                                <input type="checkbox" data-block="2" onchange="updateCheckboxes()" class="w-5 h-5 rounded text-cyan-500 bg-slate-800 border-slate-700 focus:ring-cyan-500 focus:ring-offset-slate-900 mt-0.5">
-                                <div class="text-sm">
-                                    <p class="font-bold text-slate-200">אסטרטגיות שדרוג וניהול פאצ'ים (Patch Management)</p>
-                                    <p class="text-xs text-slate-400 mt-1">למידת תפקידם של כלים כמו WSUS ו-Intune, חשיבות יצירת תוכנית נסיגה (Rollback) ועדכון בשיטת "קלאסטר" לשמירת זמינות מירבית.</p>
-                                </div>
-                            </label>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Block 3 -->
-                <div class="glass-card rounded-2xl border border-slate-800/80 overflow-hidden glow-hover">
-                    <div onclick="toggleBlockAccordion(3)" class="p-5 flex items-center justify-between cursor-pointer bg-slate-900/40 hover:bg-slate-900/60 transition">
-                        <div>
-                            <span class="text-[10px] uppercase font-bold text-cyan-400 tracking-wider font-tech">בלוק 3 (12:00 - 13:30) • שעה וחצי</span>
-                            <h4 class="text-lg font-bold text-white mt-0.5">הקשחת מערכות, פיתוח מאובטח ומקרי בוחן (שיעור 3)</h4>
-                        </div>
-                        <div class="flex items-center gap-3">
-                            <span id="block-3-progress" class="text-xs font-semibold px-2 py-0.5 rounded bg-slate-800 text-slate-300 font-tech">0/3</span>
-                            <svg id="accordion-icon-3" class="w-5 h-5 text-slate-400 transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
-                        </div>
-                    </div>
-                    <div id="block-content-3" class="p-5 border-t border-slate-800/60 space-y-4 hidden">
-                        <div class="text-sm text-slate-300 mb-2">
-                            <strong>המיקוד במבחן:</strong> צעדי הקשחה קונקרטיים (ביטול Auto Login, חומת אש מקומית, VLAN ייעודי, שינוי סיסמאות דיפולטיביות ב-DB, וסנכרון זמנים קריטי דרך NTP). מחזור פיתוח מאובטח SSDLC (הערכת סיכונים בדרישות, Threat Modeling בעיצוב, SAST בפיתוח, מניעת SQLi/בדיקת קלט בבדיקות).
-                        </div>
-                        <div class="space-y-3">
-                            <label class="flex items-start gap-3 p-3 rounded-lg bg-slate-900/60 hover:bg-slate-900 border border-slate-800/40 cursor-pointer transition">
-                                <input type="checkbox" data-block="3" onchange="updateCheckboxes()" class="w-5 h-5 rounded text-cyan-500 bg-slate-800 border-slate-700 focus:ring-cyan-500 focus:ring-offset-slate-900 mt-0.5">
-                                <div class="text-sm">
-                                    <p class="font-bold text-slate-200">צ'קליסט הקשחת מערכות (Hardening)</p>
-                                    <p class="text-xs text-slate-400 mt-1">זכור: הקשחה מצמצמת את שטח התקיפה. שינון 5 הכללים של המרצה: הגדרת תחנות עבודה, הגבלת Remote Access ל-VLAN של תמיכה בלבד, מניעת סיסמאות ברירת מחדל, וסנכרון NTP לביצוע חקירות פורנזיות (Forensics).</p>
-                                </div>
-                            </label>
-                            <label class="flex items-start gap-3 p-3 rounded-lg bg-slate-900/60 hover:bg-slate-900 border border-slate-800/40 cursor-pointer transition">
-                                <input type="checkbox" data-block="3" onchange="updateCheckboxes()" class="w-5 h-5 rounded text-cyan-500 bg-slate-800 border-slate-700 focus:ring-cyan-500 focus:ring-offset-slate-900 mt-0.5">
-                                <div class="text-sm">
-                                    <p class="font-bold text-slate-200">תהליך SSDLC ומניעת הזרקות (SQLi)</p>
-                                    <p class="text-xs text-slate-400 mt-1">חיבור אבטחת מידע לכל שלב ב-SDLC. דגש על Input Validation (בדיקת תקינות קלט) בשלב הבדיקות, איסור חשיפת מידע טכני בהודעות שגיאה, וסריקת ספריות קוד פתוח.</p>
-                                </div>
-                            </label>
-                            <label class="flex items-start gap-3 p-3 rounded-lg bg-slate-900/60 hover:bg-slate-900 border border-slate-800/40 cursor-pointer transition">
-                                <input type="checkbox" data-block="3" onchange="updateCheckboxes()" class="w-5 h-5 rounded text-cyan-500 bg-slate-800 border-slate-700 focus:ring-cyan-500 focus:ring-offset-slate-900 mt-0.5">
-                                <div class="text-sm">
-                                    <p class="font-bold text-slate-200">ניתוח מקרה הבוחן של "בינת תוכנה"</p>
-                                    <p class="text-xs text-slate-400 mt-1">הבנת התרחיש: שרת PoC ישן שנשאר באוויר 12 שנה ללא תחזוקה נפרץ על ידי Handala. ההבנה שהנזק המרכזי היה תדמיתי וגרם לנטישת לקוחות מחשש שהרשת כולה נפרצה.</p>
-                                </div>
-                            </label>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Block 4 -->
-                <div class="glass-card rounded-2xl border border-slate-800/80 overflow-hidden glow-hover">
-                    <div onclick="toggleBlockAccordion(4)" class="p-5 flex items-center justify-between cursor-pointer bg-slate-900/40 hover:bg-slate-900/60 transition">
-                        <div>
-                            <span class="text-[10px] uppercase font-bold text-cyan-400 tracking-wider font-tech">בלוק 4 (14:30 - 16:00) • שעה וחצי</span>
-                            <h4 class="text-lg font-bold text-white mt-0.5">מודיעין סייבר, אנטומיית התקיפה (APT) ו-MITRE ATT&CK</h4>
-                        </div>
-                        <div class="flex items-center gap-3">
-                            <span id="block-4-progress" class="text-xs font-semibold px-2 py-0.5 rounded bg-slate-800 text-slate-300 font-tech">0/3</span>
-                            <svg id="accordion-icon-4" class="w-5 h-5 text-slate-400 transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
-                        </div>
-                    </div>
-                    <div id="block-content-4" class="p-5 border-t border-slate-800/60 space-y-4 hidden">
-                        <div class="text-sm text-slate-300 mb-2">
-                            <strong>המיקוד במבחן:</strong> 5 השלבים הקריטיים של תקיפה ממוקדת APT (Reconnaissance -> Initial Compromise -> C2 -> Lateral Movement -> Mission Complete: CNA/CNE) והבנת השימוש במודל MITRE ATT&CK.
-                        </div>
-                        <div class="space-y-3">
-                            <label class="flex items-start gap-3 p-3 rounded-lg bg-slate-900/60 hover:bg-slate-900 border border-slate-800/40 cursor-pointer transition">
-                                <input type="checkbox" data-block="4" onchange="updateCheckboxes()" class="w-5 h-5 rounded text-cyan-500 bg-slate-800 border-slate-700 focus:ring-cyan-500 focus:ring-offset-slate-900 mt-0.5">
-                                <div class="text-sm">
-                                    <p class="font-bold text-slate-200">מודיעין סייבר ואיומים נפוצים</p>
-                                    <p class="text-xs text-slate-400 mt-1">חשיבות המודיעין לזיהוי מוקדם של תקיפות. הבנת האיומים המרכזיים: פישינג, נוזקות, כופרה, גניבת זהות בעת מעבר לענן.</p>
-                                </div>
-                            </label>
-                            <label class="flex items-start gap-3 p-3 rounded-lg bg-slate-900/60 hover:bg-slate-900 border border-slate-800/40 cursor-pointer transition">
-                                <input type="checkbox" data-block="4" onchange="updateCheckboxes()" class="w-5 h-5 rounded text-cyan-500 bg-slate-800 border-slate-700 focus:ring-cyan-500 focus:ring-offset-slate-900 mt-0.5">
-                                <div class="text-sm">
-                                    <p class="font-bold text-slate-200">חמשת שלבי ה-APT Kill Chain</p>
-                                    <p class="text-xs text-slate-400 mt-1">למידה מעמיקה של השלבים: 1. איסוף מידע (Recon). 2. אחיזה ראשונית (Initial Compromise). 3. תקשורת עם התוקף (C2). 4. התרחבות ברשת (Lateral Movement). 5. ביצוע המשימה (CNE/CNA).</p>
-                                </div>
-                            </label>
-                            <label class="flex items-start gap-3 p-3 rounded-lg bg-slate-900/60 hover:bg-slate-900 border border-slate-800/40 cursor-pointer transition">
-                                <input type="checkbox" data-block="4" onchange="updateCheckboxes()" class="w-5 h-5 rounded text-cyan-500 bg-slate-800 border-slate-700 focus:ring-cyan-500 focus:ring-offset-slate-900 mt-0.5">
-                                <div class="text-sm">
-                                    <p class="font-bold text-slate-200">מיפוי תקיפות באמצעות MITRE ATT&CK</p>
-                                    <p class="text-xs text-slate-400 mt-1">הבנת המודל כמאגר הממפה טקטיקות וטכניקות תקיפה בפועל בכל שלב, שימוש במודל לניתוח קבוצות תקיפה כמו APT33 האיראנית.</p>
-                                </div>
-                            </label>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Block 5 -->
-                <div class="glass-card rounded-2xl border border-slate-800/80 overflow-hidden glow-hover">
-                    <div onclick="toggleBlockAccordion(5)" class="p-5 flex items-center justify-between cursor-pointer bg-slate-900/40 hover:bg-slate-900/60 transition">
-                        <div>
-                            <span class="text-[10px] uppercase font-bold text-cyan-400 tracking-wider font-tech">בלוק 5 (16:15 - 17:45) • שעה וחצי</span>
-                            <h4 class="text-lg font-bold text-white mt-0.5">וקטורי תקיפה ומנגנוני הגנה מודרניים (שיעורים 4 ו-5)</h4>
-                        </div>
-                        <div class="flex items-center gap-3">
-                            <span id="block-5-progress" class="text-xs font-semibold px-2 py-0.5 rounded bg-slate-800 text-slate-300 font-tech">0/3</span>
-                            <svg id="accordion-icon-5" class="w-5 h-5 text-slate-400 transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
-                        </div>
-                    </div>
-                    <div id="block-content-5" class="p-5 border-t border-slate-800/60 space-y-4 hidden">
-                        <div class="text-sm text-slate-300 mb-2">
-                            <strong>המיקוד במבחן:</strong> הגנות אימייל (Proofpoint, SPF, DKIM, DMARC), עקרונות ה-Zero-Trust, הגנות גלישה (VDI, הלבנה, LayerX), אבולוציית ה-Endpoint (חתימות -> יוריסטיקה -> התנהגותי -> Sandbox -> EDR -> Whitelisting), והגנת DDoS (מניעת שירות בשכבות 3 ו-7).
-                        </div>
-                        <div class="space-y-3">
-                            <label class="flex items-start gap-3 p-3 rounded-lg bg-slate-900/60 hover:bg-slate-900 border border-slate-800/40 cursor-pointer transition">
-                                <input type="checkbox" data-block="5" onchange="updateCheckboxes()" class="w-5 h-5 rounded text-cyan-500 bg-slate-800 border-slate-700 focus:ring-cyan-500 focus:ring-offset-slate-900 mt-0.5">
-                                <div class="text-sm">
-                                    <p class="font-bold text-slate-200">הגנות דוא"ל, גלישה ו-Zero-Trust</p>
-                                    <p class="text-xs text-slate-400 mt-1">הבנת ההבדלים: SPF (אימות IP שולח), DKIM (חתימה קריפטוגרפית של התוכן), DMARC (הגדרת מדיניות). עקרונות Zero Trust (אימות כפול MFA, בדיקת User/Device Risk, מתן הרשאה מינימלית Least Privilege).</p>
-                                </div>
-                            </label>
-                            <label class="flex items-start gap-3 p-3 rounded-lg bg-slate-900/60 hover:bg-slate-900 border border-slate-800/40 cursor-pointer transition">
-                                <input type="checkbox" data-block="5" onchange="updateCheckboxes()" class="w-5 h-5 rounded text-cyan-500 bg-slate-800 border-slate-700 focus:ring-cyan-500 focus:ring-offset-slate-900 mt-0.5">
-                                <div class="text-sm">
-                                    <p class="font-bold text-slate-200">אבולוציית הגנת תחנות הקצה (Endpoint Protection)</p>
-                                    <p class="text-xs text-slate-400 mt-1">שלוט בהבדלים: חתימות (השוואת Hash מוכר), יוריסטיקה (חיפוש דפוסים דמויי וירוס), התנהגותי (זיהוי חריגות בזמן אמת כמו הצפנה מהירה), Sandbox (הרצה בסביבה מבודדת), EDR (זיהוי, חסימה ותחקור מבוסס ענן/ML), ו-Whitelisting (בקרת אפליקציות).</p>
-                                </div>
-                            </label>
-                            <label class="flex items-start gap-3 p-3 rounded-lg bg-slate-900/60 hover:bg-slate-900 border border-slate-800/40 cursor-pointer transition">
-                                <input type="checkbox" data-block="5" onchange="updateCheckboxes()" class="w-5 h-5 rounded text-cyan-500 bg-slate-800 border-slate-700 focus:ring-cyan-500 focus:ring-offset-slate-900 mt-0.5">
-                                <div class="text-sm">
-                                    <p class="font-bold text-slate-200">מתקפות DDoS והגנות מבוזרות</p>
-                                    <p class="text-xs text-slate-400 mt-1">ההבדל בין תקיפות DDoS בשכבה 3 (Network) לשכבה 7 (Application - מסוכנת יותר). שימוש בשירותים מבוזרים כמו Cloudflare או Radware לחסימת מתקפות במקורן.</p>
-                                </div>
-                            </label>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Block 6 -->
-                <div class="glass-card rounded-2xl border border-slate-800/80 overflow-hidden glow-hover">
-                    <div onclick="toggleBlockAccordion(6)" class="p-5 flex items-center justify-between cursor-pointer bg-slate-900/40 hover:bg-slate-900/60 transition">
-                        <div>
-                            <span class="text-[10px] uppercase font-bold text-cyan-400 tracking-wider font-tech">בלוק 6 (19:00 - 21:00) • שעתיים</span>
-                            <h4 class="text-lg font-bold text-white mt-0.5">סימולציה מסכמת ושליפה אקטיבית חוזרת (Active Recall Check)</h4>
-                        </div>
-                        <div class="flex items-center gap-3">
-                            <span id="block-6-progress" class="text-xs font-semibold px-2 py-0.5 rounded bg-slate-800 text-slate-300 font-tech">0/3</span>
-                            <svg id="accordion-icon-6" class="w-5 h-5 text-slate-400 transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
-                        </div>
-                    </div>
-                    <div id="block-content-6" class="p-5 border-t border-slate-800/60 space-y-4 hidden">
-                        <div class="text-sm text-slate-300 mb-2">
-                            <strong>המיקוד במבחן:</strong> פתרון שאלות סימולציה פתוחות ומענה על מילון המושגים המלא.
-                        </div>
-                        <div class="space-y-3">
-                            <label class="flex items-start gap-3 p-3 rounded-lg bg-slate-900/60 hover:bg-slate-900 border border-slate-800/40 cursor-pointer transition">
-                                <input type="checkbox" data-block="6" onchange="updateCheckboxes()" class="w-5 h-5 rounded text-cyan-500 bg-slate-800 border-slate-700 focus:ring-cyan-500 focus:ring-offset-slate-900 mt-0.5">
-                                <div class="text-sm">
-                                    <p class="font-bold text-slate-200">ביצוע המיני-קויז והבנת ההסברים</p>
-                                    <p class="text-xs text-slate-400 mt-1">ענה על 8 שאלות הבחירה המרובה בלשונית התרגול ועבור על התשובות וההסברים המלאים.</p>
-                                </div>
-                            </label>
-                            <label class="flex items-start gap-3 p-3 rounded-lg bg-slate-900/60 hover:bg-slate-900 border border-slate-800/40 cursor-pointer transition">
-                                <input type="checkbox" data-block="6" onchange="updateCheckboxes()" class="w-5 h-5 rounded text-cyan-500 bg-slate-800 border-slate-700 focus:ring-cyan-500 focus:ring-offset-slate-900 mt-0.5">
-                                <div class="text-sm">
-                                    <p class="font-bold text-slate-200">תרגול שאלות אירוע פתוחות במלואן</p>
-                                    <p class="text-xs text-slate-400 mt-1">פתור את 3 שאלות התרחיש הפתוחות. השווה את התשובות שלך למחוון הבדיקה המפורט כדי ללמוד מה נקודות הניקוד שהמרצה מחפש.</p>
-                                </div>
-                            </label>
-                            <label class="flex items-start gap-3 p-3 rounded-lg bg-slate-900/60 hover:bg-slate-900 border border-slate-800/40 cursor-pointer transition">
-                                <input type="checkbox" data-block="6" onchange="updateCheckboxes()" class="w-5 h-5 rounded text-cyan-500 bg-slate-800 border-slate-700 focus:ring-cyan-500 focus:ring-offset-slate-900 mt-0.5">
-                                <div class="text-sm">
-                                    <p class="font-bold text-slate-200">סבב שליפה אחרון על כרטיסיות חלשות</p>
-                                    <p class="text-xs text-slate-400 mt-1">עבור שוב על כל ה-Flashcards שסומנו כ-"לסקירה נוספת" (לא מסומנים כ-Mastered) עד שתשלוט בכולם.</p>
-                                </div>
-                            </label>
-                        </div>
-                    </div>
-                </div>
-
+                <button onclick="changeActiveTab('dashboard')" id="nav-btn-dashboard" class="w-full text-right py-2 px-3 rounded-xl text-slate-400 hover:bg-slate-900/40 text-sm font-bold transition flex items-center gap-2">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10a2 2 0 01-2 2h-2a2 2 0 01-2-2zm9-10v12a2 2 0 002 2h2a2 2 0 002-2V9a2 2 0 00-2-2h-2a2 2 0 00-2 2z"></path></svg>
+                    מדדי שליטה מורחבים
+                </button>
             </div>
-        </div>
 
-        <!-- PRACTICE & CHEATSHEET SECTION -->
-        <section id="practice-section" class="mt-12">
-            <div class="glass-card rounded-3xl border border-slate-800/80 overflow-hidden shadow-2xl">
-                <!-- Navigation Tabs -->
-                <div class="flex border-b border-slate-800 bg-slate-950/40">
-                    <button onclick="switchTab('flashcards')" id="tab-btn-flashcards" class="flex-1 py-4 text-center font-bold text-sm md:text-base border-b-2 border-cyan-500 text-cyan-400 transition-all duration-300">
-                        כרטיסיות Active Recall (15)
-                    </button>
-                    <button onclick="switchTab('quiz')" id="tab-btn-quiz" class="flex-1 py-4 text-center font-bold text-sm md:text-base border-b-2 border-transparent text-slate-400 hover:text-slate-200 transition-all duration-300">
-                        סימולטור מבחן (אמריקאי + פתוח)
-                    </button>
-                    <button onclick="switchTab('cheatsheet')" id="tab-btn-cheatsheet" class="flex-1 py-4 text-center font-bold text-sm md:text-base border-b-2 border-transparent text-slate-400 hover:text-slate-200 transition-all duration-300">
-                        מילון מונחים וסיכומים מהירים
+            <!-- Pomodoro Timer Widget -->
+            <div class="glass-card rounded-2xl p-5 border border-slate-850">
+                <div class="flex items-center justify-between mb-3">
+                    <h4 class="text-xs font-bold text-slate-300 flex items-center gap-1.5">
+                        <span class="w-2 h-2 rounded-full bg-rose-500 animate-ping"></span>
+                        פומודורו למידה
+                    </h4>
+                    <button id="sound-toggle" onclick="toggleMute()" class="p-1 rounded bg-slate-900 border border-slate-800 text-slate-400 hover:text-slate-200 transition">
+                        <svg id="sound-on-svg" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072M18.364 5.636a9 9 0 010 12.728M12 18.75V5.25L7.75 9.5H4.5v5h3.25L12 18.75z"></path></svg>
+                        <svg id="sound-off-svg" class="w-4 h-4 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z M17 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2"></path></svg>
                     </button>
                 </div>
-
-                <!-- Tab Contents -->
-                <div class="p-6 md:p-8 bg-slate-900/20">
-                    
-                    <!-- TAB 1: Flashcards -->
-                    <div id="tab-content-flashcards" class="space-y-6">
-                        <div class="text-center max-w-xl mx-auto">
-                            <h3 class="text-lg font-bold text-white mb-1">שליפה פעילה לשינון מהיר</h3>
-                            <p class="text-xs text-slate-400">נסה לענות על השאלה בלב או בקול רם, לחץ על הכרטיסייה כדי לראות את הפתרון המלא, ודרג את עצמך.</p>
-                        </div>
-
-                        <!-- 3D Flipping Card Container -->
-                        <div class="flex justify-center my-8">
-                            <div class="w-full max-w-2xl h-80 perspective-1000">
-                                <div id="flashcard-inner" onclick="flipFlashcard()" class="w-full h-full preserve-3d cursor-pointer relative rounded-2xl border border-slate-800 bg-slate-950/80 shadow-2xl shadow-cyan-500/5 transition-transform duration-500">
-                                    
-                                    <!-- Front Side -->
-                                    <div class="absolute inset-0 backface-hidden p-8 flex flex-col justify-between rounded-2xl">
-                                        <div class="flex justify-between items-center">
-                                            <span id="card-category" class="px-2.5 py-0.5 rounded-full text-[10px] font-bold tracking-wider uppercase bg-cyan-500/10 text-cyan-400 border border-cyan-500/20">IT vs OT</span>
-                                            <span id="card-index" class="text-xs font-tech text-slate-500">1 מתוך 15</span>
-                                        </div>
-                                        <div class="text-center my-auto">
-                                            <p id="card-question" class="text-lg md:text-xl font-bold leading-relaxed text-white">מהו ההבדל המהותי ביותר בין מערכות מידע (IT) למערכות תפעוליות (OT)?</p>
-                                        </div>
-                                        <div class="text-center text-xs text-slate-500 flex items-center justify-center gap-1.5">
-                                            <svg class="w-4 h-4 text-cyan-500 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122"></path></svg>
-                                            לחץ על הכרטיסייה לחשיפת התשובה המלאה
-                                        </div>
-                                    </div>
-
-                                    <!-- Back Side -->
-                                    <div class="absolute inset-0 backface-hidden rotate-y-180 p-6 md:p-8 flex flex-col justify-between bg-slate-950 rounded-2xl overflow-y-auto">
-                                        <div class="flex justify-between items-center mb-2">
-                                            <span class="text-[10px] font-bold uppercase text-indigo-400 bg-indigo-500/10 px-2 py-0.5 rounded border border-indigo-500/20">הסבר המרצה</span>
-                                            <span class="text-xs text-slate-500">פתרון מהיר</span>
-                                        </div>
-                                        <div class="my-auto text-sm leading-relaxed text-slate-300">
-                                            <p id="card-answer" class="whitespace-pre-line"></p>
-                                        </div>
-                                        <div class="text-center text-[10px] text-cyan-500 mt-2">
-                                            לחץ שוב כדי להפוך חזרה
-                                        </div>
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Card Navigation and Self-Evaluation -->
-                        <div class="flex flex-col sm:flex-row justify-between items-center gap-4 max-w-2xl mx-auto border-t border-slate-800/80 pt-6">
-                            <div class="flex gap-2">
-                                <button onclick="prevCard()" class="p-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 transition flex items-center gap-1 text-sm font-semibold">
-                                    <svg class="w-4 h-4 transform rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
-                                    קודם
-                                </button>
-                                <button onclick="nextCard()" class="p-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 transition flex items-center gap-1 text-sm font-semibold">
-                                    הבא
-                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
-                                </button>
-                            </div>
-                            
-                            <div class="flex gap-3 w-full sm:w-auto">
-                                <button id="btn-mastered" onclick="markCardMastered(true)" class="flex-1 sm:flex-initial px-4 py-2.5 rounded-xl bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 text-sm font-bold transition flex items-center justify-center gap-2">
-                                    👍 ידעתי מצוין
-                                </button>
-                                <button id="btn-needs-review" onclick="markCardMastered(false)" class="flex-1 sm:flex-initial px-4 py-2.5 rounded-xl bg-rose-500/10 hover:bg-rose-500/20 text-rose-400 border border-rose-500/30 text-sm font-bold transition flex items-center justify-center gap-2">
-                                    🔁 דורש חזרה
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- TAB 2: Quiz / Exam Simulator -->
-                    <div id="tab-content-quiz" class="space-y-8 hidden">
-                        
-                        <!-- Mini-Quiz Selection Mode Selector -->
-                        <div class="flex justify-center gap-4 bg-slate-900/40 p-1.5 rounded-xl border border-slate-800/80 max-w-md mx-auto">
-                            <button onclick="switchQuizMode('mc')" id="quiz-mode-mc" class="flex-1 py-2 text-xs font-bold rounded-lg bg-cyan-500 text-slate-950 transition">
-                                שאלות אמריקאיות (8)
-                            </button>
-                            <button onclick="switchQuizMode('open')" id="quiz-mode-open" class="flex-1 py-2 text-xs font-bold rounded-lg text-slate-400 hover:text-slate-200 transition">
-                                תרחישי אירוע פתוחים (3)
-                            </button>
-                        </div>
-
-                        <!-- MULTIPLE CHOICE QUIZ -->
-                        <div id="mc-quiz-container" class="max-w-3xl mx-auto space-y-6">
-                            <div class="flex justify-between items-center border-b border-slate-800 pb-3">
-                                <div>
-                                    <h4 class="font-bold text-white text-lg">סימולציית שאלות רב-ברירה</h4>
-                                    <p class="text-xs text-slate-400">בדיקה מהירה של שליטה במושגים ופרטים טכניים</p>
-                                </div>
-                                <span id="quiz-score" class="text-sm font-semibold bg-cyan-500/10 text-cyan-400 border border-cyan-500/25 px-3 py-1 rounded-full font-tech">ציון: 0</span>
-                            </div>
-
-                            <!-- Single Question Wrapper -->
-                            <div class="glass-card rounded-2xl p-6 border border-slate-800">
-                                <div class="flex justify-between items-center mb-4">
-                                    <span id="quiz-q-category" class="px-2 py-0.5 text-[10px] font-bold rounded bg-slate-800 text-slate-400 uppercase tracking-wide">Lesson 1</span>
-                                    <span id="quiz-q-index" class="text-xs font-tech text-slate-500">1 מתוך 8</span>
-                                </div>
-                                <h5 id="quiz-question-text" class="text-base md:text-lg font-bold text-white mb-6">מערכת בקרה קריטית של תשתית מים מבוססת בקרים תעשייתיים שאינם משתנים מזה שנים. איזה דומיין אבטחה מייצגת מערכת זו?</h5>
-                                
-                                <div id="quiz-options-container" class="space-y-3">
-                                    <!-- Dynamically filled options -->
-                                </div>
-
-                                <!-- Explanation Box (Hidden initially) -->
-                                <div id="quiz-explanation-box" class="mt-6 p-4 rounded-xl bg-slate-900 border border-slate-800 text-sm hidden">
-                                    <p id="quiz-feedback-text" class="font-bold mb-1"></p>
-                                    <p id="quiz-explanation-text" class="text-slate-300 leading-relaxed"></p>
-                                </div>
-                            </div>
-
-                            <!-- Quiz Controls -->
-                            <div class="flex justify-between">
-                                <button id="btn-quiz-prev" onclick="changeQuizQuestion(-1)" class="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 text-sm font-semibold transition">
-                                    שאלה הקודמת
-                                </button>
-                                <button id="btn-quiz-next" onclick="changeQuizQuestion(1)" class="px-4 py-2 rounded-xl bg-gradient-to-r from-cyan-500 to-indigo-600 text-white text-sm font-semibold transition">
-                                    שאלה הבאה
-                                </button>
-                            </div>
-                        </div>
-
-                        <!-- OPEN ENDED SCENARIOS -->
-                        <div id="open-quiz-container" class="max-w-3xl mx-auto space-y-6 hidden">
-                            <div class="border-b border-slate-800 pb-3">
-                                <h4 class="font-bold text-white text-lg">שאלות תרחיש פתוחות (מדמה את המבחן האמיתי)</h4>
-                                <p class="text-xs text-slate-400">פתור את השאלות בכתב, ולאחר מכן השווה את תשובתך למחוון הניקוד של המרצה.</p>
-                            </div>
-
-                            <!-- Scenario Wrapper -->
-                            <div class="space-y-6">
-                                <!-- Scenario Selector Buttons -->
-                                <div class="flex gap-2">
-                                    <button onclick="selectOpenScenario(0)" id="btn-scenario-0" class="px-3 py-1.5 rounded-lg text-xs font-bold bg-cyan-950/30 text-cyan-400 border border-cyan-500/20">תרחיש 1: בינת תוכנה</button>
-                                    <button onclick="selectOpenScenario(1)" id="btn-scenario-1" class="px-3 py-1.5 rounded-lg text-xs font-bold bg-slate-900/50 text-slate-400 border border-slate-800">תרחיש 2: כופרה ב-OT</button>
-                                    <button onclick="selectOpenScenario(2)" id="btn-scenario-2" class="px-3 py-1.5 rounded-lg text-xs font-bold bg-slate-900/50 text-slate-400 border border-slate-800">תרחיש 3: התקפת One-Day</button>
-                                </div>
-
-                                <div class="glass-card rounded-2xl p-6 border border-slate-800">
-                                    <h5 id="scenario-title" class="text-lg font-bold text-white mb-2">תרחיש 1: אירוע "בינת תוכנה"</h5>
-                                    <p id="scenario-description" class="text-sm text-slate-300 leading-relaxed mb-6"></p>
-                                    
-                                    <div class="space-y-4">
-                                        <div>
-                                            <label class="block text-xs font-bold text-slate-400 mb-2">טיוטת התשובה שלך (כתוב כאן לתרגול אקטיבי):</label>
-                                            <textarea id="scenario-user-draft" rows="4" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 text-sm text-slate-200 focus:outline-none focus:border-cyan-500/50" placeholder="הקלד כאן את נקודות המפתח לתשובה שלך..."></textarea>
-                                        </div>
-
-                                        <button onclick="toggleScenarioAnswer()" class="w-full py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-bold transition flex items-center justify-center gap-2">
-                                            <svg class="w-4 h-4 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
-                                            <span id="btn-reveal-scenario-text">חשוף תשובת מודל ומחוון בדיקה (Rubric)</span>
-                                        </button>
-
-                                        <!-- Scenario Model Answer (Hidden initially) -->
-                                        <div id="scenario-model-answer" class="mt-4 p-5 rounded-xl bg-slate-900/60 border border-slate-800 text-sm space-y-4 hidden">
-                                            <div>
-                                                <h6 class="font-bold text-cyan-400 mb-1">תשובת מודל מלאה:</h6>
-                                                <p id="scenario-answer-text" class="text-slate-300 leading-relaxed whitespace-pre-line"></p>
-                                            </div>
-                                            <div class="border-t border-slate-800/80 pt-3">
-                                                <h6 class="font-bold text-emerald-400 mb-1">מה המעריך מחפש במבחן? (מחוון ניקוד):</h6>
-                                                <ul id="scenario-rubric-list" class="list-disc list-inside space-y-1 text-xs text-slate-400">
-                                                    <!-- Rubrics -->
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-
-                    <!-- TAB 3: Cheatsheet / Knowledge Base -->
-                    <div id="tab-content-cheatsheet" class="space-y-6 hidden">
-                        <div class="flex justify-between items-center border-b border-slate-800 pb-3">
-                            <div>
-                                <h3 class="text-lg font-bold text-white">מאגר ידע ומילון מונחים</h3>
-                                <p class="text-xs text-slate-400">סיכום תמציתי של חומר החובה לפי שיעורים</p>
-                            </div>
-                        </div>
-
-                        <!-- Lesson Accordions -->
-                        <div class="space-y-4">
-                            <!-- Lesson 1 -->
-                            <div class="border border-slate-800/80 rounded-xl overflow-hidden">
-                                <button onclick="toggleLessonCheatsheet(1)" class="w-full p-4 flex justify-between items-center bg-slate-900/40 text-right">
-                                    <span class="font-bold text-slate-200">שיעור 1: הגדרות יסוד, IT לעומת OT וניהול סיכונים</span>
-                                    <svg id="cheat-icon-1" class="w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
-                                </button>
-                                <div id="cheat-content-1" class="p-4 border-t border-slate-800/60 bg-slate-950/20 text-sm space-y-4 hidden">
-                                    <p><strong>אירוע סייבר:</strong> אירוע בעל השפעה עסקית שלילית שעלול להיגרם מגורם פנימי או חיצוני. אירועים קטנים מטופלים ב-IT, אך משמעותיים דורשים הנהלה בשל השלכות חוקיות ורגולציה.</p>
-                                    <p><strong>דילמת הניהול:</strong> הקונפליקט המובנה בין צוות ה-IT שרוצה להשבית מערכות לצורך חקירה, לבין המנכ\"ל שרוצה להמשיך לייצר הכנסות.</p>
-                                    <div class="overflow-x-auto my-3">
-                                        <table class="w-full text-xs text-slate-300 border border-slate-800 text-right">
-                                            <thead>
-                                                <tr class="bg-slate-900 text-slate-100 border-b border-slate-800">
-                                                    <th class="p-2 border-l border-slate-800">פרמטר</th>
-                                                    <th class="p-2 border-l border-slate-800">IT (Information Technology)</th>
-                                                    <th class="p-2">OT (Operational Technology)</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr class="border-b border-slate-800">
-                                                    <td class="p-2 font-bold border-l border-slate-800">הגדרה</td>
-                                                    <td class="p-2 border-l border-slate-800">שרתים, מחשבים אישיים, מערכות מידע (למשל: בנק, בורסה).</td>
-                                                    <td class="p-2">מערכות בקר תעשייתיות לתשתיות פיזיות (חשמל, מים, בתי זיקוק).</td>
-                                                </tr>
-                                                <tr class="border-b border-slate-800">
-                                                    <td class="p-2 font-bold border-l border-slate-800">מיקוד CIA</td>
-                                                    <td class="p-2 border-l border-slate-800">סודיות (Confidentiality) במקום הראשון.</td>
-                                                    <td class="p-2">זמינות (Availability) במקום הראשון לשמירה על בטיחות חיים ותפקוד פיזי.</td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="p-2 font-bold border-l border-slate-800">דוגמה לתקיפה</td>
-                                                    <td class="p-2 border-l border-slate-800">גניבת בסיס נתונים של לקוחות משרת אינטרנט.</td>
-                                                    <td class="p-2">מתקפת <strong>Stuxnet (2010)</strong> על הצנטריפוגות באיראן.</td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                    <p><strong>משולש CIA:</strong> סודיות (Confidentiality), שלמות (Integrity), וזמינות (Availability).</p>
-                                    <p><strong>ניהול סיכונים:</strong> סיכון = סיכוי לאירוע × עוצמת הנזק. אסטרטגיות טיפול: קבלת הסיכון, הפחתתו (למשל ע\"י WAF), העברתו (למשל לביטוח סייבר), או הימנעות/דחייה.</p>
-                                </div>
-                            </div>
-
-                            <!-- Lesson 2 -->
-                            <div class="border border-slate-800/80 rounded-xl overflow-hidden">
-                                <button onclick="toggleLessonCheatsheet(2)" class="w-full p-4 flex justify-between items-center bg-slate-900/40 text-right">
-                                    <span class="font-bold text-slate-200">שיעור 2: גבולות הארגון, ציוד רפואי, פגיעויות ועדכונים</span>
-                                    <svg id="cheat-icon-2" class="w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
-                                </button>
-                                <div id="cheat-content-2" class="p-4 border-t border-slate-800/60 bg-slate-950/20 text-sm space-y-4 hidden">
-                                    <p><strong>אבולוציית הרשת:</strong> המעבר לרשתות מבוזרות ללא גבולות ברורים (BYOD, ענן IaaS/PaaS/SaaS, מכשירי IoT ובינה מלאכותית הגורמת לזליגת מידע ארגוני).</p>
-                                    <p><strong>מודל 3 השכבות:</strong> Presentation (תצוגה), Application (לוגיקה), ו-Database (איפה שיושבים נכסי המידע). יש צורך ב<strong>סגמנטציה</strong> (הפרדה) באמצעות חומות אש ביניהן.</p>
-                                    <p><strong>האתגר בבתי חולים:</strong> ציוד רפואי יקר (CT, MRI) מגיע כ\"קופסה שחורה\" סגורה עם מערכות הפעלה ישנות (כמו Windows 7). מנהלים חוששים לעדכן אותן בשל סיכון להשבתה וחוסר תאימות של יצרן המכשיר (\"If it works, don't touch it\").</p>
-                                    <p><strong>Zero-Day לעומת One-Day:</strong>
-                                        <br>• <strong>Zero-Day:</strong> באג לא מוכר ליצרן, ללא פאץ'. התוקפים מנצלים פגיעות זו בחשאי.
-                                        <br>• <strong>One-Day:</strong> באג שפורסם לו פאץ' (תיקון). מרגע זה כולם מודעים לפרצה ונוצר מרוץ נגד הזמן עד שהארגונים יטמיעו את העדכון. זהו חלון הזמן המסוכן ביותר.
-                                    </p>
-                                    <p><strong>אסטרטגיות שדרוג:</strong> שימוש ב-WSUS או Intune, עדכון בשלבים/קלאסטרים כדי לשמור על זמינות, והכנת תוכנית נסיגה (Rollback) במקרה של תקלה.</p>
-                                </div>
-                            </div>
-
-                            <!-- Lesson 3 -->
-                            <div class="border border-slate-800/80 rounded-xl overflow-hidden">
-                                <button onclick="toggleLessonCheatsheet(3)" class="w-full p-4 flex justify-between items-center bg-slate-900/40 text-right">
-                                    <span class="font-bold text-slate-200">שיעור 3: הקשחת מערכות (Hardening), SSDLC ומתקפות CNI</span>
-                                    <svg id="cheat-icon-3" class="w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
-                                </button>
-                                <div id="cheat-content-3" class="p-4 border-t border-slate-800/60 bg-slate-950/20 text-sm space-y-4 hidden">
-                                    <p><strong>הקשחה (Hardening):</strong> צמצום שטח התקיפה ע\"י סגירת שירותים מיותרים ושינוי קונפיגורציות.
-                                        <br>• <strong>תחנות עבודה:</strong> ביטול כניסה אוטומטית (למעט קופות סופר, כספומטים, ומכונות ייצור).
-                                        <br>• <strong>רשת וגישה:</strong> חומת אש מקומית, ביטול Remote Access או הגבלתו ל-VLAN ייעודי של תמיכה בלבד.
-                                        <br>• <strong>בסיס נתונים:</strong> שינוי/חסימת סיסמת ברירת מחדל של המנהל (SA).
-                                        <br>• <strong>סנכרון זמנים (NTP):</strong> קריטי כדי שכל הלוגים בארגון יהיו מתואמים בזמן, מה שמאפשר לבצע חקירה פורנזית במקרה של תקיפה.
-                                    </p>
-                                    <p><strong>מחזור פיתוח מאובטח (SSDLC):</strong>
-                                        <br>• <strong>דרישות:</strong> ביצעו הערכת סיכונים (Risk Assessment), בדגש על ספקים חיצוניים.
-                                        <br>• <strong>עיצוב:</strong> ביצוע Threat Modeling (מידול איומים) ובחינת ממשקים פנימיים וחיצוניים.
-                                        <br>• <strong>פיתוח:</strong> שימוש בכלי בדיקה סטטיים (SAST) לניתוח קוד.
-                                        <br>• <strong>בדיקות:</strong> דגש על בדיקת תקינות קלט (Input Validation) למניעת SQL Injection, ובדיקת הודעות שגיאה (כדי לוודא שלא נחשפים פרטים טכניים כמו גרסת שרת).
-                                    </p>
-                                    <p><strong>מתקפות השפעה ותודעה (CNI):</strong> שימוש ברשתות לצורך שינוי תודעה ויצירת מציאות מדומה (למשל: בחירות בארה\"ב, הפצת פייק ניוז כלכלי להטיית מניות). OpIsrael (מתקפה שנתית קבועה ב-7 באפריל על אתרים ישראלים).</p>
-                                </div>
-                            </div>
-
-                            <!-- Lesson 4 -->
-                            <div class="border border-slate-800/80 rounded-xl overflow-hidden">
-                                <button onclick="toggleLessonCheatsheet(4)" class="w-full p-4 flex justify-between items-center bg-slate-900/40 text-right">
-                                    <span class="font-bold text-slate-200">שיעור 4: אנטומיית התקיפה (APT), וקטורי גישה ו-Zero-Trust</span>
-                                    <svg id="cheat-icon-4" class="w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
-                                </button>
-                                <div id="cheat-content-4" class="p-4 border-t border-slate-800/60 bg-slate-950/20 text-sm space-y-4 hidden">
-                                    <p><strong>5 שלבי ה-APT (תקיפה ממוקדת מתמשכת):</strong>
-                                        <br>1. <strong>איסוף מידע (Reconnaissance):</strong> איתור יעדים ודליית מידע מרשתות חברתיות לבניית פיתיונות.
-                                        <br>2. <strong>אחיזה ראשונית (Initial Compromise):</strong> הנגיעה הראשונה בארגון, מבוצעת בשקט.
-                                        <br>3. <strong>תקשורת עם התוקף (C2 - Command & Control):</strong> יצירת ערוץ שליחה ובקרה מול שרת התוקף.
-                                        <br>4. <strong>התרחבות ברשת (Lateral Movement):</strong> חיפוש סיסמאות ומעבר מתחנה לתחנה כדי להגיע ל'יהלומי הכתר'.
-                                        <br>5. <strong>ביצוע המשימה (Mission Complete):</strong> גניבת המידע החוצה (CNE) או הרס מערכות (CNA).
-                                    </p>
-                                    <p><strong>הגנות דוא\"ל וגלישה:</strong>
-                                        <br>• <strong>גלישה:</strong> VDI (סביבה מבודדת), הלבנת קבצים (פירוק והרכבה מחדש ללא סקריפטים).
-                                        <br>• <strong>דוא\"ל:</strong> Proofpoint, ומנגנוני אימות: SPF (רשימת IP מאושרים לשליחה מהדומיין), DKIM (חתימה קריפטוגרפית), DMARC (הגדרת מדיניות טיפול באי-התאמה).
-                                    </p>
-                                    <p><strong>עקרונות Zero-Trust:</strong> \"לא סומכים על אף אחד, תמיד מאמתים\". בחינה מתמדת של רמת סיכון המשתמש (User Risk), סיכון המכשיר (Device Risk) וה-API. דרישות סף: אימות כפול MFA, מכשיר מנוהל ומעודכן, והרשאות מינימליות (Least Privilege).</p>
-                                </div>
-                            </div>
-
-                            <!-- Lesson 5 -->
-                            <div class="border border-slate-800/80 rounded-xl overflow-hidden">
-                                <button onclick="toggleLessonCheatsheet(5)" class="w-full p-4 flex justify-between items-center bg-slate-900/40 text-right">
-                                    <span class="font-bold text-slate-200">שיעור 5: הגנות Endpoint, ניהול אירוע ומתקפות נפוצות</span>
-                                    <svg id="cheat-icon-5" class="w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
-                                </button>
-                                <div id="cheat-content-5" class="p-4 border-t border-slate-800/60 bg-slate-950/20 text-sm space-y-4 hidden">
-                                    <p><strong>אבולוציית כלי הגנת ה-Endpoint:</strong>
-                                        <br>1. <strong>חתימות (Signature):</strong> השוואה פשוטה של ה-Hash של וירוסים מוכרים. אינו מזהה קובץ שעבר שינוי קטן או Zero-day.
-                                        <br>2. <strong>יוריסטיקה (Heuristic):</strong> חיפוש דפוסים ומבנה קוד שמזכירים וירוסים קיימים (מונע שינויים קלים בבאג).
-                                        <br>3. <strong>התנהגותי (Behavioral):</strong> ניטור פעולות חשודות בזמן ריצה (כמו ריצת פקודות PowerShell חריגות או הצפנת קבצים המונית).
-                                        <br>4. <strong>Sandbox (ארגז חול):</strong> הרצת הקובץ בסביבה מבודדת לבדיקת תוצאותיו (חלק מהנוזקות מזהות סביבה זו ונמנעות מפעולה).
-                                        <br>5. <strong>EDR:</strong> מערכת קצה מתקדמת שמזהה, חוסמת באופן אוטומטית, וחוקרת אנומליות בחיבור למערכות ענן מבוססות ML.
-                                        <br>6. <strong>Whitelisting (בקרת אפליקציות):</strong> אישור הרצה אך ורק לתוכנות מאושרות מראש. מעולה למערכות שלא משתנות (כמו SCADA).
-                                    </p>
-                                    <p><strong>ניהול אירוע ברמה הארגונית:</strong>
-                                        <br>• <strong>ההבחנה:</strong> לא כל תקלה תפעולית היא אירוע סייבר. אירוע סייבר דורש מעורבות משפטית, דוברות ודיווח רגולטורי לבורסה.
-                                        <br>• <strong>Playbooks (פלייבוק):</strong> רשימת פעולות מוגדרת מראש להתמודדות עם תקיפות ספציפיות.
-                                        <br>• <strong>SIEM & SOC:</strong> ה-SIEM מרכז ומנתח לוגים מכלל המערכות בארגון, וה-SOC הוא צוות התגובה והניטור שפועל לפי הניתוח.
-                                    </p>
-                                    <p><strong>מתקפות נפוצות:</strong>
-                                        <br>• <strong>גניבת זהות:</strong> האיום המשמעותי ביותר כיום. פתרון: MFA (משהו שאתה יודע, משהו שיש לך, משהו שהינך).
-                                        <br>• <strong>DDoS:</strong> מניעת שירות מבוזרת. מתקפות בשכבה 7 (Application) הן המתוחכמות ביותר. הגנה: שימוש בשירותים מבוזרים כמו Cloudflare.
-                                        <br>• <strong>SQL Injection (הזרקת SQL):</strong> הזרקת שאילתות זדוניות לבסיס הנתונים דרך שדות קלט בדפי אינטרנט. מניעה: Input Validation.
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
+                <div class="text-center py-2 bg-slate-950/60 rounded-xl border border-slate-800/80 mb-3">
+                    <span id="timer-text" class="text-3xl font-extrabold text-white font-tech">50:00</span>
+                    <span id="timer-mode-label" class="block text-[10px] text-slate-500 font-semibold tracking-wider">למידה ממוקדת</span>
+                </div>
+                <div class="flex gap-2">
+                    <button id="timer-play-btn" onclick="toggleTimer()" class="flex-1 py-1.5 px-3 rounded-lg bg-gradient-to-r from-cyan-500 to-indigo-600 text-slate-950 font-bold text-xs hover:opacity-90 transition flex items-center justify-center gap-1">
+                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"></path></svg>
+                        <span>הפעל</span>
+                    </button>
+                    <button onclick="resetTimer()" class="py-1.5 px-3 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 font-semibold text-xs transition">
+                        איפוס
+                    </button>
                 </div>
             </div>
-        </section>
 
-    </main>
+        </aside>
 
-    <footer class="mt-12 text-center text-slate-500 text-xs max-w-7xl mx-auto px-4 border-t border-slate-900 pt-6">
-        <p class="font-tech">CyberPrep Study Companion • Built for success by Antigravity</p>
-        <p class="mt-1">"הדרך הטובה ביותר לחזות את העתיד היא להנדס אותו לאחור."</p>
-    </footer>
+        <!-- CENTER/RIGHT COLUMN: Interactive Content Space (lg:col-span-9) -->
+        <main class="lg:col-span-9 space-y-6">
+            
+            <!-- Dynamic Content Area -->
+            <div id="dynamic-content-wrapper">
+                <!-- Content injected here via selectLesson() or changeActiveTab() -->
+            </div>
 
-    <!-- Audio Synth Control / Sound Synthesis (No External File Needed) -->
+        </main>
+    </div>
+
+    <!-- Toast system -->
+    <div id="toast-bar" class="fixed bottom-5 left-5 px-4 py-2.5 rounded-xl bg-slate-900 border border-slate-800 text-cyan-400 text-sm font-semibold shadow-2xl transition-all duration-300 transform translate-y-10 opacity-0 z-50"></div>
+
+    <!-- Data Definition (Injected directly for single-file functionality) -->
     <script>
-        let isMuted = false;
-        
-        function toggleSound() {
-            isMuted = !isMuted;
-            document.getElementById('sound-icon-on').classList.toggle('hidden', isMuted);
-            document.getElementById('sound-icon-off').classList.toggle('hidden', !isMuted);
-            
-            // Show feedback toast
-            showToast(isMuted ? 'הקול הושתק' : 'הקול הופעל');
-        }
-
-        function playAlarmSound() {
-            if (isMuted) return;
-            try {
-                const ctx = new (window.AudioContext || window.webkitAudioContext)();
-                
-                // Play a nice two-tone chime (Success Indicator)
-                // Tone 1
-                const osc1 = ctx.createOscillator();
-                const gain1 = ctx.createGain();
-                osc1.type = 'sine';
-                osc1.frequency.setValueAtTime(523.25, ctx.currentTime); // C5
-                osc1.frequency.setValueAtTime(659.25, ctx.currentTime + 0.15); // E5
-                gain1.gain.setValueAtTime(0.3, ctx.currentTime);
-                gain1.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.6);
-                osc1.connect(gain1);
-                gain1.connect(ctx.destination);
-                osc1.start();
-                osc1.stop(ctx.currentTime + 0.6);
-                
-                // Tone 2 (offset)
-                setTimeout(() => {
-                    const osc2 = ctx.createOscillator();
-                    const gain2 = ctx.createGain();
-                    osc2.type = 'sine';
-                    osc2.frequency.setValueAtTime(783.99, ctx.currentTime); // G5
-                    osc2.frequency.setValueAtTime(1046.50, ctx.currentTime + 0.15); // C6
-                    gain2.gain.setValueAtTime(0.3, ctx.currentTime);
-                    gain2.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.7);
-                    osc2.connect(gain2);
-                    gain2.connect(ctx.destination);
-                    osc2.start();
-                    osc2.stop(ctx.currentTime + 0.7);
-                }, 180);
-
-            } catch (e) {
-                console.log("AudioContext blocked or unsupported", e);
-            }
-        }
-        
-        // Custom simple toast notification system
-        function showToast(message) {
-            let toast = document.getElementById('custom-toast');
-            if (!toast) {
-                toast = document.createElement('div');
-                toast.id = 'custom-toast';
-                toast.className = 'fixed bottom-5 left-5 px-4 py-2.5 rounded-xl bg-slate-900 border border-slate-800 text-cyan-400 text-sm font-semibold shadow-2xl transition-all duration-300 transform translate-y-10 opacity-0 z-50';
-                document.body.appendChild(toast);
-            }
-            toast.innerText = message;
-            toast.classList.remove('translate-y-10', 'opacity-0');
-            
-            setTimeout(() => {
-                toast.classList.add('translate-y-10', 'opacity-0');
-            }, 3000);
-        }
-    </script>
-
-    <!-- POMODORO TIMER SCRIPT -->
-    <script>
-        let timerSeconds = 3000; // 50 minutes default
-        let totalPresetSeconds = 3000;
-        let timerInterval = null;
-        let isTimerRunning = false;
-        let currentTimerMode = 'study'; // 'study', 'short', 'long'
-
-        const timerDisplay = document.getElementById('timer-display');
-        const timerLabel = document.getElementById('timer-label');
-        const timerProgressCircle = document.getElementById('timer-progress');
-        const btnTimerToggleText = document.getElementById('btn-timer-text');
-        const playIcon = document.getElementById('play-icon');
-        const pauseIcon = document.getElementById('pause-icon');
-
-        // Circumference of our progress circle (r=80 -> 2 * PI * 80 = 502.65)
-        const circleCircumference = 502.65;
-
-        function updateTimerUI() {
-            const minutes = Math.floor(timerSeconds / 60);
-            const seconds = timerSeconds % 60;
-            timerDisplay.innerText = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-            
-            // Calculate progress fraction
-            const fraction = timerSeconds / totalPresetSeconds;
-            // Map to dashoffset: 0 means full, circleCircumference means empty
-            const offset = circleCircumference * (1 - fraction);
-            timerProgressCircle.style.strokeDashoffset = offset;
-        }
-
-        function toggleTimer() {
-            if (isTimerRunning) {
-                // Pause timer
-                clearInterval(timerInterval);
-                isTimerRunning = false;
-                btnTimerToggleText.innerText = 'המשך למידה';
-                playIcon.classList.remove('hidden');
-                pauseIcon.classList.add('hidden');
-                showToast('הטיימר הושהה');
-            } else {
-                // Start timer
-                isTimerRunning = true;
-                btnTimerToggleText.innerText = 'השהה טיימר';
-                playIcon.classList.add('hidden');
-                pauseIcon.classList.remove('hidden');
-                showToast('הטיימר הופעל');
-
-                timerInterval = setInterval(() => {
-                    if (timerSeconds > 0) {
-                        timerSeconds--;
-                        updateTimerUI();
-                    } else {
-                        // Timer completed
-                        clearInterval(timerInterval);
-                        isTimerRunning = false;
-                        playAlarmSound();
-                        showToast('סבב הטיימר הושלם בהצלחה!');
-                        resetTimer();
+        const lessonsData = {
+            1: {
+                title: "שיעור 1: מבוא, IT לעומת OT וניהול סיכונים",
+                introduction: "שיעור המבוא עוסק בהגדרת גבולות עולם אירועי הסייבר, הבנת המאפיינים הייחודיים של מערכות הבקרה המפעילות את התשתית הפיזית במדינה, ומתודולוגיית היסוד של זיהוי סיכונים, הגדרת נכסי מפתח וטיפול בהם.",
+                concepts: [
+                    {
+                        title: "1. הגדרות יסוד ודילמת הניהול",
+                        text: "אירוע סייבר מוגדר כאירוע בעל פוטנציאל השפעה עסקי, משפטי או רגולטורי. בעוד שאירועים קטנים וטכניים מטופלים בשגרה בצוות ה-IT, אירועים משמעותיים דורשים מעורבות הנהלה מהרגע הראשון בשל השלכות חוקיות ופגיעה בפרטיות.\n\n**דילמת הניהול (Management Dilemma):** מציגה קונפליקט מובנה בזמן אירוע פעיל:\n- **צוות ה-IT/אבטחה** מעוניין להשבית את המערכות באופן מיידי כדי לעצור את התקיפה, למנוע זליגת מידע, ולבצע חקירה פורנזית.\n- **המנכ\"ל וההנהלה העסקית** מעוניינים להמשיך את הפעילות העסקית ולייצר הכנסות, תוך הימנעות מהשבתה שעלולה לפגוע אנושות בלקוחות.",
+                        examinerTip: "בבחינה, אם תישאל על אירוע סייבר פעיל, זכור להציג את שתי נקודות המבט הללו. הסבר שהחלטה על השבתה צריכה להתקבל ברמת הנהלה על בסיס חישוב סיכון עסקי, ולא כהחלטה טכנית גרידא של צוות האבטחה.",
+                        checkpoint: {
+                            id: "l1_q1",
+                            question: "בעת אירוע סייבר בשרת הייצור, מנהל ה-IT דורש לכבות את השרת כדי למנוע נזק נוסף. המנכ\"ל מתנגד. מהו הבסיס לקונפליקט זה?",
+                            options: [
+                                "אי-הבנה טכנולוגית של המנכ\"ל לגבי מורכבות התקיפה.",
+                                "דילמת הניהול: IT מעוניין בחקירה ועצירת התקיפה, בעוד המנכ\"ל מעוניין בהמשכיות עסקית וייצור הכנסות.",
+                                "הפרת תנאי הרישיון של המערכת המותקנת בשרת.",
+                                "כשל בתקשורת של צוות ה-SOC מול הדוברות."
+                            ],
+                            correct: 1
+                        }
+                    },
+                    {
+                        title: "2. תשתיות קריטיות: IT לעומת OT",
+                        text: "תשתיות המדינה נחלקות לשני דומיינים מרכזיים:\n1. **IT (Information Technology):** מערכות מידע רגילות, שרתים ומחשבים אישיים (למשל: בנק ישראל, הבורסה). המיקוד המרכזי באבטחה הוא **סודיות (Confidentiality)**.\n2. **OT (Operational Technology):** מערכות בקרה תעשייתיות (ICS/SCADA) האחראיות על תשתיות פיזיות (חשמל, מים, בתי זיקוק, רכבות). המיקוד המרכזי באבטחה הוא **זמינות (Availability)** ובטיחות פיזית של חיי אדם.\n\n*מתקפת ייחוס:* תקיפת **Stuxnet (2010)** על הצנטריפוגות באיראן מדגימה פגיעה במערכות OT שגרמה להרס פיזי ממשי.",
+                        examinerTip: "המרצה אוהב לבקש השוואה בין השניים. זכור את משולש ה-CIA: ב-IT הסודיות ראשונה, ב-OT הזמינות והשלמות קריטיות (שיבוש קלט בבקר מים עלול להרעיל עיר שלמה, לכן שלמות וזמינות הבקר קודמות לכל).",
+                        checkpoint: {
+                            id: "l1_q2",
+                            question: "מדוע זמינות (Availability) היא העדיפות הראשונה במערכות OT בניגוד למערכות IT?",
+                            options: [
+                                "מכיוון שבמערכות IT המחשבים מהירים יותר ואין בעיית ביצועים.",
+                                "מכיוון שהשבתה או שיבוש של מערכת OT (כגון חשמל או מים) עלולים להוביל לפגיעה פיזית בחיי אדם ובביטחון המדינה.",
+                                "בשל דרישת רגולציית GDPR להגנה על פרטיות הבקרים.",
+                                "מכיוון שבקרים תעשייתיים אינם תומכים בבסיסי נתונים."
+                            ],
+                            correct: 1
+                        }
+                    },
+                    {
+                        title: "3. ניהול סיכונים, משולש CIA ונכסים קריטיים",
+                        text: "אבטחת המידע נשענת על משולש **CIA: Confidentiality (סודיות), Integrity (שלמות), Availability (זמינות)**.\n\n**חישוב סיכון:** עוצמת הסיכון מחושבת כמכפלה:\n$$\\text{Risk} = \\text{Likelihood (סבירות)} \\times \\text{Impact (עוצמת הנזק)}$$\n\n**זיהוי נכסים (Crown Jewels):** ארגון חייב להגדיר את הנכסים הקריטיים שבלעדיהם הוא לא יכול להתקיים. לדוגמה:\n- עבור **eBay** - זמינות האתר.\n- עבור **קוקה קולה** - הנוסחה הסודית (סודיות).\n\n**אסטרטגיות טיפול בסיכון:**\n1. **הפחתה (Mitigation):** הטמעת בקרות מיגון (WAF, EDR).\n2. **העברה (Transfer):** ביטוח סייבר או הוצאת פעילות (כמו סליקה) לצד ג'.\n3. **קבלה (Acceptance):** החלטה לחיות עם הסיכון.\n4. **הימנעות/דחייה (Avoidance):** ביטול התהליך שמייצר את הסיכון.",
+                        examinerTip: "אם בבחינה מוצגת לך מערכת מסוימת, קודם כל זהה מהם 'יהלומי הכתר' שלה והאם האיום העיקרי עליהם פוגע בסודיות, בשלמות או בזמינות. על בסיס זה תציע את אסטרטגיית הטיפול בסיכון.",
+                        checkpoint: {
+                            id: "l1_q3",
+                            question: "חברת תרופות החליטה להוציא את שירות משלוחי התרופות שלה לחברה קבלנית חיצונית כדי לא לשאת בסיכון של פגיעה בשרשרת האספקה. באיזו אסטרטגיה מדובר?",
+                            options: [
+                                "הפחתת סיכון (Mitigation)",
+                                "קבלת סיכון (Acceptance)",
+                                "העברת סיכון (Transfer)",
+                                "הימנעות מסיכון (Avoidance)"
+                            ],
+                            correct: 2
+                        }
                     }
-                }, 1000);
+                ]
+            },
+            2: {
+                title: "שיעור 2: גבולות הארגון, תשתיות קריטיות וניהול עדכונים",
+                introduction: "שיעור זה מתמקד באבולוציה של גבולות הרשת הארגונית, האתגרים שנובעים מחיבור רכיבי ענן ו-IoT, והמורכבות הגבוהה של ניהול פגיעות ועדכוני תוכנה במערכות מורכבות.",
+                concepts: [
+                    {
+                        title: "1. אבולוציית הרשת, 3 השכבות וסגמנטציה",
+                        text: "בעידן המודרני גבולות הרשת היטשטשו (Borders without IT) עקב שימוש ב-BYOD (מכשירים אישיים), מחשוב ענן (IaaS/PaaS/SaaS), מכשירי IoT ובינה מלאכותית היוצרת אתגרי זליגת מידע.\n\n**מודל 3 השכבות:** ארכיטקטורת רשת נפוצה להגנה על נכסי המידע:\n1. **Presentation (תצוגה):** הממשק מול הלקוח/המשתמש.\n2. **Application (לוגיקה):** מנוע עיבוד הנתונים.\n3. **Database (בסיס נתונים):** כאן יושבים נכסי המידע.\n\nההגנה מבוצעת באמצעות **סגמנטציה (Segmentation)** - הקמת חומות אש (Firewalls) המפרידות בין השכבות כדי למנוע גישה ישירה משכבת התצוגה החשופה אל בסיס הנתונים.",
+                        examinerTip: "הקפד להסביר את חשיבות הסגמנטציה בבחינה. תקיפות רבות מצליחות משום שאין סגמנטציה והתוקף שעובר את שכבת התצוגה מגיע ישירות ל-Database ללא הגבלה.",
+                        checkpoint: {
+                            id: "l2_q1",
+                            question: "מהי המטרה העיקרית של ביצוע סגמנטציה במודל 3 השכבות?",
+                            options: [
+                                "שיפור מהירות החיבור של שרת ה-Presentation.",
+                                "מניעת גישה ישירה ובלתי מבוקרת משכבות חיצוניות וחשופות אל שכבת ה-Database הרגישה.",
+                                "ביטול הצורך בשימוש במערכת EDR.",
+                                "סנכרון השעונים של שרתי האפליקציה."
+                            ],
+                            correct: 1
+                        }
+                    },
+                    {
+                        title: "2. האתגר במערכות בקרה (OT) וציוד רפואי",
+                        text: "מערכות בקרה (SCADA) ותשתיות פיזיות לעיתים קרובות אינן משתנות במשך שנים רבות.\n\n**בבתי חולים:** ציוד רפואי יקר (כמו CT, MRI) מגיע כ\"קופסה שחורה\" סגורה, המופעלת על ידי מערכות הפעלה ישנות מאוד (כמו Windows 7). \nארגונים נמנעים מלעדכן אותן עקב:\n- פחד מהשבתה של ציוד מציל חיים.\n- היעדר תאימות ותמיכה מצד היצרן.\n- מחסור במומחים טכניים ייעודיים.\n\nהמדיניות הרווחת היא: **\"If it works, don't touch it\"** - דבר המייצר סיכוני אבטחה כבדים.",
+                        examinerTip: "אם מוצג תרחיש של בית חולים או מפעל תעשייתי, התייחס לחלופה של **בקרת אפליקציות (Application Whitelisting)** במקום עדכון פאצ'ים אגרסיבי, מאחר שהמערכות הללו סטטיות ולא משתנות.",
+                        checkpoint: {
+                            id: "l2_q2",
+                            question: "מדוע ארגונים רפואיים נמנעים לרוב מעדכון פאצ'ים במכשירי CT או MRI?",
+                            options: [
+                                "מכיוון שהמכשירים אינם מחוברים לחשמל.",
+                                "עקב החשש שהעדכון יגרום להשבתת המערכת, חוסר תאימות של יצרן המכשיר והיעדר אחריות.",
+                                "משום שמערכות אלו מוגנות באופן מובנה על ידי DMARC.",
+                                "עקב דרישות רגולטוריות של משרד הבריאות המונעות עדכון תוכנה."
+                            ],
+                            correct: 1
+                        }
+                    },
+                    {
+                        title: "3. פגיעויות: Zero-Day לעומת One-Day וניהול פאצ'ים",
+                        text: "ההבדל בין סוגי הפגיעויות קריטי להבנת מרוץ החימוש באבטחה:\n- **Zero-Day Attack:** מתקפה המנצלת באג שטרם התגלה על ידי היצרן, ולכן אין לו פתרון או פאץ' קיים. התוקף משתמש בו בסודיות.\n- **One-Day Attack:** מתקפה המתרחשת מהרגע שבו פורסם פאץ' (תיקון) ועד שהארגון מטמיע אותו בפועל.\n\n*חלון ה-One-day נחשב למסוכן ביותר* מכיוון שהפרצה הופכת לפומבית וכולם מודעים אליה, בעוד תהליך העדכון בארגונים גדולים (במערכות כבדות כמו SAP או Oracle) הוא מורכב ביותר, דורש בדיקות איכות (QA) וסביבות בדיקה כדי למנוע השבתה, ומבוצע לרוב בשלבים (שיטת קלאסטר) עם תוכנית נסיגה (Rollback).",
+                        examinerTip: "זכור: ברגע שיוצא פאץ', הארגון נכנס לסיכון גבוה של One-day. המרצה ישאל איך לנהל סיכון זה בארגון גדול. התשובה היא ניהול פאצ'ים מבוקר הכולל בדיקות QA ותוכנית נסיגה מסודרת.",
+                        checkpoint: {
+                            id: "l2_q3",
+                            question: "מדוע חלון הזמן של One-Day נחשב לעיתים למסוכן יותר לארגונים מאשר Zero-Day?",
+                            options: [
+                                "מכיוון שב-Zero-Day כל העולם כבר מכיר את דרכי הניצול של הפרצה.",
+                                "מכיוון שברגע שהפאץ' מפורסם (One-Day), הפגיעות הופכת לפומבית וכולם מודעים אליה, דבר שמפעיל סורקים אקטיביים של תוקפים מכל העולם על שרתים שטרם עודכנו.",
+                                "כי פגיעויות One-Day תמיד מוחקות את בסיס הנתונים באופן אוטומטי.",
+                                "משום שלא ניתן להתקין פאצ'ים ללא אישור ישיר של המוסד לביטוח לאומי."
+                            ],
+                            correct: 1
+                        }
+                    }
+                ]
+            },
+            3: {
+                title: "שיעור 3: הקשחת מערכות, SSDLC ומתקפות תודעה (CNI)",
+                introduction: "שיעור זה עוסק בצעדים המעשיים להקטנת שטח התקיפה (הקשחה), שילוב אבטחת מידע בכל שלבי פיתוח התוכנה (SSDLC), ושימוש ברשת ככלי להשפעה על התודעה הציבורית.",
+                concepts: [
+                    {
+                        title: "1. צ'קליסט הקשחת מערכות (Hardening)",
+                        text: "הקשחה היא תהליך של צמצום שטח התקיפה על ידי ביטול שירותים מיותרים וקביעת פרמטרים מאובטחים:\n- **הגדרות תחנת עבודה:** ביטול כניסה אוטומטית (Automatic Login), למעט בקופות בסופרמרקטים, כספומטים או עמדות ייצור שבהן המפעיל אינו איש מחשבים.\n- **הקשחת רשת:** הגדרת חומת אש מקומית, ביטול Remote Access או הגבלתו לסגמנט רשת ספציפי (VLAN) של צוות התמיכה בלבד.\n- **הקשחת בסיסי נתונים:** שינוי סיסמת המנהל הדיפולטיבית (Default User) או חסימת המשתמש המובנה (sa).\n- **סנכרון זמנים (NTP):** קריטי לוודא שכל המחשבים מסונכרנים לאותו שעון כדי לאפשר הצלבת לוגים וחקירה פורנזית (Forensics) תקינה.\n- **לוגים וניטור:** העברת כל הלוגים למסך ניטור מרכזי (SIEM) לצורך זיהוי אנומליות.",
+                        examinerTip: "הקשחה היא שאלה קלאסית במבחן. אם יש אירוע של פריצה, בדוק האם הלוגים היו מסונכרנים (NTP) והאם משתמש ברירת המחדל של ה-DB שונה.",
+                        checkpoint: {
+                            id: "l3_q1",
+                            question: "איזה מבין הצעדים הבאים אינו מהווה חלק מצ'קליסט הקשחת המערכות (Hardening) של הארגון?",
+                            options: [
+                                "שינוי או ביטול סיסמאות ברירת המחדל של משתמשי הניהול בבסיסי הנתונים.",
+                                "הפעלת פרוטוקול NTP לסנכרון השעונים של כלל השרתים.",
+                                "ביצוע Static Analysis (SAST) לקוד המקור של האפליקציה בשלב הפיתוח.",
+                                "ביטול Automatic Login בתחנות העבודה המשרדיות."
+                            ],
+                            correct: 2
+                        }
+                    },
+                    {
+                        title: "2. מחזור פיתוח מאובטח (SSDLC)",
+                        text: "SSDLC משלב את אבטחת המידע בכל אחד משלבי פיתוח התוכנה (SDLC):\n- **שלב הדרישות:** ביצוע הערכת סיכונים (Risk Assessment), במיוחד בממשקים מול ספקים חיצוניים (כמו ספקי סליקה).\n- **שלב העיצוב:** ביצוע Threat Modeling (מידול איומים) ובחינת ממשקים פנימיים (חיבור ל-ERP).\n- **שלב הפיתוח:** שימוש בכלי בדיקה סטטיים (Static Analysis / SAST).\n- **שלב הבדיקות:** בדיקת תקינות קלט (Input Validation) למניעת SQL Injection (חסימת תווים מיוחדים) ואיסור חשיפת מידע טכני בתוך הודעות שגיאה המוצגות למשתמש.\n- **קוד פתוח:** סריקה קפדנית של ספריות קוד פתוח מחשש להחדרת קוד זדוני על ידי תוקפים.",
+                        examinerTip: "הבנת השלבים חשובה. בבחינה עשויים לשאול היכן מבוצע Threat Modeling (שלב העיצוב/Design) או מתי בודקים Input Validation (שלב הבדיקות/Testing).",
+                        checkpoint: {
+                            id: "l3_q2",
+                            question: "באיזה שלב של ה-SSDLC מבוצע תהליך מידול האיומים (Threat Modeling)?",
+                            options: [
+                                "שלב הדרישות (Requirements)",
+                                "שלב העיצוב (Design)",
+                                "שלב הפיתוח (Development)",
+                                "שלב הבדיקות (Testing)"
+                            ],
+                            correct: 1
+                        }
+                    },
+                    {
+                        title: "3. מתקפות CNI ומקרה הבוחן: בינת תוכנה",
+                        text: "מתקפות סייבר אינן מוגבלות לגניבה או הרס:\n- **CNI (Computer Network Influence):** שימוש ברשתות ובמדיה להשפעה על התודעה והפצת פייק ניוז (בחירות בארה\"ב, הטיית מניות).\n- **OpIsrael:** מתקפת האקטיביסטים השנתית (7 באפריל) שמטרתה בעיקר השחתת אתרים (Defacement) ליצירת הד תקשורתי.\n\n**מקרה בוחן: בינת תוכנה:**\nשרת PoC (הוכחת יכולת) ישן ולא מתוחזק הושאר פתוח לאינטרנט במשך 12 שנים. קבוצת Handala פרצה אליו ופירמטה אותו. השרת לא החזיק מידע רגיש, אך הנזק העיקרי היה **נזק תדמיתי כבד** - לקוחות רבים ניתקו את החיבור עם החברה מחשש שכלל הארגון נפרץ, דבר שהצריך מאמץ משפטי והסברתי אדיר לשיקום האמון.",
+                        examinerTip: "מקרה 'בינת תוכנה' מדגים כשל בניהול נכסים (Asset Management). זכור כי נזק תדמיתי ואובדן אמון לקוחות עלולים להיות הרסניים בהרבה מאובדן הנתונים הפיזי עצמו.",
+                        checkpoint: {
+                            id: "l3_q3",
+                            question: "מהו הלקח המרכזי מאירוע הפריצה לחברת 'בינת תוכנה'?",
+                            options: [
+                                "שרתי PoC תמיד מחזיקים את המידע הרגיש ביותר של הארגון.",
+                                "הנזק התדמיתי ואובדן אמון הלקוחות עקב רשלנות באבטחה עלולים לגרום לנזק עסקי כבד, גם אם השרת שנפרץ לא הכיל מידע רגיש.",
+                                "יש להשתמש אך ורק במערכות הפעלה מבוססות Linux לשרתי פיתוח.",
+                                "יש להכריז על אירוע סייבר רק אם שרת הייצור הראשי נפגע."
+                            ],
+                            correct: 1
+                        }
+                    }
+                ]
+            },
+            4: {
+                title: "שיעור 4: מודיעין סייבר, אנטומיית התקיפה (APT) והגנות מודרניות",
+                introduction: "שיעור זה מציג את שלבי התקיפה הממוקדת והמתמשכת (APT), השימוש במודל MITRE ATT&CK, ווקטורי ההגנה המודרניים ברשת ובנקודות הקצה.",
+                concepts: [
+                    {
+                        title: "1. חמשת שלבי ה-APT Kill Chain",
+                        text: "מתקפת APT (Advanced Persistent Threat) היא תקיפה ממוקדת וממושכת המורכבת מחמישה שלבים קריטיים:\n1. **איסוף מידע (Reconnaissance):** איתור יעדים (סמנכ\"לי כספים, מנהלי מערכות) ואיסוף מידע עליהם מרשתות חברתיות.\n2. **אחיזה ראשונית (Initial Compromise):** החדירה הראשונית לארגון, לרוב שקטה ומינורית (למשל, פישינג ממוקד).\n3. **תקשורת שליטה ובקרה (C2 - Command & Control):** יצירת ערוץ תקשורת מוצפן בין הנוזקה לשרת של התוקף לקבלת פקודות.\n4. **תנועה לטרלית (Lateral Movement):** דילוג בין שרתים ותחנות קצה בתוך הארגון כדי להשיג סיסמאות של מנהלים ולהגיע לנכסים הרגישים.\n5. **ביצוע המשימה (Mission Complete):** השלב הסופי - גניבת המידע (CNE) או הרס תשתיות (CNA).\n\n**MITRE ATT&CK:** מסגרת עבודה מפורטת הממפה את כלל הטקטיקות והטכניקות של התוקפים בכל שלב ושלב.",
+                        examinerTip: "הבנת שלבי ה-APT קריטית למענה על תרחישי פריצה. אם תוקף נכנס דרך מחשב של מזכירה והגיע לשרת בסיס הנתונים של ההנהלה, ציין כי הוא ביצע 'תנועה לטרלית' (Lateral Movement) וציין את הבקרות שיכלו למנוע זאת (סגמנטציה).",
+                        checkpoint: {
+                            id: "l4_q1",
+                            question: "באיזה שלב של מתקפת ה-APT תוקף עובר מתחנת עבודה פשוטה של עובד זוטר לשרת בסיס הנתונים הראשי של הארגון?",
+                            options: [
+                                "Initial Compromise (אחיזה ראשונית)",
+                                "Reconnaissance (איסוף מידע)",
+                                "Lateral Movement (תנועה לטרלית)",
+                                "C2 (תקשורת שליטה ובקרה)"
+                            ],
+                            correct: 2
+                        }
+                    },
+                    {
+                        title: "2. הגנות דוא\"ל, גלישה ו-Zero-Trust",
+                        text: "וקטורי החדירה העיקריים הם דוא\"ל וגלישה באינטרנט. מנגנוני ההגנה כוללים:\n- **הגנת גלישה:** גלישה דרך סביבות מבודדות (VDI / Azure Virtual Desktop) וביצוע 'הלבנה' (פירוק קבצים והרכבתם מחדש ללא סקריפטים פעילים).\n- **הגנת דוא\"ל (מניעת זיופי דומיין - Email Spoofing):**\n  1. **SPF (Sender Policy Framework):** רשימת כתובות IP המורשות לשלוח מייל בשם הדומיין.\n  2. **DKIM:** חתימה קריפטוגרפית המאשרת שהמייל נשלח מהדומיין ושתוכנו לא שונה.\n  3. **DMARC:** קובע מדיניות (התעלמות, ספאם, חסימה) במידה ובדיקות SPF או DKIM נכשלו.\n- **Zero-Trust (אמון אפס):** תפיסה שבה לא סומכים על אף אחד, גם בתוך הרשת הארגונית. דרישות הסף הן: אימות כפול (MFA), מכשיר מנוהל ומעודכן, והרשאות מינימליות (Least Privilege).",
+                        examinerTip: "נושא SPF/DKIM/DMARC מופיע כמעט תמיד בשאלות העוסקות בפישינג וזיוף זהות. ודא שאתה מסוגל להסביר כיצד שלושתם עובדים יחד כדי למנוע זיוף של כתובת השולח.",
+                        checkpoint: {
+                            id: "l4_q2",
+                            question: "כיצד פרוטוקול SPF מסייע במניעת מתקפות פישינג המזייפות את דומיין הארגון?",
+                            options: [
+                                "הוא מצפין את תוכן האימייל באמצעות מפתח ציבורי.",
+                                "הוא מגדיר ב-DNS רשימה של כתובות IP המורשות לשלוח מיילים בשם הדומיין, ובכך מאפשר לשרת המקבל לזהות שולחים מזויפים.",
+                                "הוא חוסם קבצים מצורפים המכילים מאקרו.",
+                                "הוא דורש מהמשתמש להקיש קוד MFA לפני פתיחת המייל."
+                            ],
+                            correct: 1
+                        }
+                    }
+                ]
+            },
+            5: {
+                title: "שיעור 5: הגנת Endpoint, ניהול אירוע ומתקפות נפוצות",
+                introduction: "השיעור האחרון מסכם את אבולוציית ההגנה על נקודות הקצה, הבחנה בין תקלה תפעולית לאירוע סייבר ברמה הניהולית, ודרכי התמודדות עם מתקפות נפוצות כמו DDoS ו-SQL Injection.",
+                concepts: [
+                    {
+                        title: "1. אבולוציית ה-Endpoint ו-Whitelisting",
+                        text: "ההגנה על תחנות הקצה התפתחה משמעותית לאורך השנים:\n1. **חתימות (Signature-based):** השוואת Hash של קבצים מול רשימה שחורה מוכרת. לא יעיל נגד Zero-day.\n2. **יוריסטיקה (Heuristic):** חיפוש תבניות קוד החשודות כווירוס.\n3. **זיהוי התנהגותי (Behavioral):** ניטור פעולות בזמן אמת (כמו ריצת פקודות PowerShell חריגות או הצפנת קבצים המונית).\n4. **Sandbox (ארגז חול):** הרצת קבצים חשודים בסביבה וירטואלית מבודדת.\n5. **EDR (Endpoint Detection and Response):** מערכות קצה מתקדמות המשלבות זיהוי התנהגותי, חסימה אוטומטית מקומית ואיסוף נתוני טלמטריה לענן לניתוח מבוסס ML.\n6. **Application Whitelisting (בקרת אפליקציות):** חסימת כל התוכנות והתרת הרצה אך ורק לתוכנות שאושרו מראש. פתרון מעולה למערכות קבועות (כמו בקרי SCADA או קופות רושמות).",
+                        examinerTip: "השוואה בין EDR ל-Whitelisting היא קלאסית. זכור: EDR מתאים לסביבות משתנות ודינמיות (מחשבי עובדים), בעוד Whitelisting מתאים לסביבות קבועות וסטטיות (שרתי ייצור, בקרי SCADA).",
+                        checkpoint: {
+                            id: "l5_q1",
+                            question: "באיזו טכנולוגיית הגנת Endpoint מומלץ להשתמש בבקר תעשייתי (OT/SCADA) שאינו משתנה לעיתים קרובות?",
+                            options: [
+                                "סריקת חתימות אנטי-וירוס מסורתית.",
+                                "בקרת אפליקציות (Application Whitelisting) המאשרת הרצה רק לקבצי הייצור המוכרים מראש וחוסמת כל קובץ אחר.",
+                                "מערכת הגנת דוא\"ל Proofpoint.",
+                                "הרצת קוד סטטית (SAST) בזמן ריצה."
+                            ],
+                            correct: 1
+                        }
+                    },
+                    {
+                        title: "2. ניהול אירוע: דילמת ההכרזה וצוות ה-SOC",
+                        text: "ניהול אירוע סייבר בארגון מחייב הבחנה בין **תקלה תפעולית** (כמו שרת שנפל עקב כשל חומרה) לבין **אירוע סייבר זדוני**.\n\n**דילמת ההכרזה (Declaration Dilemma):** \nהכרזה על אירוע סייבר היא החלטה ניהולית כבדת משקל (לרוב ברמת סמנכ\"ל ומעלה) עקב ההשלכות הבאות:\n- **חובת דיווח:** דיווח לרשויות (הרשות להגנת הפרטיות) ולבורסה (לחברות ציבוריות).\n- **השלכות משפטיות:** סיכון לתביעות נזיקין של לקוחות.\n- **נזק תדמיתי:** צורך בהפעלת מערך דוברות ויחסי ציבור.\n\nצוות ה-**SOC (Security Operations Center)** מנטר את המערכות באמצעות כלי **SIEM** המרכז את כל הלוגים מהארגון, ופועל לפי **פלייבוקים (Playbooks)** - תוכניות פעולה מוגדרות מראש לכל סוג תקיפה.",
+                        examinerTip: "בשאלה העוסקת בתגובה לאירוע, ציין תמיד את החשיבות של עבודה לפי פלייבוקים מוגדרים מראש, ואת הצורך של צוות ה-SOC לערב את הדרג הניהולי הבכיר לצורך דילמת ההכרזה.",
+                        checkpoint: {
+                            id: "l5_q2",
+                            question: "מדוע החלטה על הכרזת אירוע סייבר מתקבלת ברמת ההנהלה הבכירה ולא על ידי צוות ה-SOC הטכנולוגי?",
+                            options: [
+                                "מכיוון שלצוות ה-SOC אין הרשאות גישה לשרת ה-SIEM.",
+                                "בשל ההשלכות העסקיות, התדמיתיות והחוקיות הכבדות (כגון חובת דיווח לבורסה וסיכון לתביעות) הנלוות להכרזה זו.",
+                                "מכיוון שהכרזה על אירוע סייבר דורשת רכישת רישיונות תוכנה חדשים.",
+                                "משום שצוות ה-SOC אינו יודע להפעיל את פלייבוק התגובה."
+                            ],
+                            correct: 1
+                        }
+                    },
+                    {
+                        title: "3. מתקפות נפוצות: DDoS ו-SQL Injection",
+                        text: "- **DDoS (Distributed Denial of Service):** מתקפת מניעת שירות מבוזרת. \n  - **שכבה 3 (Network):** הצפת רוחב הפס של הרשת (קל יחסית לחסימה במקור).\n  - **שכבה 7 (Application):** מתקפה מתוחכמת המציפה את שרת האפליקציה בבקשות HTTP/HTTPS לגיטימיות כביכול (כגון בקשות GET כבדות) שיוצרות עומס על בסיס הנתונים. חסימה מבוצעת באמצעות שירותים מבוזרים (כמו Cloudflare) או WAF.\n- **SQL Injection (SQLi):** הזרקת שאילתות SQL זדוניות דרך שדות קלט של דפי אינטרנט שאינם מוגנים, במטרה לגנוב או למחוק את בסיס הנתונים. מניעה מתבצעת על ידי **בדיקת תקינות קלט (Input Validation)** ושאילתות מוגדרות מראש (Parameterized Queries).",
+                        examinerTip: "בשאלות על SQLi, ציין תמיד 'Input Validation' (בדיקת קלט) כבקרת מניעה בשלב פיתוח התוכנה (SSDLC). בשאלות על DDoS, הבחן בין שכבה 3 לשכבה 7 והסבר מדוע שכבה 7 מורכבת יותר לחסימה.",
+                        checkpoint: {
+                            id: "l5_q3",
+                            question: "מהי הבקרת הפיתוח היעילה ביותר למניעת מתקפות הזרקת SQL (SQL Injection) באפליקציות אינטרנט?",
+                            options: [
+                                "התקנת מערכת EDR בשרת בסיס הנתונים.",
+                                "בדיקת תקינות קלט (Input Validation) ושימוש בשאילתות פרמטריות (Parameterized Queries).",
+                                "סנכרון שעונים באמצעות NTP.",
+                                "הגדרת רשומות SPF ו-DKIM בשרת הדואר."
+                            ],
+                            correct: 1
+                        }
+                    }
+                ]
             }
-        }
+        };
 
-        function resetTimer() {
-            clearInterval(timerInterval);
-            isTimerRunning = false;
-            timerSeconds = totalPresetSeconds;
-            btnTimerToggleText.innerText = currentTimerMode === 'study' ? 'התחל למידה' : 'התחל הפסקה';
-            playIcon.classList.remove('hidden');
-            pauseIcon.classList.add('hidden');
-            updateTimerUI();
-        }
-
-        function setTimerPreset(minutes, mode) {
-            clearInterval(timerInterval);
-            isTimerRunning = false;
-            currentTimerMode = mode;
-            totalPresetSeconds = minutes * 60;
-            timerSeconds = totalPresetSeconds;
-            
-            // Highlight active button style
-            const modes = ['study', 'short', 'long'];
-            modes.forEach(m => {
-                const btn = document.getElementById(`btn-preset-${m}`);
-                if (m === mode) {
-                    btn.className = "py-1.5 px-2 text-xs font-bold rounded-lg border border-cyan-500/30 bg-cyan-950/30 text-cyan-400 text-center transition";
-                } else {
-                    btn.className = "py-1.5 px-2 text-xs font-bold rounded-lg border border-slate-800 bg-slate-900/50 text-slate-400 text-center transition hover:bg-slate-800";
-                }
-            });
-
-            // Update Label
-            if (mode === 'study') {
-                timerLabel.innerText = 'זמן למידה';
-                btnTimerToggleText.innerText = 'התחל למידה';
-            } else if (mode === 'short') {
-                timerLabel.innerText = 'הפסקה קלה';
-                btnTimerToggleText.innerText = 'התחל הפסקה';
-            } else {
-                timerLabel.innerText = 'הפסקה ארוכה';
-                btnTimerToggleText.innerText = 'התחל הפסקה';
-            }
-
-            playIcon.classList.remove('hidden');
-            pauseIcon.classList.add('hidden');
-            updateTimerUI();
-            showToast(`הטיימר שונה ל-${minutes} דקות`);
-        }
-
-        // Initialize Timer circle state
-        timerProgressCircle.style.strokeDasharray = circleCircumference;
-        updateTimerUI();
-    </script>
-
-    <!-- CHECKBOXES & LOCALSTORAGE PERSISTENCE -->
-    <script>
-        // Load checkbox state from localStorage
-        window.addEventListener('DOMContentLoaded', () => {
-            const checkboxes = document.querySelectorAll('input[type="checkbox"]');
-            checkboxes.forEach((cb, idx) => {
-                const val = localStorage.getItem(`cyber_todo_${idx}`);
-                if (val === 'true') {
-                    cb.checked = true;
-                }
-            });
-            updateCheckboxes();
-        });
-
-        function updateCheckboxes() {
-            const checkboxes = document.querySelectorAll('input[type="checkbox"]');
-            let totalChecked = 0;
-            
-            // Count per block
-            const blockCounts = { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0 };
-            const blockTotals = { 1: 3, 2: 3, 3: 3, 4: 3, 5: 3, 6: 3 };
-
-            checkboxes.forEach((cb, idx) => {
-                const blockNum = cb.getAttribute('data-block');
-                if (cb.checked) {
-                    totalChecked++;
-                    blockCounts[blockNum]++;
-                    localStorage.setItem(`cyber_todo_${idx}`, 'true');
-                } else {
-                    localStorage.setItem(`cyber_todo_${idx}`, 'false');
-                }
-            });
-
-            // Update Block Progress UI
-            for (let i = 1; i <= 6; i++) {
-                document.getElementById(`block-${i}-progress`).innerText = `${blockCounts[i]}/${blockTotals[i]}`;
-                // Optional styling: Highlight completed blocks green
-                if (blockCounts[i] === blockTotals[i]) {
-                    document.getElementById(`block-${i}-progress`).className = "text-xs font-semibold px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-400 font-tech border border-emerald-500/20";
-                } else {
-                    document.getElementById(`block-${i}-progress`).className = "text-xs font-semibold px-2 py-0.5 rounded bg-slate-800 text-slate-300 font-tech";
-                }
-            }
-
-            // Overall Progress Calculation
-            const percent = checkboxes.length > 0 ? Math.round((totalChecked / checkboxes.length) * 100) : 0;
-            document.getElementById('overall-progress-text').innerText = `${percent}%`;
-            document.getElementById('overall-progress-bar').style.width = `${percent}%`;
-        }
-
-        function resetAllCheckboxes() {
-            if (confirm('האם אתה בטוח שברצונך לאפס את כל התקדמות המשימות?')) {
-                const checkboxes = document.querySelectorAll('input[type="checkbox"]');
-                checkboxes.forEach((cb, idx) => {
-                    cb.checked = false;
-                    localStorage.removeItem(`cyber_todo_${idx}`);
-                });
-                updateCheckboxes();
-                showToast('כל המשימות אופסו בהצלחה');
-            }
-        }
-
-        function toggleBlockAccordion(blockId) {
-            const content = document.getElementById(`block-content-${blockId}`);
-            const icon = document.getElementById(`accordion-icon-${blockId}`);
-            content.classList.toggle('hidden');
-            icon.classList.toggle('rotate-180');
-        }
-
-        function scrollToElement(id) {
-            document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
-        }
-    </script>
-
-    <!-- FLASHCARDS SCRIPT -->
-    <script>
         const flashcardsData = [
             {
                 category: "יסודות ו-OT",
@@ -1136,7 +497,7 @@
             },
             {
                 category: "אבטחת רשת",
-                question: "מהו ממודל 3 השכבות (Three-Tier Architecture) ברשת וכיצד מגנים עליו?",
+                question: "מהו מודל 3 השכבות (Three-Tier Architecture) ברשת וכיצד מגנים עליו?",
                 answer: "מודל 3 השכבות מחלק את המערכת ל:\n1. שכבת התצוגה (Presentation Layer): ממשק המשתמש/דפי האינטרנט הפונים לציבור.\n2. שכבת הלוגיקה (Application Layer): מנוע האפליקציה והקוד העסקי.\n3. שכבת בסיס הנתונים (Database Layer): היכן שיושבים נכסי המידע (Crown Jewels).\n\nההגנה מבוצעת באמצעות סגמנטציה (Segmentation) - הקמת חומות אש (Firewalls) המפרידות בין השכבות, ומעבר של תעבורה רק בפורטים ספציפיים ובתצורה מאושרת, כדי למנוע מתוקף שפרץ לשכבה הראשונה גישה ישירה ויד חופשית לבסיס הנתונים."
             },
             {
@@ -1186,71 +547,6 @@
             }
         ];
 
-        let currentCardIndex = 0;
-        let masteredCards = new Set(); // Track index of mastered cards
-
-        const cardInner = document.getElementById('flashcard-inner');
-        const cardCategory = document.getElementById('card-category');
-        const cardIndexText = document.getElementById('card-index');
-        const cardQuestion = document.getElementById('card-question');
-        const cardAnswer = document.getElementById('card-answer');
-
-        function updateCardUI() {
-            // Reset flip state to front
-            cardInner.classList.remove('flipped');
-            
-            const card = flashcardsData[currentCardIndex];
-            
-            // Wait brief duration for transition before updating texts
-            setTimeout(() => {
-                cardCategory.innerText = card.category;
-                cardIndexText.innerText = `${currentCardIndex + 1} מתוך ${flashcardsData.length}`;
-                cardQuestion.innerText = card.question;
-                cardAnswer.innerText = card.answer;
-                
-                // Style evaluated state buttons
-                const isMastered = masteredCards.has(currentCardIndex);
-                document.getElementById('btn-mastered').className = isMastered 
-                    ? "flex-1 sm:flex-initial px-4 py-2.5 rounded-xl bg-emerald-500 text-slate-950 text-sm font-bold transition flex items-center justify-center gap-2"
-                    : "flex-1 sm:flex-initial px-4 py-2.5 rounded-xl bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 text-sm font-bold transition flex items-center justify-center gap-2";
-            }, 150);
-        }
-
-        function flipFlashcard() {
-            cardInner.classList.toggle('flipped');
-        }
-
-        function nextCard() {
-            currentCardIndex = (currentCardIndex + 1) % flashcardsData.length;
-            updateCardUI();
-        }
-
-        function prevCard() {
-            currentCardIndex = (currentCardIndex - 1 + flashcardsData.length) % flashcardsData.length;
-            updateCardUI();
-        }
-
-        function markCardMastered(isMastered) {
-            if (isMastered) {
-                masteredCards.add(currentCardIndex);
-                showToast('כל הכבוד! המושג סומן כנלמד');
-            } else {
-                masteredCards.delete(currentCardIndex);
-                showToast('סומן לחזרה נוספת בבלוק 6');
-            }
-            
-            // Update Mastery UI Widget
-            document.getElementById('mastered-cards-count').innerText = `${masteredCards.size}/${flashcardsData.length}`;
-            updateCardUI();
-        }
-
-        // Initialize first card
-        updateCardUI();
-    </script>
-
-    <!-- QUIZ & SCENARIO SCRIPTS -->
-    <script>
-        // Multiple Choice Questions
         const mcQuestions = [
             {
                 category: "שיעור 1",
@@ -1350,10 +646,9 @@
             }
         ];
 
-        // Open Ended Scenarios
         const openScenarios = [
             {
-                title: "מקרה בוחן 1: שרת ה-PoC הישן של 'בינת תוכנה'",
+                title: "תרחיש 1: אירוע שרת ה-PoC של 'בינת תוכנה'",
                 description: "בחברת 'בינת תוכנה' הושאר שרת פיתוח זמני (PoC) מחובר לרשת האינטרנט ללא שימוש במשך 12 שנים, ללא עדכוני אבטחה או פיקוח. קבוצת התקיפה Handala גילתה את השרת, פרצה דרכו ופירמטה אותו לחלוטין. השרת לא החזיק מידע עסקי רגיש. למרות זאת, החברה ספגה פגיעה עסקית קשה ביותר ולקוחות רבים דרשו להתנתק לאלתר.\n\nשאלה: נתח מדוע חל נזק כה קשה למרות שהשרת לא החזיק מידע רגיש, ואיזה סוג נזק מייצג מקרה זה?",
                 answer: "הנזק המרכזי במקרה זה הוא נזק תדמיתי כבד (Reputational Damage).\n\nנקודות הניתוח:\n1. אובדן אמון הלקוחות: הלקוחות לא ידעו להבחין בין שרת זמני (PoC) שאינו בשימוש לבין רשת הייצור המרכזית של החברה. מבחינתם, 'בינת תוכנה נפרצה', והם חששו שמידע רגיש שלהם המנוהל בחברה דלף או חשוף.\n2. הזנחה ניהולית: המקרה חשף כשל תשתיתי שבו שרת נשאר חשוף לרשת במשך 12 שנים ללא פיקוח. זה מעיד על היעדר ניהול נכסים (Asset Management) וניהול פגיעויות בסיסי.\n3. מאמץ השיקום: שיקום האירוע דרש מאמץ משפטי והסברתי עצום ויקר כדי להחזיר את אמון הלקוחות ולהוכיח שהמערכות המרכזיות מאובטחות.",
                 rubric: [
@@ -1363,7 +658,7 @@
                 ]
             },
             {
-                title: "מקרה בוחן 2: מתקפת כופרה במפעל ייצור בקבוקים (IT vs OT)",
+                title: "תרחיש 2: מתקפת כופרה במפעל ייצור בקבוקים (IT vs OT)",
                 description: "מפעל ייצור גדול חווה מתקפת כופרה. רשת המשרדים (IT) נפגעה, ומחשבי המזכירות והנהלת החשבונות הוצפנו. מערכות הייצור הפיזיות של הבקבוקים (OT) הנשלטות ע\"י בקרי SCADA מבודדים לא נפגעו. מנהל אבטחת המידע (CISO) דורש להשבית מיד את כל המפעל, כולל פסי הייצור, כדי לבצע סריקה מלאה ולמנוע זליגת מידע מה-IT ל-OT. מנהל המפעל מתנגד בתוקף.\n\nשאלה: הצג את שתי עמדות הצדדים לאור 'דילמת הניהול' והסבר איזה דומיין קריטי יותר לייצור במקרה זה.",
                 answer: "מקרה זה מציג בצורה קלאסית את דילמת הניהול בין צוות האבטחה להנהלה העסקית:\n\n• עמדת ה-CISO (אבטחה): חושש מהתפשטות לטרלית (Lateral Movement) מרשת ה-IT לרשת ה-OT. השבתת המפעל היא צעד מניעתי קריטי להגנה על בקרי ה-SCADA, שהם הנכסים היקרים ביותר במפעל (Crown Jewels).\n• עמדת מנהל המפעל (עסקי): מבוססת על העובדה שמערכות ה-OT מתפקדות ואינן נגועות. השבתת קווי הייצור תגרום להפסד כספי ישיר מיידי, עיכוב באספקות, ופגיעה במוניטין מול לקוחות.\n\nדומיין ה-OT הוא הקריטי ביותר להמשכיות הייצור הפיזי. הפתרון המומלץ הוא בידוד רשתות מיידי (Segmentation) ברמת חומות האש שבין ה-IT ל-OT, והמשך עבודת ה-OT במצב מבודד (Air-Gapped) ככל הניתן תוך ביצוע ניקוי לרשת ה-IT.",
                 rubric: [
@@ -1373,7 +668,7 @@
                 ]
             },
             {
-                title: "מקרה בוחן 3: פרצת VPN פומבית (מתקפת One-Day)",
+                title: "תרחיש 3: פרצת VPN פומבית (מתקפת One-Day)",
                 description: "חברת אבטחה פרסמה פאץ' (תיקון) קריטי לפגיעות VPN המאפשרת מעקף סיסמה מלא. ארגון גדול החליט לדחות את התקנת הפאץ' לסוף השבוע (בעוד 4 ימים) כדי לא להפריע לעבודה השוטפת של העובדים מרחוק. יומיים לאחר הפרסום, נפרץ הארגון דרך ה-VPN ונגנבו נתוני לקוחות.\n\nשאלה: הגדר את סוג הפגיעות שנוצלה (Zero-Day או One-Day), הסבר מדוע חלון הזמן הזה מסוכן ביותר, ומה היה על הארגון לעשות.",
                 answer: "סוג הפגיעות שנוצלה הוא פגיעות One-Day (או מתקפת One-Day).\n\nהסבר:\n1. ההגדרה: ברגע שהיצרן פרסם את הפאץ', הפגיעות הפכה מ-Zero-day (סודית) ל-One-day (ידועה לכל). התוקפים מנתחים את התיקון כדי להבין בדיוק איך לנצל את הפרצה.\n2. חלון הזמן המסוכן: זהו מרוץ חימוש. תוקפים סורקים באופן אוטומטי אלפי כתובות IP כדי לאתר ארגונים שטרם התקינו את הפאץ'. דחיית העדכון ב-4 ימים יצרה חלון הזדמנות מושלם לתוקפים.\n3. הפעולה הנדרשת: עבור רכיב גישה מרכזי וחשוף לאינטרנט כמו VPN, הארגון היה חייב לבצע התקנת חירום מיידית של הפאץ' ללא השהיה, תוך שימוש באסטרטגיית שדרוג של 'קלאסטר' או תיאום חלון השבתה קצר של חצי שעה בלילה.",
                 rubric: [
@@ -1383,220 +678,786 @@
                 ]
             }
         ];
+    </script>
 
+    <!-- State & UI Engine -->
+    <script>
+        let currentTab = 'guide'; // 'guide', 'flashcards', 'simulator', 'dashboard'
+        let currentLesson = 1;
+        let masteredCheckpoints = {}; // { 'l1_q1': true }
+        let currentCardIndex = 0;
+        let cardMasteredState = {}; // { cardIdx: true/false }
         let currentQuizIndex = 0;
-        let selectedAnswers = {}; // Tracks selected index for each question
-        let currentOpenScenarioIndex = 0;
+        let quizAnswers = {}; // { qIdx: selectedOptIdx }
+        let currentOpenIndex = 0;
+        let isMuted = false;
 
-        const quizOptionsContainer = document.getElementById('quiz-options-container');
-        const quizQuestionText = document.getElementById('quiz-question-text');
-        const quizQCategory = document.getElementById('quiz-q-category');
-        const quizQIndex = document.getElementById('quiz-q-index');
-        const quizExplanationBox = document.getElementById('quiz-explanation-box');
-        const quizFeedbackText = document.getElementById('quiz-feedback-text');
-        const quizExplanationText = document.getElementById('quiz-explanation-text');
-        const quizScoreText = document.getElementById('quiz-score');
+        // Load state from localStorage on init
+        window.addEventListener('DOMContentLoaded', () => {
+            const savedCheckpoints = localStorage.getItem('cyber_mastered_checkpoints');
+            if (savedCheckpoints) masteredCheckpoints = JSON.parse(savedCheckpoints);
+            
+            const savedCards = localStorage.getItem('cyber_card_states');
+            if (savedCards) cardMasteredState = JSON.parse(savedCards);
 
-        // Switch between MC Quiz and Open Scenarios
-        function switchQuizMode(mode) {
-            const mcContainer = document.getElementById('mc-quiz-container');
-            const openContainer = document.getElementById('open-quiz-container');
-            const mcBtn = document.getElementById('quiz-mode-mc');
-            const openBtn = document.getElementById('quiz-mode-open');
+            const savedQuiz = localStorage.getItem('cyber_quiz_answers');
+            if (savedQuiz) quizAnswers = JSON.parse(savedQuiz);
 
-            if (mode === 'mc') {
-                mcContainer.classList.remove('hidden');
-                openContainer.classList.add('hidden');
-                mcBtn.className = "flex-1 py-2 text-xs font-bold rounded-lg bg-cyan-500 text-slate-950 transition";
-                openBtn.className = "flex-1 py-2 text-xs font-bold rounded-lg text-slate-400 hover:text-slate-200 transition";
+            updateHUD();
+            renderCurrentView();
+        });
+
+        function changeActiveTab(tabId) {
+            currentTab = tabId;
+            
+            // Manage UI navigation styling
+            ['guide', 'flashcards', 'simulator', 'dashboard'].forEach(t => {
+                const btn = document.getElementById(`nav-btn-${t}`);
+                if (t === tabId) {
+                    btn.className = "w-full text-right py-2 px-3 rounded-xl bg-cyan-950/40 text-cyan-400 border border-cyan-500/20 text-sm font-bold transition flex items-center gap-2";
+                } else {
+                    btn.className = "w-full text-right py-2 px-3 rounded-xl text-slate-400 hover:bg-slate-900/40 text-sm font-bold transition flex items-center gap-2";
+                }
+            });
+
+            // Toggle Lesson selector subnav visibility
+            const subnav = document.getElementById('lesson-subnavigation');
+            if (tabId === 'guide') {
+                subnav.classList.remove('hidden');
             } else {
-                mcContainer.classList.add('hidden');
-                openContainer.classList.remove('hidden');
-                mcBtn.className = "flex-1 py-2 text-xs font-bold rounded-lg text-slate-400 hover:text-slate-200 transition";
-                openBtn.className = "flex-1 py-2 text-xs font-bold rounded-lg bg-cyan-500 text-slate-950 transition";
-                // Load first scenario
-                selectOpenScenario(currentOpenScenarioIndex);
+                subnav.classList.add('hidden');
+            }
+
+            renderCurrentView();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function selectLesson(lessonId) {
+            currentLesson = lessonId;
+            
+            // Highlight subnav
+            for (let i = 1; i <= 5; i++) {
+                const btn = document.getElementById(`lesson-nav-${i}`);
+                if (i === lessonId) {
+                    btn.className = "w-full text-right py-1.5 px-2 rounded-lg text-xs font-medium text-cyan-400 bg-cyan-500/10 border-r-2 border-cyan-500 transition";
+                } else {
+                    btn.className = "w-full text-right py-1.5 px-2 rounded-lg text-xs font-medium text-slate-400 hover:text-slate-200 transition";
+                }
+            }
+
+            renderCurrentView();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function updateHUD() {
+            // Count completed inline checkpoints (total 10 checkpoints across 5 lessons)
+            const completedCount = Object.keys(masteredCheckpoints).filter(k => masteredCheckpoints[k] === true).length;
+            document.getElementById('mastered-concepts-count').innerText = `${completedCount}/10`;
+            
+            // Mastery percent
+            const percent = Math.round((completedCount / 10) * 100);
+            document.getElementById('global-mastery-text').innerText = `${percent}%`;
+            document.getElementById('global-mastery-bar').style.width = `${percent}%`;
+        }
+
+        function renderCurrentView() {
+            const wrapper = document.getElementById('dynamic-content-wrapper');
+            
+            if (currentTab === 'guide') {
+                renderLessonGuide(wrapper);
+            } else if (currentTab === 'flashcards') {
+                renderFlashcardsLab(wrapper);
+            } else if (currentTab === 'simulator') {
+                renderExamSimulator(wrapper);
+            } else if (currentTab === 'dashboard') {
+                renderDashboardAnalytics(wrapper);
             }
         }
 
-        // Multiple Choice Logic
-        function renderQuizQuestion() {
-            const q = mcQuestions[currentQuizIndex];
-            quizQCategory.innerText = q.category;
-            quizQIndex.innerText = `${currentQuizIndex + 1} מתוך ${mcQuestions.length}`;
-            quizQuestionText.innerText = q.question;
-            
-            // Clear
-            quizOptionsContainer.innerHTML = '';
-            quizExplanationBox.classList.add('hidden');
+        // ------------------ VIEW RENDERERS ------------------
 
+        function renderLessonGuide(container) {
+            const lesson = lessonsData[currentLesson];
+            
+            let html = `
+                <div class="space-y-6">
+                    <!-- Lesson Intro Card -->
+                    <div class="glass-card rounded-2xl p-6 border border-slate-800 relative overflow-hidden">
+                        <div class="absolute -right-16 -top-16 w-36 h-36 bg-cyan-500/5 rounded-full blur-2xl pointer-events-none"></div>
+                        <div class="relative z-10">
+                            <span class="text-xs font-bold text-cyan-400 uppercase tracking-widest font-tech">שיעור ${currentLesson} מתוך 5</span>
+                            <h2 class="text-2xl font-extrabold text-white mt-1 mb-2">${lesson.title}</h2>
+                            <p class="text-slate-300 text-sm leading-relaxed">${lesson.introduction}</p>
+                        </div>
+                    </div>
+
+                    <!-- Lesson Concepts -->
+                    <div class="space-y-6">
+            `;
+
+            lesson.concepts.forEach((concept, index) => {
+                const isMastered = masteredCheckpoints[concept.checkpoint.id] === true;
+                
+                html += `
+                    <div class="glass-card rounded-2xl border border-slate-800 overflow-hidden">
+                        <!-- Concept Header -->
+                        <div class="p-5 bg-slate-900/40 border-b border-slate-800 flex items-center justify-between">
+                            <h3 class="font-bold text-slate-200 text-base md:text-lg">${concept.title}</h3>
+                            <span id="badge-${concept.checkpoint.id}" class="text-xs font-bold px-2.5 py-1 rounded-full ${
+                                isMastered 
+                                    ? 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20' 
+                                    : 'bg-slate-800 text-slate-400 border border-slate-700/60'
+                            }">
+                                ${isMastered ? '✓ נלמד ושולב' : 'טרם נלמד'}
+                            </span>
+                        </div>
+
+                        <!-- Concept Body -->
+                        <div class="p-5 md:p-6 space-y-4 text-slate-300 text-sm leading-relaxed">
+                            <p class="whitespace-pre-line">${concept.text}</p>
+                            
+                            <!-- Examiner Box -->
+                            <div class="p-4 rounded-xl bg-cyan-950/20 border border-cyan-500/15 flex gap-3">
+                                <div class="w-8 h-8 rounded-full bg-cyan-500/10 text-cyan-400 flex items-center justify-center shrink-0">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path></svg>
+                                </div>
+                                <div class="text-xs leading-relaxed text-slate-400">
+                                    <strong class="text-cyan-400 block text-xs mb-1">טיפ מפתח למעריך הבחינה (השאלות הפתוחות):</strong>
+                                    ${concept.examinerTip}
+                                </div>
+                            </div>
+
+                            <!-- Inline Checkpoint (Question) -->
+                            <div class="border-t border-slate-800/80 pt-5 mt-5">
+                                <div class="flex items-center gap-2 mb-3">
+                                    <span class="w-1.5 h-3 bg-indigo-500 rounded"></span>
+                                    <h4 class="font-bold text-slate-200 text-xs tracking-wide uppercase">בוחן הבנה מהיר (Inline Checkpoint)</h4>
+                                </div>
+                                <p class="text-sm font-semibold text-white mb-4">${concept.checkpoint.question}</p>
+                                
+                                <div class="grid grid-cols-1 gap-2.5">
+                `;
+
+                concept.checkpoint.options.forEach((opt, oIdx) => {
+                    const checkId = concept.checkpoint.id;
+                    const checkpointAnswered = localStorage.getItem(`answered_${checkId}`) !== null;
+                    const savedAns = localStorage.getItem(`answered_${checkId}`);
+                    const isSelected = savedAns !== null && parseInt(savedAns) === oIdx;
+                    const isCorrectOption = oIdx === concept.checkpoint.correct;
+
+                    let btnStyle = "border-slate-800 bg-slate-950/20 hover:bg-slate-900/30 text-slate-300";
+                    let badgeIcon = `<span class="w-5 h-5 rounded-full border border-slate-700 flex items-center justify-center text-[10px] text-slate-500 shrink-0">${oIdx+1}</span>`;
+
+                    if (checkpointAnswered) {
+                        if (isCorrectOption) {
+                            btnStyle = "border-emerald-500/30 bg-emerald-500/5 text-emerald-300";
+                            badgeIcon = `<span class="w-5 h-5 rounded-full bg-emerald-500 text-slate-950 flex items-center justify-center text-xs font-bold shrink-0">✓</span>`;
+                        } else if (isSelected) {
+                            btnStyle = "border-rose-500/30 bg-rose-500/5 text-rose-300";
+                            badgeIcon = `<span class="w-5 h-5 rounded-full bg-rose-500 text-white flex items-center justify-center text-xs font-bold shrink-0">✗</span>`;
+                        } else {
+                            btnStyle = "border-slate-850 bg-slate-950/10 opacity-50 text-slate-400";
+                        }
+                    }
+
+                    html += `
+                        <button onclick="answerCheckpoint('${checkId}', ${oIdx}, ${concept.checkpoint.correct})" ${checkpointAnswered ? 'disabled' : ''} 
+                                class="w-full text-right p-3.5 rounded-xl border text-xs leading-relaxed transition flex items-start gap-3 ${btnStyle}">
+                            ${badgeIcon}
+                            <span>${opt}</span>
+                        </button>
+                    `;
+                });
+
+                html += `
+                                </div>
+                                
+                                <!-- Explanation Box (Visible if answered) -->
+                                <div id="expl-${concept.checkpoint.id}" class="mt-4 p-4 rounded-xl bg-slate-950/60 border border-slate-800 text-xs leading-relaxed text-slate-400 ${
+                                    localStorage.getItem(`answered_${concept.checkpoint.id}`) !== null ? '' : 'hidden'
+                                }">
+                                    <strong class="text-indigo-400 block mb-1">הסבר המרצה:</strong>
+                                    כאשר עונים על שאלות כאלו במבחן, חשוב לזכור את הרקע והסיבה לבחירה. במקרה זה, הפתרון הנכון נובע מכך ש-${
+                                        concept.checkpoint.options[concept.checkpoint.correct]
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+
+            html += `
+                    </div>
+                    
+                    <!-- Bottom Nav -->
+                    <div class="flex justify-between items-center border-t border-slate-800 pt-6">
+                        <button onclick="selectLesson(${Math.max(1, currentLesson - 1)})" ${currentLesson === 1 ? 'disabled' : ''} 
+                                class="px-4 py-2 rounded-xl bg-slate-900 border border-slate-800 text-slate-300 text-xs font-semibold hover:bg-slate-800 transition disabled:opacity-50">
+                            השיעור הקודם
+                        </button>
+                        <span class="text-xs font-bold text-slate-400 font-tech">שיעור ${currentLesson} מתוך 5</span>
+                        <button onclick="selectLesson(${Math.min(5, currentLesson + 1)})" ${currentLesson === 5 ? 'disabled' : ''} 
+                                class="px-4 py-2 rounded-xl bg-slate-900 border border-slate-800 text-slate-300 text-xs font-semibold hover:bg-slate-800 transition disabled:opacity-50">
+                            השיעור הבא
+                        </button>
+                    </div>
+                </div>
+            `;
+            
+            container.innerHTML = html;
+        }
+
+        function answerCheckpoint(checkpointId, selectedIdx, correctIdx) {
+            localStorage.setItem(`answered_${checkpointId}`, selectedIdx);
+            
+            const isCorrect = selectedIdx === correctIdx;
+            masteredCheckpoints[checkpointId] = isCorrect;
+            localStorage.setItem('cyber_mastered_checkpoints', JSON.stringify(masteredCheckpoints));
+
+            updateHUD();
+            renderCurrentView();
+            playChimeSound();
+            showToast(isCorrect ? "תשובה נכונה! רכשת שליטה במושג זה" : "תשובה לא נכונה. עבור על ההסבר המלא");
+        }
+
+        function renderFlashcardsLab(container) {
+            const card = flashcardsData[currentCardIndex];
+            const isMastered = cardMasteredState[currentCardIndex] === true;
+
+            container.innerHTML = `
+                <div class="space-y-6">
+                    <div class="glass-card rounded-2xl p-6 border border-slate-800 text-center max-w-xl mx-auto">
+                        <h2 class="text-xl font-extrabold text-white mb-1">מעבדת כרטיסיות Active Recall</h2>
+                        <p class="text-xs text-slate-400">נסה לענות על השאלה בקול רם, לחץ על הכרטיסייה כדי לראות את הפתרון, ודרג את רמת השליטה שלך.</p>
+                    </div>
+
+                    <!-- 3D Card -->
+                    <div class="flex justify-center my-6">
+                        <div class="w-full max-w-2xl h-80 perspective-1000">
+                            <div id="flashcard-inner" onclick="flipCard()" class="w-full h-full preserve-3d cursor-pointer relative rounded-2xl border border-slate-800 bg-slate-950/80 shadow-2xl shadow-cyan-500/5 transition-transform duration-500">
+                                
+                                <!-- Front -->
+                                <div class="absolute inset-0 backface-hidden p-8 flex flex-col justify-between rounded-2xl">
+                                    <div class="flex justify-between items-center">
+                                        <span class="px-2.5 py-0.5 rounded-full text-[10px] font-bold tracking-wider uppercase bg-cyan-500/10 text-cyan-400 border border-cyan-500/20">${card.category}</span>
+                                        <span class="text-xs font-tech text-slate-500">${currentCardIndex + 1} / ${flashcardsData.length}</span>
+                                    </div>
+                                    <div class="text-center my-auto">
+                                        <p class="text-base md:text-lg font-bold leading-relaxed text-white">${card.question}</p>
+                                    </div>
+                                    <div class="text-center text-xs text-slate-500 flex items-center justify-center gap-1.5">
+                                        <svg class="w-4 h-4 text-cyan-500 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122"></path></svg>
+                                        לחץ על הכרטיסייה לחשיפת הפתרון
+                                    </div>
+                                </div>
+
+                                <!-- Back -->
+                                <div class="absolute inset-0 backface-hidden rotate-y-180 p-6 md:p-8 flex flex-col justify-between bg-slate-950 rounded-2xl overflow-y-auto">
+                                    <div class="flex justify-between items-center mb-2">
+                                        <span class="text-[10px] font-bold uppercase text-indigo-400 bg-indigo-500/10 px-2 py-0.5 rounded border border-indigo-500/20">הסבר מחוון התשובה</span>
+                                        <span class="text-xs text-slate-500">${currentCardIndex + 1} / ${flashcardsData.length}</span>
+                                    </div>
+                                    <div class="my-auto text-sm leading-relaxed text-slate-300">
+                                        <p class="whitespace-pre-line">${card.answer}</p>
+                                    </div>
+                                    <div class="text-center text-[10px] text-cyan-500 mt-2">
+                                        לחץ שוב כדי להפוך חזרה
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Navigation and Self-Evaluation -->
+                    <div class="flex flex-col sm:flex-row justify-between items-center gap-4 max-w-2xl mx-auto border-t border-slate-800/80 pt-6">
+                        <div class="flex gap-2">
+                            <button onclick="navigateCard(-1)" class="p-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 transition flex items-center gap-1 text-sm font-semibold">
+                                <svg class="w-4 h-4 transform rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                                קודם
+                            </button>
+                            <button onclick="navigateCard(1)" class="p-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 transition flex items-center gap-1 text-sm font-semibold">
+                                הבא
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                            </button>
+                        </div>
+                        
+                        <div class="flex gap-3 w-full sm:w-auto">
+                            <button onclick="setCardMastery(true)" class="flex-1 sm:flex-initial px-4 py-2.5 rounded-xl text-sm font-bold transition flex items-center justify-center gap-2 ${
+                                isMastered 
+                                    ? 'bg-emerald-500 text-slate-950 shadow-lg shadow-emerald-500/20' 
+                                    : 'bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-400 border border-emerald-500/30'
+                            }">
+                                👍 ידעתי מצוין
+                            </button>
+                            <button onclick="setCardMastery(false)" class="flex-1 sm:flex-initial px-4 py-2.5 rounded-xl text-sm font-bold transition flex items-center justify-center gap-2 ${
+                                !isMastered && cardMasteredState[currentCardIndex] !== undefined
+                                    ? 'bg-rose-500 text-white shadow-lg shadow-rose-500/20'
+                                    : 'bg-rose-500/10 hover:bg-rose-500/20 text-rose-400 border border-rose-500/30'
+                            }">
+                                🔁 דורש חזרה
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function flipCard() {
+            document.getElementById('flashcard-inner').classList.toggle('flipped');
+        }
+
+        function navigateCard(dir) {
+            currentCardIndex = (currentCardIndex + dir + flashcardsData.length) % flashcardsData.length;
+            renderCurrentView();
+        }
+
+        function setCardMastery(mastered) {
+            cardMasteredState[currentCardIndex] = mastered;
+            localStorage.setItem('cyber_card_states', JSON.stringify(cardMasteredState));
+            showToast(mastered ? 'סומן כנלמד בהצלחה!' : 'סומן כדורש חזרה בבלוק 6');
+            playChimeSound();
+            renderCurrentView();
+        }
+
+        function renderExamSimulator(container) {
+            container.innerHTML = `
+                <div class="space-y-8">
+                    <!-- Mode Selector -->
+                    <div class="flex justify-center gap-4 bg-slate-900/40 p-1.5 rounded-xl border border-slate-800/80 max-w-md mx-auto">
+                        <button onclick="switchSimMode('mc')" id="sim-mode-mc-btn" class="flex-1 py-2 text-xs font-bold rounded-lg bg-cyan-500 text-slate-950 transition">
+                            שאלות אמריקאיות (8)
+                        </button>
+                        <button onclick="switchSimMode('open')" id="sim-mode-open-btn" class="flex-1 py-2 text-xs font-bold rounded-lg text-slate-400 hover:text-slate-200 transition">
+                            תרחישי אירוע פתוחים (3)
+                        </button>
+                    </div>
+
+                    <!-- MULTIPLE CHOICE COMPONENT -->
+                    <div id="sim-mc-content" class="max-w-3xl mx-auto space-y-6">
+                        <div class="flex justify-between items-center border-b border-slate-850 pb-3">
+                            <div>
+                                <h3 class="font-bold text-white text-lg">שאלות רב-ברירה</h3>
+                                <p class="text-xs text-slate-400">בחינה מהירה של כלל נושאי הקורס</p>
+                            </div>
+                            <span id="sim-score-badge" class="text-sm font-semibold bg-cyan-500/10 text-cyan-400 border border-cyan-500/20 px-3 py-1 rounded-full font-tech">ציון: 0</span>
+                        </div>
+
+                        <!-- Question Display -->
+                        <div id="sim-question-card">
+                            <!-- Injected by renderSimQuestion() -->
+                        </div>
+                    </div>
+
+                    <!-- SCENARIOS COMPONENT -->
+                    <div id="sim-open-content" class="max-w-3xl mx-auto space-y-6 hidden">
+                        <div class="border-b border-slate-850 pb-3">
+                            <h3 class="font-bold text-white text-lg">תרחישי אירוע פתוחים</h3>
+                            <p class="text-xs text-slate-400">תרגיל מבוסס סימולציות - כתוב טיוטה והשווה למחוון המרצה</p>
+                        </div>
+                        
+                        <!-- Scenario buttons selection -->
+                        <div class="flex gap-2">
+                            <button onclick="selectOpenScenarioSim(0)" id="scen-btn-0" class="px-3 py-1.5 rounded-lg text-xs font-bold bg-cyan-950/30 text-cyan-400 border border-cyan-500/20">תרחיש 1: בינת תוכנה</button>
+                            <button onclick="selectOpenScenarioSim(1)" id="scen-btn-1" class="px-3 py-1.5 rounded-lg text-xs font-bold bg-slate-900/50 text-slate-400 border border-slate-800">תרחיש 2: כופרה ב-OT</button>
+                            <button onclick="selectOpenScenarioSim(2)" id="scen-btn-2" class="px-3 py-1.5 rounded-lg text-xs font-bold bg-slate-900/50 text-slate-400 border border-slate-800">תרחיש 3: התקפת One-Day</button>
+                        </div>
+
+                        <div class="glass-card rounded-2xl p-6 border border-slate-800 space-y-6">
+                            <h4 id="scen-title-display" class="text-lg font-bold text-white"></h4>
+                            <p id="scen-desc-display" class="text-sm text-slate-350 leading-relaxed"></p>
+                            
+                            <div>
+                                <label class="block text-xs font-bold text-slate-400 mb-2">טיוטת התשובה שלך (תרגול אקטיבי):</label>
+                                <textarea id="scen-user-input" rows="4" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 text-sm text-slate-200 focus:outline-none focus:border-cyan-500/50" placeholder="הקלד כאן את נקודות המפתח..."></textarea>
+                            </div>
+
+                            <button onclick="toggleScenAnswerDisplay()" class="w-full py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-bold transition">
+                                <span id="reveal-scen-btn-text">חשוף תשובת מודל ומחוון בדיקה</span>
+                            </button>
+
+                            <!-- Hidden Model Box -->
+                            <div id="scen-model-box" class="mt-4 p-5 rounded-xl bg-slate-950 border border-slate-850 text-sm space-y-4 hidden">
+                                <div>
+                                    <h5 class="font-bold text-cyan-400 mb-1">תשובת מודל מלאה:</h5>
+                                    <p id="scen-model-ans-text" class="text-slate-300 leading-relaxed whitespace-pre-line"></p>
+                                </div>
+                                <div class="border-t border-slate-800/80 pt-3">
+                                    <h5 class="font-bold text-emerald-400 mb-1">מחוון ניקוד של הבודק (Rubric):</h5>
+                                    <ul id="scen-model-rubric" class="list-disc list-inside space-y-1 text-xs text-slate-400">
+                                        <!-- Rubrics list -->
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            // Init questions
+            calculateQuizScore();
+            renderSimQuestion();
+        }
+
+        let simMode = 'mc';
+        
+        function switchSimMode(mode) {
+            simMode = mode;
+            const mcContent = document.getElementById('sim-mc-content');
+            const openContent = document.getElementById('sim-open-content');
+            const mcBtn = document.getElementById('sim-mode-mc-btn');
+            const openBtn = document.getElementById('sim-mode-open-btn');
+
+            if (mode === 'mc') {
+                mcContent.classList.remove('hidden');
+                openContent.classList.add('hidden');
+                mcBtn.className = "flex-1 py-2 text-xs font-bold rounded-lg bg-cyan-500 text-slate-950 transition";
+                openBtn.className = "flex-1 py-2 text-xs font-bold rounded-lg text-slate-400 hover:text-slate-200 transition";
+                renderSimQuestion();
+            } else {
+                mcContent.classList.add('hidden');
+                openContent.classList.remove('hidden');
+                mcBtn.className = "flex-1 py-2 text-xs font-bold rounded-lg text-slate-400 hover:text-slate-200 transition";
+                openBtn.className = "flex-1 py-2 text-xs font-bold rounded-lg bg-cyan-500 text-slate-950 transition";
+                selectOpenScenarioSim(currentOpenIndex);
+            }
+        }
+
+        function renderSimQuestion() {
+            const card = document.getElementById('sim-question-card');
+            if (!card) return;
+
+            const q = mcQuestions[currentQuizIndex];
+            const hasSelected = quizAnswers[currentQuizIndex] !== undefined;
+            const selectedOpt = quizAnswers[currentQuizIndex];
+
+            let optionsHtml = '';
             q.options.forEach((opt, idx) => {
-                const button = document.createElement('button');
-                button.className = "w-full text-right p-4 rounded-xl border border-slate-800 bg-slate-950/40 hover:bg-slate-900/40 transition text-sm text-slate-300 flex items-start gap-3";
-                
-                // Checked status styling
-                const hasSelected = selectedAnswers[currentQuizIndex] !== undefined;
-                const isCurrentOptionSelected = selectedAnswers[currentQuizIndex] === idx;
-                
-                let optionStyle = "border-slate-800 bg-slate-950/40 hover:bg-slate-900/40";
+                let btnStyle = "border-slate-800 bg-slate-950/40 hover:bg-slate-900/40 text-slate-350";
                 let badge = `<span class="w-5 h-5 rounded-full border border-slate-700 flex items-center justify-center text-xs text-slate-500 shrink-0">${idx+1}</span>`;
 
                 if (hasSelected) {
                     if (idx === q.answerIndex) {
-                        // Correct Option (Green)
-                        optionStyle = "border-emerald-500/40 bg-emerald-500/5 text-emerald-300";
+                        btnStyle = "border-emerald-500/40 bg-emerald-500/5 text-emerald-350";
                         badge = `<span class="w-5 h-5 rounded-full bg-emerald-500 text-slate-950 flex items-center justify-center text-xs font-bold shrink-0">✓</span>`;
-                    } else if (isCurrentOptionSelected) {
-                        // Incorrect Selected Option (Red)
-                        optionStyle = "border-rose-500/40 bg-rose-500/5 text-rose-300";
+                    } else if (idx === selectedOpt) {
+                        btnStyle = "border-rose-500/40 bg-rose-500/5 text-rose-350";
                         badge = `<span class="w-5 h-5 rounded-full bg-rose-500 text-white flex items-center justify-center text-xs font-bold shrink-0">✗</span>`;
                     } else {
-                        // Unselected other options
-                        optionStyle = "border-slate-800/60 bg-slate-950/20 opacity-60";
+                        btnStyle = "border-slate-850 bg-slate-950/20 opacity-60 text-slate-400";
                     }
                 }
 
-                button.className = `w-full text-right p-4 rounded-xl border transition text-sm flex items-start gap-3 ${optionStyle}`;
-                button.innerHTML = `${badge} <span class="leading-relaxed">${opt}</span>`;
-                
-                if (!hasSelected) {
-                    button.onclick = () => selectQuizAnswer(idx);
-                }
-                quizOptionsContainer.appendChild(button);
+                optionsHtml += `
+                    <button onclick="selectSimAnswer(${idx})" ${hasSelected ? 'disabled' : ''} 
+                            class="w-full text-right p-4 rounded-xl border transition text-xs md:text-sm flex items-start gap-3 ${btnStyle}">
+                        ${badge}
+                        <span class="leading-relaxed">${opt}</span>
+                    </button>
+                `;
             });
 
-            // Show explanation if already answered
-            if (selectedAnswers[currentQuizIndex] !== undefined) {
-                showQuizExplanation();
-            }
+            card.innerHTML = `
+                <div class="glass-card rounded-2xl p-6 border border-slate-800 space-y-4">
+                    <div class="flex justify-between items-center">
+                        <span class="px-2 py-0.5 text-[9px] font-bold rounded bg-slate-800 text-slate-400 uppercase tracking-wide">${q.category}</span>
+                        <span class="text-xs font-tech text-slate-500">${currentQuizIndex + 1} / ${mcQuestions.length}</span>
+                    </div>
+                    <h4 class="text-sm md:text-base font-bold text-white mb-4 leading-relaxed">${q.question}</h4>
+                    
+                    <div class="space-y-3">
+                        ${optionsHtml}
+                    </div>
+
+                    <!-- Explanation -->
+                    <div class="mt-4 p-4 rounded-xl bg-slate-950/65 border border-slate-850 text-xs leading-relaxed text-slate-400 ${hasSelected ? '' : 'hidden'}">
+                        <strong class="text-indigo-400 block mb-1">הסבר המרצה לתשובה:</strong>
+                        ${q.explanation}
+                    </div>
+
+                    <!-- Navigation inside simulation -->
+                    <div class="flex justify-between border-t border-slate-850 pt-5 mt-5">
+                        <button onclick="navigateSimQuestion(-1)" class="px-3.5 py-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-bold transition">שאלה קודמת</button>
+                        <button onclick="navigateSimQuestion(1)" class="px-3.5 py-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-bold transition">שאלה הבאה</button>
+                    </div>
+                </div>
+            `;
         }
 
-        function selectQuizAnswer(index) {
-            selectedAnswers[currentQuizIndex] = index;
+        function selectSimAnswer(optIdx) {
+            quizAnswers[currentQuizIndex] = optIdx;
+            localStorage.setItem('cyber_quiz_answers', JSON.stringify(quizAnswers));
             calculateQuizScore();
-            renderQuizQuestion();
-            playAlarmSound(); // Short success sound effect on answer
+            renderSimQuestion();
+            playChimeSound();
         }
 
-        function showQuizExplanation() {
-            const q = mcQuestions[currentQuizIndex];
-            const isCorrect = selectedAnswers[currentQuizIndex] === q.answerIndex;
-            
-            quizExplanationBox.classList.remove('hidden');
-            if (isCorrect) {
-                quizFeedbackText.innerText = "✓ תשובה נכונה!";
-                quizFeedbackText.className = "font-bold text-emerald-400 mb-1 text-sm";
-            } else {
-                quizFeedbackText.innerText = "✗ תשובה שגויה";
-                quizFeedbackText.className = "font-bold text-rose-400 mb-1 text-sm";
-            }
-            quizExplanationText.innerText = q.explanation;
-        }
-
-        function changeQuizQuestion(direction) {
-            const nextIndex = currentQuizIndex + direction;
-            if (nextIndex >= 0 && nextIndex < mcQuestions.length) {
-                currentQuizIndex = nextIndex;
-                renderQuizQuestion();
-            }
+        function navigateSimQuestion(dir) {
+            currentQuizIndex = (currentQuizIndex + dir + mcQuestions.length) % mcQuestions.length;
+            renderSimQuestion();
         }
 
         function calculateQuizScore() {
-            let correctCount = 0;
-            Object.keys(selectedAnswers).forEach(qIdx => {
-                if (selectedAnswers[qIdx] === mcQuestions[qIdx].answerIndex) {
-                    correctCount++;
+            let correct = 0;
+            let answered = 0;
+            mcQuestions.forEach((q, idx) => {
+                if (quizAnswers[idx] !== undefined) {
+                    answered++;
+                    if (quizAnswers[idx] === q.answerIndex) correct++;
                 }
             });
-            const score = Math.round((correctCount / mcQuestions.length) * 100);
-            quizScoreText.innerText = `ציון: ${score}`;
+            const score = answered > 0 ? Math.round((correct / mcQuestions.length) * 100) : 0;
+            const badge = document.getElementById('sim-score-badge');
+            if (badge) badge.innerText = `ציון: ${score}%`;
         }
 
-        // Open Scenario Logic
-        function selectOpenScenario(idx) {
-            currentOpenScenarioIndex = idx;
-            const scenario = openScenarios[idx];
+        // Open Simulator Scenario selector
+        function selectOpenScenarioSim(idx) {
+            currentOpenIndex = idx;
+            const scen = openScenarios[idx];
             
-            document.getElementById('scenario-title').innerText = scenario.title;
-            document.getElementById('scenario-description').innerText = scenario.description;
+            document.getElementById('scen-title-display').innerText = scen.title;
+            document.getElementById('scen-desc-display').innerText = scen.description;
             
-            // Reset fields
-            document.getElementById('scenario-user-draft').value = '';
-            document.getElementById('scenario-model-answer').classList.add('hidden');
-            document.getElementById('btn-reveal-scenario-text').innerText = "חשוף תשובת מודל ומחוון בדיקה (Rubric)";
+            // Reset input draft
+            document.getElementById('scen-user-input').value = localStorage.getItem(`draft_scen_${idx}`) || '';
+            document.getElementById('scen-model-box').classList.add('hidden');
+            document.getElementById('reveal-scen-btn-text').innerText = "חשוף תשובת מודל ומחוון בדיקה";
 
-            // Update scenario tabs styling
+            // Active button classes styling
             for (let i = 0; i < 3; i++) {
-                const btn = document.getElementById(`btn-scenario-${i}`);
+                const btn = document.getElementById(`scen-btn-${i}`);
                 if (i === idx) {
                     btn.className = "px-3 py-1.5 rounded-lg text-xs font-bold bg-cyan-950/30 text-cyan-400 border border-cyan-500/20";
                 } else {
                     btn.className = "px-3 py-1.5 rounded-lg text-xs font-bold bg-slate-900/50 text-slate-400 border border-slate-800";
                 }
             }
+
+            // Save draft input
+            document.getElementById('scen-user-input').oninput = (e) => {
+                localStorage.setItem(`draft_scen_${idx}`, e.target.value);
+            };
         }
 
-        function toggleScenarioAnswer() {
-            const modelAnswerBox = document.getElementById('scenario-model-answer');
-            const btnText = document.getElementById('btn-reveal-scenario-text');
-            const scenario = openScenarios[currentOpenScenarioIndex];
+        function toggleScenAnswerDisplay() {
+            const box = document.getElementById('scen-model-box');
+            const txt = document.getElementById('reveal-scen-btn-text');
+            const scen = openScenarios[currentOpenIndex];
 
-            const isHidden = modelAnswerBox.classList.contains('hidden');
-            if (isHidden) {
-                modelAnswerBox.classList.remove('hidden');
-                btnText.innerText = "הסתר תשובת מודל ומחוון בדיקה";
+            if (box.classList.contains('hidden')) {
+                box.classList.remove('hidden');
+                txt.innerText = "הסתר תשובת מודל ומחוון";
                 
-                // Load details
-                document.getElementById('scenario-answer-text').innerText = scenario.answer;
+                document.getElementById('scen-model-ans-text').innerText = scen.answer;
                 
-                const rubricList = document.getElementById('scenario-rubric-list');
-                rubricList.innerHTML = '';
-                scenario.rubric.forEach(r => {
+                const rubricUl = document.getElementById('scen-model-rubric');
+                rubricUl.innerHTML = '';
+                scen.rubric.forEach(r => {
                     const li = document.createElement('li');
                     li.innerText = r;
-                    rubricList.appendChild(li);
+                    rubricUl.appendChild(li);
                 });
-                
-                playAlarmSound(); // Nice success chime
+                playChimeSound();
             } else {
-                modelAnswerBox.classList.add('hidden');
-                btnText.innerText = "חשוף תשובת מודל ומחוון בדיקה (Rubric)";
+                box.classList.add('hidden');
+                txt.innerText = "חשוף תשובת מודל ומחוון בדיקה";
             }
         }
 
-        // Initialize Quiz
-        renderQuizQuestion();
-    </script>
-
-    <!-- TABS NAVIGATION SCRIPT -->
-    <script>
-        function switchTab(tabId) {
-            const tabs = ['flashcards', 'quiz', 'cheatsheet'];
+        function renderDashboardAnalytics(container) {
+            // Analytics logic
+            const inlineMastered = Object.keys(masteredCheckpoints).filter(k => masteredCheckpoints[k] === true).length;
+            const flashcardMastered = Object.keys(cardMasteredState).filter(k => cardMasteredState[k] === true).length;
             
-            tabs.forEach(t => {
-                const btn = document.getElementById(`tab-btn-${t}`);
-                const content = document.getElementById(`tab-content-${t}`);
-                
-                if (t === tabId) {
-                    btn.className = "flex-1 py-4 text-center font-bold text-sm md:text-base border-b-2 border-cyan-500 text-cyan-400 transition-all duration-300";
-                    content.classList.remove('hidden');
-                } else {
-                    btn.className = "flex-1 py-4 text-center font-bold text-sm md:text-base border-b-2 border-transparent text-slate-400 hover:text-slate-200 transition-all duration-300";
-                    content.classList.add('hidden');
+            let quizCorrect = 0;
+            let quizTotal = 0;
+            mcQuestions.forEach((q, idx) => {
+                if (quizAnswers[idx] !== undefined) {
+                    quizTotal++;
+                    if (quizAnswers[idx] === q.answerIndex) quizCorrect++;
                 }
             });
+
+            container.innerHTML = `
+                <div class="space-y-6">
+                    <div class="glass-card rounded-2xl p-6 border border-slate-800">
+                        <h2 class="text-xl font-extrabold text-white mb-2">מרכז שליטה וסטטיסטיקת למידה</h2>
+                        <p class="text-xs text-slate-400">נתח את קצב ההתקדמות שלך לקראת הבחינה</p>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <!-- Stat 1 -->
+                        <div class="glass-card rounded-xl p-5 border border-slate-800 text-center space-y-2">
+                            <span class="text-xs font-bold text-slate-400 block">בחני הבנה (Inline)</span>
+                            <span class="text-3xl font-extrabold text-cyan-400 font-tech block">${inlineMastered} / 10</span>
+                            <span class="text-[10px] text-slate-500 block">הושלמו מתוך חומר הלימוד</span>
+                        </div>
+                        <!-- Stat 2 -->
+                        <div class="glass-card rounded-xl p-5 border border-slate-800 text-center space-y-2">
+                            <span class="text-xs font-bold text-slate-400 block">כרטיסיות ששוננו (Flashcards)</span>
+                            <span class="text-3xl font-extrabold text-indigo-400 font-tech block">${flashcardMastered} / 15</span>
+                            <span class="text-[10px] text-slate-500 block">סומנו כ-'ידעתי מצוין'</span>
+                        </div>
+                        <!-- Stat 3 -->
+                        <div class="glass-card rounded-xl p-5 border border-slate-800 text-center space-y-2">
+                            <span class="text-xs font-bold text-slate-400 block">סימולציית בחירה מרובה</span>
+                            <span class="text-3xl font-extrabold text-emerald-400 font-tech block">${quizTotal > 0 ? Math.round((quizCorrect/quizTotal)*100) : 0}%</span>
+                            <span class="text-[10px] text-slate-500 block">ציון ממוצע מתוך ${quizTotal} מענים</span>
+                        </div>
+                    </div>
+
+                    <div class="glass-card rounded-2xl p-6 border border-slate-800 space-y-4">
+                        <h3 class="font-bold text-white text-base">הערכות סופיות למעבר המבחן:</h3>
+                        <div class="space-y-3 text-xs md:text-sm text-slate-300">
+                            <p class="flex items-center gap-2">
+                                <span class="w-2 h-2 rounded-full ${inlineMastered >= 8 ? 'bg-emerald-500' : 'bg-rose-500'}"></span>
+                                <span>שליטה תיאורטית: <strong>${inlineMastered >= 8 ? 'מעולה' : 'נדרש פתרון של עוד בחנים מהירים בגוף החומר'}</strong></span>
+                            </p>
+                            <p class="flex items-center gap-2">
+                                <span class="w-2 h-2 rounded-full ${flashcardMastered >= 12 ? 'bg-emerald-500' : 'bg-rose-500'}"></span>
+                                <span>שינון מושגי יסוד: <strong>${flashcardMastered >= 12 ? 'מוכן למבחן' : 'עבור שוב על כרטיסיות השינון שסומנו לחזרה'}</strong></span>
+                            </p>
+                            <p class="flex items-center gap-2">
+                                <span class="w-2 h-2 rounded-full ${quizCorrect >= 6 ? 'bg-emerald-500' : 'bg-rose-500'}"></span>
+                                <span>יכולת ניתוח קייסים: <strong>${quizCorrect >= 6 ? 'טובה מאוד' : 'פתור את סימולטור התרחישים וערוך השוואה קפדנית למחווני הניקוד'}</strong></span>
+                            </p>
+                        </div>
+                        
+                        <div class="border-t border-slate-800/80 pt-4 flex justify-between">
+                            <button onclick="resetAllStudyState()" class="px-3.5 py-2 rounded-lg bg-rose-500/10 hover:bg-rose-500/20 border border-rose-500/30 text-rose-400 text-xs font-bold transition">
+                                אפס את כל נתוני הלמידה
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function resetAllStudyState() {
+            if (confirm('האם אתה בטוח שברצונך לאפס לחלוטין את כל התקדמות הלמידה שלך (בחנים, כרטיסיות, סימולטור)?')) {
+                localStorage.clear();
+                masteredCheckpoints = {};
+                cardMasteredState = {};
+                quizAnswers = {};
+                currentCardIndex = 0;
+                currentQuizIndex = 0;
+                currentOpenIndex = 0;
+                
+                updateHUD();
+                renderCurrentView();
+                showToast('כל ההתקדמות אופסה בהצלחה');
+            }
         }
     </script>
 
-    <!-- CHEATSHEET ACCORDIONS SCRIPT -->
+    <!-- Sound & Toast Systems -->
     <script>
-        function toggleLessonCheatsheet(lessonNum) {
-            const content = document.getElementById(`cheat-content-${lessonNum}`);
-            const icon = document.getElementById(`cheat-icon-${lessonNum}`);
-            content.classList.toggle('hidden');
-            icon.classList.toggle('rotate-180');
+        function toggleMute() {
+            isMuted = !isMuted;
+            document.getElementById('sound-on-svg').classList.toggle('hidden', isMuted);
+            document.getElementById('sound-off-svg').classList.toggle('hidden', !isMuted);
+            showToast(isMuted ? 'הסאונד הושתק' : 'הסאונד הופעל');
+        }
+
+        function playChimeSound() {
+            if (isMuted) return;
+            try {
+                const ctx = new (window.AudioContext || window.webkitAudioContext)();
+                
+                const osc = ctx.createOscillator();
+                const gain = ctx.createGain();
+                
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(587.33, ctx.currentTime); // D5
+                osc.frequency.setValueAtTime(880, ctx.currentTime + 0.15); // A5
+                
+                gain.gain.setValueAtTime(0.25, ctx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.5);
+                
+                osc.connect(gain);
+                gain.connect(ctx.destination);
+                
+                osc.start();
+                osc.stop(ctx.currentTime + 0.5);
+            } catch (e) {
+                console.log("Audio blocking", e);
+            }
+        }
+
+        function showToast(msg) {
+            const bar = document.getElementById('toast-bar');
+            bar.innerText = msg;
+            bar.classList.remove('translate-y-10', 'opacity-0');
+            
+            setTimeout(() => {
+                bar.classList.add('translate-y-10', 'opacity-0');
+            }, 3000);
         }
     </script>
 
+    <!-- POMODORO TIMER SYSTEM -->
+    <script>
+        let timerSec = 3000;
+        let timerMax = 3000;
+        let timerMode = 'study';
+        let timerRunning = false;
+        let timerInt = null;
+
+        function updateTimerUI() {
+            const m = Math.floor(timerSec / 60).toString().padStart(2, '0');
+            const s = (timerSec % 60).toString().padStart(2, '0');
+            document.getElementById('timer-text').innerText = `${m}:${s}`;
+        }
+
+        function toggleTimer() {
+            const btn = document.getElementById('timer-play-btn');
+            if (timerRunning) {
+                clearInterval(timerInt);
+                timerRunning = false;
+                btn.innerHTML = `
+                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"></path></svg>
+                    <span>הפעל</span>
+                `;
+                showToast('הטיימר הושהה');
+            } else {
+                timerRunning = true;
+                btn.innerHTML = `
+                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M10 9v6m4-6v6m7-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    <span>השהה</span>
+                `;
+                showToast('הטיימר הופעל');
+                
+                timerInt = setInterval(() => {
+                    if (timerSec > 0) {
+                        timerSec--;
+                        updateTimerUI();
+                    } else {
+                        clearInterval(timerInt);
+                        timerRunning = false;
+                        playChimeSound();
+                        showToast('סבב פומודורו הושלם בהצלחה!');
+                        resetTimer();
+                    }
+                }, 1000);
+            }
+        }
+
+        function resetTimer() {
+            clearInterval(timerInt);
+            timerRunning = false;
+            timerSec = timerMax;
+            updateTimerUI();
+            
+            const btn = document.getElementById('timer-play-btn');
+            btn.innerHTML = `
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"></path></svg>
+                <span>הפעל</span>
+            `;
+        }
+
+        updateTimerUI();
+    </script>
 </body>
 </html>
