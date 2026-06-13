@@ -778,7 +778,183 @@
                         </div>
                     </div>
 
+                    <!-- APT Groups Common Techniques (sourced from MITRE ATT&CK Navigator) -->
+                    <div class="glass-card rounded-2xl p-6 md:p-8 border border-slate-800 space-y-6">
+                        <div class="border-b border-slate-800 pb-4">
+                            <h3 class="font-bold text-white text-lg md:text-xl flex items-center gap-2">
+                                <span class="w-2 h-4 bg-rose-500 rounded"></span>
+                                טכניקות נפוצות לפי קבוצת תקיפה (MITRE ATT&CK Navigator)
+                            </h3>
+                            <p class="text-xs md:text-sm text-slate-400 mt-1">טכניקות מתועדות רשמית ב-MITRE ATT&CK עבור כל קבוצה, לפי נתוני ה-Navigator</p>
+                        </div>
+
+                        <!-- APT29 -->
+                        <div class="rounded-xl border border-slate-700/60 overflow-hidden">
+                            <div class="flex items-center gap-3 px-4 py-3 bg-rose-500/10 border-b border-slate-700/60">
+                                <div class="w-9 h-9 rounded-lg bg-rose-500/20 text-rose-400 flex items-center justify-center font-bold font-tech text-sm flex-shrink-0">APT29</div>
+                                <div>
+                                    <span class="font-bold text-white text-sm">APT29 — Cozy Bear (G0016)</span>
+                                    <span class="text-xs text-rose-400 font-semibold font-tech mr-2">• רוסיה / SVR • ריגול אסטרטגי</span>
+                                </div>
+                            </div>
+                            <div class="divide-y divide-slate-800/60">
+                                <div class="grid grid-cols-1 sm:grid-cols-3 px-4 py-2 text-xs text-slate-500 font-semibold uppercase tracking-wider bg-slate-900/20">
+                                    <span>טכניקה</span><span class="hidden sm:block">MITRE ID</span><span class="hidden sm:block">הסבר קצר</span>
+                                </div>
+                                <div class="grid grid-cols-1 sm:grid-cols-3 gap-1 px-4 py-3 hover:bg-slate-800/20 transition-colors">
+                                    <span class="font-semibold text-white text-xs">Spearphishing Attachment/Link</span>
+                                    <span class="font-tech text-rose-400 text-xs">T1566</span>
+                                    <span class="text-xs text-slate-400">שליחת מיילי פישינג ממוקדים עם קבצים זדוניים מצורפים או קישורים לדפים מזויפים כדי לגרום לקורבן לפתוח ולהפעיל קוד זדוני.</span>
+                                </div>
+                                <div class="grid grid-cols-1 sm:grid-cols-3 gap-1 px-4 py-3 hover:bg-slate-800/20 transition-colors">
+                                    <span class="font-semibold text-white text-xs">PowerShell</span>
+                                    <span class="font-tech text-rose-400 text-xs">T1059.001</span>
+                                    <span class="text-xs text-slate-400">שימוש ב-PowerShell להרצת סקריפטים זדוניים מוצפנים ישירות בזיכרון (Fileless), עקיפת הגנות AV ו-EDR.</span>
+                                </div>
+                                <div class="grid grid-cols-1 sm:grid-cols-3 gap-1 px-4 py-3 hover:bg-slate-800/20 transition-colors">
+                                    <span class="font-semibold text-white text-xs">Archive Collected Data</span>
+                                    <span class="font-tech text-rose-400 text-xs">T1560.001</span>
+                                    <span class="text-xs text-slate-400">כיווץ נתונים גנובים לארכיוני ZIP/7z מוצפנים לפני הוצאתם מהארגון (כפי שנעשה ב-SolarWinds).</span>
+                                </div>
+                                <div class="grid grid-cols-1 sm:grid-cols-3 gap-1 px-4 py-3 hover:bg-slate-800/20 transition-colors">
+                                    <span class="font-semibold text-white text-xs">Password Spraying</span>
+                                    <span class="font-tech text-rose-400 text-xs">T1110.003</span>
+                                    <span class="text-xs text-slate-400">ניסיון כניסה עם סיסמאות נפוצות מול רשימת חשבונות גדולה כדי לעקוף נעילות חשבון ולזהות חשבונות חלשים.</span>
+                                </div>
+                                <div class="grid grid-cols-1 sm:grid-cols-3 gap-1 px-4 py-3 hover:bg-slate-800/20 transition-colors">
+                                    <span class="font-semibold text-white text-xs">Additional Cloud Credentials</span>
+                                    <span class="font-tech text-rose-400 text-xs">T1098.001</span>
+                                    <span class="text-xs text-slate-400">הוספת אישורים (credentials) לאפליקציות ו-Service Principals ב-Azure AD כדי לשמור על גישה מתמשכת גם לאחר איפוס סיסמה.</span>
+                                </div>
+                                <div class="grid grid-cols-1 sm:grid-cols-3 gap-1 px-4 py-3 hover:bg-slate-800/20 transition-colors">
+                                    <span class="font-semibold text-white text-xs">Web Protocols C2 (HTTP/S)</span>
+                                    <span class="font-tech text-rose-400 text-xs">T1071.001</span>
+                                    <span class="text-xs text-slate-400">תקשורת שליטה ובקרה (C2) מוסתרת בתוך תעבורת HTTP/HTTPS רגילה כדי להיראות כגלישה לגיטימית.</span>
+                                </div>
+                                <div class="grid grid-cols-1 sm:grid-cols-3 gap-1 px-4 py-3 hover:bg-slate-800/20 transition-colors">
+                                    <span class="font-semibold text-white text-xs">Registry Run Keys / Startup</span>
+                                    <span class="font-tech text-rose-400 text-xs">T1547.001</span>
+                                    <span class="text-xs text-slate-400">הוספת מפתחות Run ב-Registry או קבצים לתיקיית Startup כדי שהנוזקה תעלה אוטומטית עם כל אתחול מחשב.</span>
+                                </div>
+                                <div class="grid grid-cols-1 sm:grid-cols-3 gap-1 px-4 py-3 hover:bg-slate-800/20 transition-colors">
+                                    <span class="font-semibold text-white text-xs">Obfuscated Files or Information</span>
+                                    <span class="font-tech text-rose-400 text-xs">T1027</span>
+                                    <span class="text-xs text-slate-400">הסתרת קוד זדוני באמצעות הצפנה, base64 או עטיפה (packing) כדי לחמוק מזיהוי על-ידי כלי אבטחה.</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- APT38 -->
+                        <div class="rounded-xl border border-slate-700/60 overflow-hidden">
+                            <div class="flex items-center gap-3 px-4 py-3 bg-amber-500/10 border-b border-slate-700/60">
+                                <div class="w-9 h-9 rounded-lg bg-amber-500/20 text-amber-400 flex items-center justify-center font-bold font-tech text-sm flex-shrink-0">APT38</div>
+                                <div>
+                                    <span class="font-bold text-white text-sm">APT38 — Lazarus Financial (G0082)</span>
+                                    <span class="text-xs text-amber-400 font-semibold font-tech mr-2">• צפון קוריאה / RGB • פשע פיננסי וגניבת מטבעות</span>
+                                </div>
+                            </div>
+                            <div class="divide-y divide-slate-800/60">
+                                <div class="grid grid-cols-1 sm:grid-cols-3 px-4 py-2 text-xs text-slate-500 font-semibold uppercase tracking-wider bg-slate-900/20">
+                                    <span>טכניקה</span><span class="hidden sm:block">MITRE ID</span><span class="hidden sm:block">הסבר קצר</span>
+                                </div>
+                                <div class="grid grid-cols-1 sm:grid-cols-3 gap-1 px-4 py-3 hover:bg-slate-800/20 transition-colors">
+                                    <span class="font-semibold text-white text-xs">PowerShell</span>
+                                    <span class="font-tech text-amber-400 text-xs">T1059.001</span>
+                                    <span class="text-xs text-slate-400">הרצת פקודות PowerShell לביצוע פעולות על מחשב הקורבן, כולל הורדת נוזקות נוספות ומשיכת נתונים.</span>
+                                </div>
+                                <div class="grid grid-cols-1 sm:grid-cols-3 gap-1 px-4 py-3 hover:bg-slate-800/20 transition-colors">
+                                    <span class="font-semibold text-white text-xs">Windows Command Shell</span>
+                                    <span class="font-tech text-amber-400 text-xs">T1059.003</span>
+                                    <span class="text-xs text-slate-400">שימוש ב-cmd.exe להרצת פקודות, סקריפטי Batch ותוכניות לגיטימיות לביצוע מטרות זדוניות.</span>
+                                </div>
+                                <div class="grid grid-cols-1 sm:grid-cols-3 gap-1 px-4 py-3 hover:bg-slate-800/20 transition-colors">
+                                    <span class="font-semibold text-white text-xs">Create or Modify Windows Service</span>
+                                    <span class="font-tech text-amber-400 text-xs">T1543.003</span>
+                                    <span class="text-xs text-slate-400">התקנת שירות Windows חדש או שינוי שירות קיים כדי להשיג Persistence והרצה מתמשכת של הנוזקה.</span>
+                                </div>
+                                <div class="grid grid-cols-1 sm:grid-cols-3 gap-1 px-4 py-3 hover:bg-slate-800/20 transition-colors">
+                                    <span class="font-semibold text-white text-xs">Bypass UAC (ieinstal.exe)</span>
+                                    <span class="font-tech text-amber-400 text-xs">T1548.002</span>
+                                    <span class="text-xs text-slate-400">ניצול תוכניות לגיטימיות כגון ieinstal.exe לעקיפת בקרת חשבון משתמש (UAC) ולהשגת הרשאות גבוהות.</span>
+                                </div>
+                                <div class="grid grid-cols-1 sm:grid-cols-3 gap-1 px-4 py-3 hover:bg-slate-800/20 transition-colors">
+                                    <span class="font-semibold text-white text-xs">Web Protocols C2 (HTTP/S)</span>
+                                    <span class="font-tech text-amber-400 text-xs">T1071.001</span>
+                                    <span class="text-xs text-slate-400">הבקדור QUICKRIDE משתמש בפרוטוקולי HTTP/HTTPS לתקשורת שליטה ובקרה כדי לחמוק מניטור רשת.</span>
+                                </div>
+                                <div class="grid grid-cols-1 sm:grid-cols-3 gap-1 px-4 py-3 hover:bg-slate-800/20 transition-colors">
+                                    <span class="font-semibold text-white text-xs">Brute Force</span>
+                                    <span class="font-tech text-amber-400 text-xs">T1110</span>
+                                    <span class="text-xs text-slate-400">ניסיונות כניסה אוטומטיים רבים עם סיסמאות שונות כדי לפרוץ לחשבונות כאשר הסיסמה אינה ידועה.</span>
+                                </div>
+                                <div class="grid grid-cols-1 sm:grid-cols-3 gap-1 px-4 py-3 hover:bg-slate-800/20 transition-colors">
+                                    <span class="font-semibold text-white text-xs">Clipboard Data (KEYLIME)</span>
+                                    <span class="font-tech text-amber-400 text-xs">T1115</span>
+                                    <span class="text-xs text-slate-400">איסוף נתונים שהועתקו ללוח (Clipboard) של המחשב, כגון סיסמאות, מפתחות קריפטו ומידע פיננסי.</span>
+                                </div>
+                                <div class="grid grid-cols-1 sm:grid-cols-3 gap-1 px-4 py-3 hover:bg-slate-800/20 transition-colors">
+                                    <span class="font-semibold text-white text-xs">Browser Bookmark Discovery</span>
+                                    <span class="font-tech text-amber-400 text-xs">T1217</span>
+                                    <span class="text-xs text-slate-400">גישה לסימניות הדפדפן של הקורבן לאיסוף מידע על מערכות פנימיות, חשבונות מקוונים ומשאבי ארגון.</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- APT33 -->
+                        <div class="rounded-xl border border-slate-700/60 overflow-hidden">
+                            <div class="flex items-center gap-3 px-4 py-3 bg-cyan-500/10 border-b border-slate-700/60">
+                                <div class="w-9 h-9 rounded-lg bg-cyan-500/20 text-cyan-400 flex items-center justify-center font-bold font-tech text-sm flex-shrink-0">APT33</div>
+                                <div>
+                                    <span class="font-bold text-white text-sm">APT33 — Elfin (G0064)</span>
+                                    <span class="text-xs text-cyan-400 font-semibold font-tech mr-2">• איראן • תשתיות ו-OT / אנרגיה</span>
+                                </div>
+                            </div>
+                            <div class="divide-y divide-slate-800/60">
+                                <div class="grid grid-cols-1 sm:grid-cols-3 px-4 py-2 text-xs text-slate-500 font-semibold uppercase tracking-wider bg-slate-900/20">
+                                    <span>טכניקה</span><span class="hidden sm:block">MITRE ID</span><span class="hidden sm:block">הסבר קצר</span>
+                                </div>
+                                <div class="grid grid-cols-1 sm:grid-cols-3 gap-1 px-4 py-3 hover:bg-slate-800/20 transition-colors">
+                                    <span class="font-semibold text-white text-xs">Spearphishing Attachment/Link</span>
+                                    <span class="font-tech text-cyan-400 text-xs">T1566</span>
+                                    <span class="text-xs text-slate-400">שליחת מיילים ממוקדים לעובדים בסקטורי אנרגיה ותעופה עם קבצים זדוניים או קישורים לאתרים מזויפים.</span>
+                                </div>
+                                <div class="grid grid-cols-1 sm:grid-cols-3 gap-1 px-4 py-3 hover:bg-slate-800/20 transition-colors">
+                                    <span class="font-semibold text-white text-xs">Web Protocols C2 (HTTP)</span>
+                                    <span class="font-tech text-cyan-400 text-xs">T1071.001</span>
+                                    <span class="text-xs text-slate-400">שימוש בפרוטוקול HTTP לתקשורת C2 כדי להתחמק מחסימה על-ידי Firewall וכלי DLP ארגוניים.</span>
+                                </div>
+                                <div class="grid grid-cols-1 sm:grid-cols-3 gap-1 px-4 py-3 hover:bg-slate-800/20 transition-colors">
+                                    <span class="font-semibold text-white text-xs">Archive via WinRAR</span>
+                                    <span class="font-tech text-cyan-400 text-xs">T1560.001</span>
+                                    <span class="text-xs text-slate-400">כיווץ נתונים גנובים עם WinRAR לפני הוצאתם מהארגון, מה שמקשה על זיהוי ועצירת הדליפה.</span>
+                                </div>
+                                <div class="grid grid-cols-1 sm:grid-cols-3 gap-1 px-4 py-3 hover:bg-slate-800/20 transition-colors">
+                                    <span class="font-semibold text-white text-xs">Registry Run Keys / Startup</span>
+                                    <span class="font-tech text-cyan-400 text-xs">T1547.001</span>
+                                    <span class="text-xs text-slate-400">פריסת DarkComet לתיקיית Startup ורישום Run Keys ב-Registry לשמירת גישה מתמשכת לאחר אתחול.</span>
+                                </div>
+                                <div class="grid grid-cols-1 sm:grid-cols-3 gap-1 px-4 py-3 hover:bg-slate-800/20 transition-colors">
+                                    <span class="font-semibold text-white text-xs">Password Spraying</span>
+                                    <span class="font-tech text-cyan-400 text-xs">T1110.003</span>
+                                    <span class="text-xs text-slate-400">ביצוע Password Spray נגד חשבונות O365 וסביבות ארגוניות לאיתור חשבונות עם סיסמאות חלשות.</span>
+                                </div>
+                                <div class="grid grid-cols-1 sm:grid-cols-3 gap-1 px-4 py-3 hover:bg-slate-800/20 transition-colors">
+                                    <span class="font-semibold text-white text-xs">PowerShell</span>
+                                    <span class="font-tech text-cyan-400 text-xs">T1059.001</span>
+                                    <span class="text-xs text-slate-400">הרצת סקריפטי PowerShell להורדת נוזקות נוספות, גישה למידע ומחיקת עקבות פעילות זדונית.</span>
+                                </div>
+                                <div class="grid grid-cols-1 sm:grid-cols-3 gap-1 px-4 py-3 hover:bg-slate-800/20 transition-colors">
+                                    <span class="font-semibold text-white text-xs">Data Destruction (Shamoon Wiper)</span>
+                                    <span class="font-tech text-cyan-400 text-xs">T1485</span>
+                                    <span class="text-xs text-slate-400">שימוש בנוזקות Wiper כגון Shamoon להשמדת נתונים ו-MBR על מאות מחשבים בו-זמנית, גרימת נזק תפעולי.</span>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
                     <!-- 12 Tactics Interactive List -->
+
                     <div class="glass-card rounded-2xl p-6 border border-slate-800 space-y-4">
                         <h3 class="font-bold text-white text-lg flex items-center gap-2">
                             <span class="w-2 h-4 bg-indigo-500 rounded"></span>
