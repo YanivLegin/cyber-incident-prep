@@ -261,6 +261,37 @@
             }
         }
 
+        function saveState() {
+            localStorage.setItem('cyber_masteredCheckpoints', JSON.stringify(masteredCheckpoints));
+            localStorage.setItem('cyber_cardMasteredState', JSON.stringify(cardMasteredState));
+            localStorage.setItem('cyber_quizAnswers', JSON.stringify(quizAnswers));
+            localStorage.setItem('cyber_scenarioDrafts', JSON.stringify(scenarioDrafts));
+            localStorage.setItem('cyber_tempCheckpointAnswers', JSON.stringify(tempCheckpointAnswers));
+            localStorage.setItem('cyber_currentTab', currentTab);
+            localStorage.setItem('cyber_currentLesson', currentLesson.toString());
+        }
+
+        function loadState() {
+            try {
+                masteredCheckpoints = JSON.parse(localStorage.getItem('cyber_masteredCheckpoints')) || {};
+                cardMasteredState = JSON.parse(localStorage.getItem('cyber_cardMasteredState')) || {};
+                quizAnswers = JSON.parse(localStorage.getItem('cyber_quizAnswers')) || {};
+                scenarioDrafts = JSON.parse(localStorage.getItem('cyber_scenarioDrafts')) || {};
+                tempCheckpointAnswers = JSON.parse(localStorage.getItem('cyber_tempCheckpointAnswers')) || {};
+                currentTab = localStorage.getItem('cyber_currentTab') || 'guide';
+                currentLesson = parseInt(localStorage.getItem('cyber_currentLesson')) || 1;
+            } catch (e) {
+                console.error("Error loading state from localStorage", e);
+                masteredCheckpoints = {};
+                cardMasteredState = {};
+                quizAnswers = {};
+                scenarioDrafts = {};
+                tempCheckpointAnswers = {};
+                currentTab = 'guide';
+                currentLesson = 1;
+            }
+        }
+
         window.addEventListener('DOMContentLoaded', () => {
             // Force reset values of all inputs and textareas on load to prevent browser cache
             document.querySelectorAll('input, textarea, select').forEach(el => {
@@ -271,17 +302,13 @@
                 }
             });
 
-            // Re-initialise memory states completely on refresh (No localStorage loads!)
-            masteredCheckpoints = {};
-            cardMasteredState = {};
-            quizAnswers = {};
-            scenarioDrafts = {};
-            tempCheckpointAnswers = {};
+            loadState();
 
             // Setup navigation counts
             document.getElementById('flashcard-nav-label').innerText = `כרטיסיות שינון (${flashcardsData.length})`;
             document.getElementById('simulator-nav-label').innerText = `סימולטור מבחן`;
 
+            changeActiveTab(currentTab);
             renderSubnavigation();
             updateHUD();
             renderCurrentView();
@@ -289,6 +316,7 @@
 
         function changeActiveTab(tabId) {
             currentTab = tabId;
+            if (typeof saveState === 'function') saveState();
             
             ['guide', 'mitre', 'flashcards', 'simulator', 'dashboard'].forEach(t => {
                 const btn = document.getElementById(`nav-btn-${t}`);
@@ -312,6 +340,7 @@
 
         function selectLesson(lessonId) {
             currentLesson = lessonId;
+            if (typeof saveState === 'function') saveState();
             renderSubnavigation();
             renderCurrentView();
             window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -489,6 +518,7 @@
             
             const isCorrect = selectedIdx === correctIdx;
             masteredCheckpoints[checkpointId] = isCorrect;
+            saveState();
 
             updateHUD();
             renderCurrentView();
@@ -590,6 +620,7 @@
 
         function setCardMastery(mastered) {
             cardMasteredState[currentCardIndex] = mastered;
+            saveState();
             showToast(mastered ? 'סומן כנלמד בהצלחה!' : 'סומן כדורש חזרה');
             playChimeSound();
             renderCurrentView();
@@ -1101,6 +1132,7 @@
 
         function selectSimAnswer(optIdx) {
             quizAnswers[currentQuizIndex] = optIdx;
+            saveState();
             calculateQuizScore();
             renderSimQuestion();
             playChimeSound();
@@ -1143,6 +1175,7 @@
             // Save draft to memory
             document.getElementById('scen-user-input').oninput = (e) => {
                 scenarioDrafts[idx] = e.target.value;
+                saveState();
             };
         }
 
@@ -1254,6 +1287,19 @@
                 currentCardIndex = 0;
                 currentQuizIndex = 0;
                 currentOpenIndex = 0;
+                currentTab = 'guide';
+                currentLesson = 1;
+                
+                localStorage.removeItem('cyber_masteredCheckpoints');
+                localStorage.removeItem('cyber_cardMasteredState');
+                localStorage.removeItem('cyber_quizAnswers');
+                localStorage.removeItem('cyber_scenarioDrafts');
+                localStorage.removeItem('cyber_tempCheckpointAnswers');
+                localStorage.removeItem('cyber_currentTab');
+                localStorage.removeItem('cyber_currentLesson');
+                
+                changeActiveTab('guide');
+                selectLesson(1);
                 
                 updateHUD();
                 renderCurrentView();
